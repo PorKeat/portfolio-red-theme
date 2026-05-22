@@ -5,15 +5,18 @@ import { motion } from "framer-motion";
 
 export default function MusicPlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
-  const audioRef = useRef<HTMLAudioElement>(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  
+  // YouTube Video ID (HOME - Resonance)
+  // Change this string to any YouTube video ID to update the background music!
+  const youtubeId = "8GW6sLrK40k";
 
   const togglePlay = () => {
-    if (audioRef.current) {
+    if (iframeRef.current && iframeRef.current.contentWindow) {
       if (isPlaying) {
-        audioRef.current.pause();
+        iframeRef.current.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
       } else {
-        // Attempt to play, catch potential auto-play policy errors
-        audioRef.current.play().catch(e => console.log("Audio play blocked:", e));
+        iframeRef.current.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
       }
       setIsPlaying(!isPlaying);
     }
@@ -22,8 +25,13 @@ export default function MusicPlayer() {
   return (
     <div className="fixed bottom-6 right-6 z-[9999] flex items-center gap-4 bg-slate-900/80 backdrop-blur-md border border-red-primary/30 p-3 rounded-full shadow-[0_0_20px_rgba(239,68,68,0.15)] hover:border-red-primary/80 transition-colors pointer-events-auto group">
       
-      {/* Hidden Audio Element */}
-      <audio ref={audioRef} src="/bg-music.mp3" loop preload="auto" />
+      {/* Hidden YouTube Iframe Player */}
+      <iframe
+        ref={iframeRef}
+        src={`https://www.youtube.com/embed/${youtubeId}?enablejsapi=1&autoplay=0&loop=1&playlist=${youtubeId}`}
+        allow="autoplay"
+        className="absolute w-0 h-0 opacity-0 pointer-events-none"
+      />
 
       {/* Song Info (Hover to reveal) */}
       <div className="w-0 overflow-hidden group-hover:w-32 transition-all duration-300 whitespace-nowrap">
