@@ -1,37 +1,11 @@
+"use client";
+
+import { useState } from "react";
 import HeroSection from "@/components/sections/HeroSection";
 import AboutSection from "@/components/sections/AboutSection";
 import SkillsSection from "@/components/sections/SkillsSection";
 import { SectionTitle, ExperienceCard } from "@/components/sections/ExperienceSection";
-
-const EDUCATION = [
-  {
-    year: "Nov 2024",
-    title: "IT Professional (DevOps)",
-    institution: "ISTAD",
-    description: "Specializing in DevOps practices, gaining practical experience through real projects, application deployment, CI/CD, and infrastructure management."
-  },
-  {
-    year: "Oct 2024",
-    title: "Full-stack Student",
-    institution: "ISTAD",
-    description: "Specializing in Next.js and Spring, gaining practical experience through real projects and team-based web application development."
-  },
-  {
-    year: "Aug 2023",
-    title: "Foundation Student",
-    institution: "ISTAD",
-    description: "Developed web development skills in React and Java, with hands-on experience on real projects and collaborative teamwork."
-  }
-];
-
-const PROJECTS = [
-  {
-    year: "2023 - Present",
-    title: "Project Experience",
-    institution: "SETEC Institute & ISTAD",
-    description: "Completed numerous assignments and projects in Programming, Web Development, Graphic Design, Networking, UX/UI Design, and hands-on Windows Server projects at TGI."
-  }
-];
+import portfolioData from "@/data/portfolio.json";
 import ContactSection from "@/components/sections/ContactSection";
 import OutroSection from "@/components/sections/OutroSection";
 import MouseSpotlight from "@/components/ui/MouseSpotlight";
@@ -39,14 +13,16 @@ import FlyThroughParallax from "@/components/ui/FlyThroughParallax";
 import TerminalBootLoader from "@/components/ui/TerminalBootLoader";
 
 export default function Home() {
+  const [isBooting, setIsBooting] = useState(true);
+
   return (
-    <main className="w-full bg-slate-950 relative overflow-x-hidden">
-      <TerminalBootLoader />
+    <main className={`w-full bg-slate-950 relative overflow-x-hidden ${isBooting ? "h-screen overflow-hidden" : ""}`}>
+      {isBooting && <TerminalBootLoader onComplete={() => setIsBooting(false)} />}
 
       {/* Interactive Spotlight Background fixed behind everything */}
       <MouseSpotlight />
 
-      <div className="relative z-10 w-full">
+      <div className={`relative z-10 w-full transition-opacity duration-[1500ms] ease-in-out ${isBooting ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
         {/* The Universal 3D Fly-Through Parallax Container */}
         <FlyThroughParallax>
           
@@ -63,7 +39,7 @@ export default function Home() {
           <SectionTitle sysNum="SYS.03" title="Education" />
 
           {/* Section 5, 6, 7: Education Cards flying Left and Right */}
-          {EDUCATION.map((item, index) => (
+          {portfolioData.education.map((item, index) => (
             <ExperienceCard key={`edu-${index}`} item={item} index={index} />
           ))}
 
@@ -71,7 +47,7 @@ export default function Home() {
           <SectionTitle sysNum="SYS.04" title="Projects" />
 
           {/* Section 9: Project Cards flying Left and Right */}
-          {PROJECTS.map((item, index) => (
+          {portfolioData.projects.map((item, index) => (
             <ExperienceCard key={`proj-${index}`} item={item} index={index} />
           ))}
 

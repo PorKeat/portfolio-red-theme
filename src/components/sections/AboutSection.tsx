@@ -27,15 +27,14 @@ export default function AboutSection() {
             <div className="absolute inset-0 rounded-full overflow-hidden z-40">
               <ImageSlider className="w-full h-full" hoverControl={true}>
                 <ImageLayer
-                  src="/profile-picture.jpg"
-                  alt="Normal Profile"
+                  src="/alexkgm.jpg"
+                  alt="Alex KGM Realistic"
                   layer="first"
                 />
                 <ImageLayer 
-                  src="/profile-picture.jpg" 
-                  alt="Cyberpunk Profile" 
+                  src="/alexkgm2d.jpg" 
+                  alt="Alex KGM 2D Cyberpunk" 
                   layer="second" 
-                  className="contrast-[1.2] grayscale brightness-75 sepia-[.3] hue-rotate-[-50deg]" 
                 />
                 <Divider />
               </ImageSlider>

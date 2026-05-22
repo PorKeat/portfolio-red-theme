@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-export default function TerminalBootLoader() {
+export default function TerminalBootLoader({ onComplete }: { onComplete?: () => void }) {
   const [isBooting, setIsBooting] = useState(true);
   const [showAccessGranted, setShowAccessGranted] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -89,6 +89,7 @@ export default function TerminalBootLoader() {
     // Hide the loader quickly after Access Granted
     const timer2 = setTimeout(() => {
       setIsBooting(false);
+      if (onComplete) onComplete();
     }, 2800); // Reduced from 4000ms to 2800ms
 
     return () => {

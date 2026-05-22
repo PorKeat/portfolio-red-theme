@@ -1,0 +1,51 @@
+{
+  "education": [
+    {
+      "year": "2024",
+      "title": "Foundation Student",
+      "institution": "ISTAD",
+      "description": "Developed web development skills in React and Java, with hands-on experience on real projects and collaborative teamwork.",
+      "image": "/education/full-stack.jpg"
+    },
+    {
+      "year": "2025",
+      "title": "Full-stack Student",
+      "institution": "ISTAD",
+      "description": "Specializing in Next.js and Spring, gaining practical experience through real projects and team-based web application development.",
+      "image": "/education/foundation.jpg"
+    },
+    {
+      "year": "2026",
+      "title": "IT Professional (DevOps)",
+      "institution": "ISTAD",
+      "description": "Specializing in DevOps practices, gaining practical experience through real projects, application deployment, CI/CD, and infrastructure management.",
+      "image": "/placeholder-mountain.png"
+    }
+  ],
+  "projects": [
+    {
+      "year": "2024",
+      "title": "Sport Hub",
+      "institution": "Fullstack Web Application",
+      "description": "Sport Hub is your go-to platform for discovering nearby sports clubs, exploring various sports events, and staying informed with the latest sports news. Whether you're searching for the right club or just want to stay connected with the sports community, Sport Hub makes it easy and convenient.",
+      "image": "/project-demo/sporthub.mp4",
+      "logo": "/logo/sporthub.png"
+    },
+    {
+      "year": "2025",
+      "title": "CamboStack",
+      "institution": "Interactive Forum Platform",
+      "description": "CamboStack is a modern forum platform built to connect ISTAD students and mentors in a collaborative learning community. With bilingual support (English & Khmer), role-based access, and interactive Q&A features, users can ask questions, share answers, and build knowledge together.",
+      "image": "/project-demo/cambostack.mp4",
+      "logo": "/logo/cambostack.svg"
+    },
+    {
+      "year": "2026",
+      "title": "Autonomous - A8S",
+      "institution": "DevOps & Infrastructure Platform",
+      "description": "A8S is an autonomous platform that helps teams create, deploy, operate, and manage application workloads and databases from one unified system. It combines guided project workflows, managed infrastructure operations, database tooling, and platform integrations into a single product experience for modern software delivery.",
+      "image": "/placeholder-mountain.png",
+      "logo": "/logo/a8s-logo.png"
+    }
+  ]
+}
