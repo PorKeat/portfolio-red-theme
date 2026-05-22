@@ -15,6 +15,8 @@ import TerminalBootLoader from "@/components/ui/TerminalBootLoader";
 export default function Home() {
   const [isBooting, setIsBooting] = useState(true);
 
+  
+
   return (
     <main className={`w-full bg-slate-950 relative overflow-x-hidden ${isBooting ? "h-screen overflow-hidden" : ""}`}>
       {isBooting && <TerminalBootLoader onComplete={() => setIsBooting(false)} />}
