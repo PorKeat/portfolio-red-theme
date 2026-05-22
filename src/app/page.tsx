@@ -34,19 +34,17 @@ const PROJECTS = [
 ];
 import ContactSection from "@/components/sections/ContactSection";
 import OutroSection from "@/components/sections/OutroSection";
-import HeroCanvas from "@/components/canvas/HeroCanvas";
+import MouseSpotlight from "@/components/ui/MouseSpotlight";
 import FlyThroughParallax from "@/components/ui/FlyThroughParallax";
-import GateLoader from "@/components/ui/GateLoader";
+import TerminalBootLoader from "@/components/ui/TerminalBootLoader";
 
 export default function Home() {
   return (
     <main className="w-full bg-slate-950 relative overflow-x-hidden">
-      <GateLoader />
+      <TerminalBootLoader />
 
-      {/* 3D Background fixed behind everything */}
-      <div className="fixed inset-0 z-0 pointer-events-none">
-        <HeroCanvas />
-      </div>
+      {/* Interactive Spotlight Background fixed behind everything */}
+      <MouseSpotlight />
 
       <div className="relative z-10 w-full">
         {/* The Universal 3D Fly-Through Parallax Container */}

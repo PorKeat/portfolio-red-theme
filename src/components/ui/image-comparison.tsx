@@ -1,0 +1,80 @@
+"use client";
+
+import React, { useState, useRef } from "react";
+
+interface ImageSliderProps {
+  children: React.ReactNode;
+  className?: string;
+  hoverControl?: boolean;
+  defaultPosition?: number;
+}
+
+export const ImageSlider = ({ children, className = "", hoverControl = false, defaultPosition = 50 }: ImageSliderProps) => {
+  const [position, setPosition] = useState(defaultPosition);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const handleDrag = (e: any) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = Math.max(0, Math.min(e.clientX - rect.left, rect.width));
+    const percent = (x / rect.width) * 100;
+    setPosition(percent);
+  };
+
+  const handleTouch = (e: any) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = Math.max(0, Math.min(e.touches[0].clientX - rect.left, rect.width));
+    const percent = (x / rect.width) * 100;
+    setPosition(percent);
+  };
+
+  const events = hoverControl ? {
+    onMouseMove: handleDrag,
+    onTouchMove: handleTouch,
+  } : {
+    onMouseMove: (e: any) => e.buttons === 1 && handleDrag(e),
+    onMouseDown: handleDrag,
+    onTouchMove: handleTouch,
+  };
+
+  return (
+    <div 
+      ref={containerRef} 
+      className={`relative select-none cursor-ew-resize touch-none ${className}`}
+      {...events}
+    >
+      {React.Children.map(children, (child) => {
+        if (React.isValidElement(child)) {
+          return React.cloneElement(child as any, { position });
+        }
+        return child;
+      })}
+    </div>
+  );
+};
+
+export const ImageLayer = ({ src, alt, layer, className = "", position = 50 }: any) => {
+  const clipPath = layer === "first" 
+    ? `polygon(0 0, ${position}% 0, ${position}% 100%, 0 100%)`
+    : `polygon(${position}% 0, 100% 0, 100% 100%, ${position}% 100%)`;
+
+  return (
+    <div className={`absolute inset-0 w-full h-full ${className}`} style={{ clipPath }}>
+      <img src={src} alt={alt} className="w-full h-full object-cover pointer-events-none" />
+    </div>
+  );
+};
+
+export const Divider = ({ width = 2, position = 50 }: any) => {
+  return (
+    <div 
+      className="absolute top-0 bottom-0 bg-red-primary pointer-events-none flex items-center justify-center shadow-[0_0_15px_rgba(239,68,68,0.8)] z-10" 
+      style={{ left: `${position}%`, width: `${width}px`, transform: `translateX(-${width / 2}px)` }}
+    >
+      <div className="w-8 h-8 rounded-full bg-slate-900 border-2 border-red-primary flex items-center justify-center shadow-[0_0_15px_rgba(239,68,68,0.8)]">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+      </div>
+    </div>
+  );
+};

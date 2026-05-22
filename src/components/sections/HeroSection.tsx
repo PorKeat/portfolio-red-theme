@@ -16,7 +16,7 @@ export default function HeroSection() {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
+          transition={{ delay: 3.0 }} // Synced with terminal zoom
           className="mb-6 flex items-center gap-4"
         >
           <div className="w-12 h-[1px] bg-red-primary/50" />
@@ -31,7 +31,7 @@ export default function HeroSection() {
           <motion.div 
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.4, ease: "easeOut", delay: 0 }}
+            transition={{ duration: 0.4, ease: "easeOut", delay: 2.8 }} // Exact moment terminal flies away
           >
             <span className="text-[4.5rem] md:text-[11rem] leading-[0.8] font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-slate-100 to-slate-500 drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)] tracking-tighter hover:tracking-[0.05em] transition-[letter-spacing] duration-300 ease-out inline-block">
               ALEX
@@ -42,7 +42,7 @@ export default function HeroSection() {
           <motion.div 
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.4, ease: "easeOut", delay: 0.1 }}
+            transition={{ duration: 0.4, ease: "easeOut", delay: 2.9 }}
           >
             <span className="text-[4.5rem] md:text-[11rem] leading-[0.8] font-black text-transparent bg-clip-text bg-gradient-to-b from-red-400 via-red-primary to-red-900 drop-shadow-[0_10px_20px_rgba(239,68,68,0.4)] tracking-tighter hover:tracking-[0.05em] transition-[letter-spacing] duration-300 ease-out inline-block">
               KGM
@@ -54,7 +54,7 @@ export default function HeroSection() {
         {/* Subtitle */}
         <div className="mt-12 md:mt-24 relative z-20">
           <div className="absolute -left-4 md:-left-6 top-1/2 -translate-y-1/2 w-1 h-8 bg-red-primary" />
-          <RevealText delay={0.3}>
+          <RevealText delay={3.1}>
             <p className="text-slate-300 text-lg md:text-3xl max-w-2xl font-light tracking-wide pl-4">
               Creative Developer <span className="text-red-primary font-bold">x</span> System Architect
             </p>
@@ -67,7 +67,7 @@ export default function HeroSection() {
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.6, duration: 0.5 }}
+        transition={{ delay: 3.4, duration: 0.5 }}
         className="absolute bottom-12 flex flex-col items-center justify-center pointer-events-auto"
       >
         <span className="text-slate-500 font-mono text-[10px] md:text-xs uppercase tracking-[0.4em] mb-4">

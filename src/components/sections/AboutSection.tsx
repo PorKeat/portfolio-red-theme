@@ -3,8 +3,8 @@
 import { User, BookOpen, Shield, Code2, Database, Terminal } from "lucide-react";
 import TiltCard from "@/components/ui/TiltCard";
 import RevealText from "@/components/react-bits/RevealText";
-import Image from "next/image";
 import { motion } from "framer-motion";
+import { ImageSlider, ImageLayer, Divider } from "@/components/ui/image-comparison";
 
 export default function AboutSection() {
   return (
@@ -24,12 +24,21 @@ export default function AboutSection() {
         {/* Center Target: The Image */}
         <div className="relative z-30 w-48 h-48 md:w-64 md:h-64 mx-auto md:absolute md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2">
           <TiltCard className="w-full h-full rounded-full shadow-[0_0_50px_rgba(239,68,68,0.4)] border-4 border-red-primary/50 relative group">
-            <div className="absolute inset-0 rounded-full overflow-hidden">
-              <img 
-                src="/profile-picture.jpg" 
-                alt="Alex KGM Profile" 
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-110"
-              />
+            <div className="absolute inset-0 rounded-full overflow-hidden z-40">
+              <ImageSlider className="w-full h-full" hoverControl={true}>
+                <ImageLayer
+                  src="/profile-picture.jpg"
+                  alt="Normal Profile"
+                  layer="first"
+                />
+                <ImageLayer 
+                  src="/profile-picture.jpg" 
+                  alt="Cyberpunk Profile" 
+                  layer="second" 
+                  className="contrast-[1.2] grayscale brightness-75 sepia-[.3] hue-rotate-[-50deg]" 
+                />
+                <Divider />
+              </ImageSlider>
             </div>
             {/* HUD Ring */}
             <div className="absolute -inset-6 border border-red-primary/30 rounded-full animate-[spin_10s_linear_infinite]" />

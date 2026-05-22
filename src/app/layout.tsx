@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Outfit, Space_Mono } from "next/font/google";
 import "./globals.css";
 import LenisProvider from "@/components/providers/LenisProvider";
+import CustomCursor from "@/components/ui/CustomCursor";
+import MusicPlayer from "@/components/ui/MusicPlayer";
 
 const mainFont = Outfit({
   variable: "--font-sans",
@@ -29,7 +31,9 @@ export default function RootLayout({
       lang="en"
       className={`${mainFont.variable} ${monoFont.variable} h-full antialiased bg-slate-950 text-slate-200`}
     >
-      <body className="min-h-full flex flex-col selection:bg-red-primary selection:text-white overflow-x-hidden">
+      <body className="min-h-full flex flex-col selection:bg-red-primary selection:text-white overflow-x-hidden cursor-none">
+        <CustomCursor />
+        <MusicPlayer />
         <LenisProvider>
           {children}
         </LenisProvider>
