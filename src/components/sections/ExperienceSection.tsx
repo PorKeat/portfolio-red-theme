@@ -21,11 +21,21 @@ export function SectionTitle({ sysNum, title }: { sysNum: string, title: string 
   );
 }
 
+const getYoutubeId = (url: string) => {
+  if (!url) return null;
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+  const match = url.match(regExp);
+  return (match && match[2].length === 11) ? match[2] : null;
+};
+
 export function ExperienceCard({ item, index }: { item: any, index: number }) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const isLeft = index % 2 === 0;
+  
+  // Detect Media Types
   const isVideo = item.image && /\.(mp4|webm|ogg|mov)$/i.test(item.image);
+  const youtubeId = item.image ? getYoutubeId(item.image) : null;
   
   const thumbnailVideoRef = useRef<HTMLVideoElement>(null);
 
@@ -107,6 +117,15 @@ export function ExperienceCard({ item, index }: { item: any, index: number }) {
                 playsInline
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 scale-100 group-hover:scale-110"
               />
+            ) : youtubeId ? (
+              <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden bg-black rounded-xl">
+                <iframe
+                  src={`https://www.youtube.com/embed/${youtubeId}?autoplay=1&mute=1&loop=1&playlist=${youtubeId}&controls=0&modestbranding=1&rel=0&playsinline=1&disablekb=1`}
+                  allow="autoplay; encrypted-media"
+                  className="absolute top-1/2 left-1/2 w-[175%] h-[175%] -translate-x-1/2 -translate-y-1/2 transition-transform duration-700 group-hover:scale-105"
+                  style={{ border: 'none' }}
+                />
+              </div>
             ) : (
               <motion.img 
                 layoutId={`image-${index}`}
@@ -210,6 +229,15 @@ export function ExperienceCard({ item, index }: { item: any, index: number }) {
                     controls
                     playsInline
                     className={`w-full object-cover transition-all duration-500 ${isFullscreen ? "h-full min-h-screen" : "h-auto min-h-[500px] max-h-[calc(90vh-32px)]"}`}
+                  />
+                ) : youtubeId ? (
+                  <iframe
+                    src={`https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0`}
+                    title="YouTube video player"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className={`w-full transition-all duration-500 ${isFullscreen ? "h-full min-h-screen" : "h-full min-h-[500px] max-h-[calc(90vh-32px)]"}`}
                   />
                 ) : (
                   <motion.img 

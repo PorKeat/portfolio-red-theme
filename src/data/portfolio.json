@@ -28,7 +28,7 @@
       "title": "Sport Hub",
       "institution": "Fullstack Web Application",
       "description": "Sport Hub is your go-to platform for discovering nearby sports clubs, exploring various sports events, and staying informed with the latest sports news. Whether you're searching for the right club or just want to stay connected with the sports community, Sport Hub makes it easy and convenient.",
-      "image": "/project-demo/sporthub.mp4",
+      "image": "https://youtu.be/IcIQ2yxTsc0",
       "logo": "/logo/sporthub.png"
     },
     {
@@ -36,7 +36,7 @@
       "title": "CamboStack",
       "institution": "Interactive Forum Platform",
       "description": "CamboStack is a modern forum platform built to connect ISTAD students and mentors in a collaborative learning community. With bilingual support (English & Khmer), role-based access, and interactive Q&A features, users can ask questions, share answers, and build knowledge together.",
-      "image": "/project-demo/cambostack.mp4",
+      "image": "https://youtu.be/2IfBmzsDvFI",
       "logo": "/logo/cambostack.svg"
     },
     {
