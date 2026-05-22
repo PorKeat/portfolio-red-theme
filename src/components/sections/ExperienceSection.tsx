@@ -43,7 +43,6 @@ export function ExperienceCard({ item, index }: { item: any, index: number }) {
   useEffect(() => {
     if (selectedIndex !== null) {
       document.body.style.overflow = 'hidden';
-      setIsFullscreen(false); // Reset fullscreen state when opening
       // Try to sync time from thumbnail to modal when opening
       if (thumbnailVideoRef.current) {
         // Since modal video is now standard HTML video, we might need to find it
@@ -101,6 +100,7 @@ export function ExperienceCard({ item, index }: { item: any, index: number }) {
             layoutId={`image-container-${index}`}
             onClick={() => {
               setSelectedIndex(index);
+              setIsFullscreen(false); // Reset fullscreen state when opening
               // Ensure background video plays when opening modal
               if (thumbnailVideoRef.current) thumbnailVideoRef.current.play();
             }}
