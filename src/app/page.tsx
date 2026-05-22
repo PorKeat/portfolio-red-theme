@@ -1,65 +1,90 @@
-import Image from "next/image";
+import HeroSection from "@/components/sections/HeroSection";
+import AboutSection from "@/components/sections/AboutSection";
+import SkillsSection from "@/components/sections/SkillsSection";
+import { SectionTitle, ExperienceCard } from "@/components/sections/ExperienceSection";
+
+const EDUCATION = [
+  {
+    year: "Nov 2024",
+    title: "IT Professional (DevOps)",
+    institution: "ISTAD",
+    description: "Specializing in DevOps practices, gaining practical experience through real projects, application deployment, CI/CD, and infrastructure management."
+  },
+  {
+    year: "Oct 2024",
+    title: "Full-stack Student",
+    institution: "ISTAD",
+    description: "Specializing in Next.js and Spring, gaining practical experience through real projects and team-based web application development."
+  },
+  {
+    year: "Aug 2023",
+    title: "Foundation Student",
+    institution: "ISTAD",
+    description: "Developed web development skills in React and Java, with hands-on experience on real projects and collaborative teamwork."
+  }
+];
+
+const PROJECTS = [
+  {
+    year: "2023 - Present",
+    title: "Project Experience",
+    institution: "SETEC Institute & ISTAD",
+    description: "Completed numerous assignments and projects in Programming, Web Development, Graphic Design, Networking, UX/UI Design, and hands-on Windows Server projects at TGI."
+  }
+];
+import ContactSection from "@/components/sections/ContactSection";
+import OutroSection from "@/components/sections/OutroSection";
+import HeroCanvas from "@/components/canvas/HeroCanvas";
+import FlyThroughParallax from "@/components/ui/FlyThroughParallax";
+import GateLoader from "@/components/ui/GateLoader";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <main className="w-full bg-slate-950 relative overflow-x-hidden">
+      <GateLoader />
+
+      {/* 3D Background fixed behind everything */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <HeroCanvas />
+      </div>
+
+      <div className="relative z-10 w-full">
+        {/* The Universal 3D Fly-Through Parallax Container */}
+        <FlyThroughParallax>
+          
+          {/* Section 1: Hero */}
+          <HeroSection />
+          
+          {/* Section 2: About */}
+          <AboutSection />
+          
+          {/* Section 3: Tech Stack */}
+          <SkillsSection />
+          
+          {/* Section 4: Education Title */}
+          <SectionTitle sysNum="SYS.03" title="Education" />
+
+          {/* Section 5, 6, 7: Education Cards flying Left and Right */}
+          {EDUCATION.map((item, index) => (
+            <ExperienceCard key={`edu-${index}`} item={item} index={index} />
+          ))}
+
+          {/* Section 8: Projects Title */}
+          <SectionTitle sysNum="SYS.04" title="Projects" />
+
+          {/* Section 9: Project Cards flying Left and Right */}
+          {PROJECTS.map((item, index) => (
+            <ExperienceCard key={`proj-${index}`} item={item} index={index} />
+          ))}
+
+          {/* Section 10: Contact */}
+          <ContactSection />
+
+          {/* Section 11: Outro / Thank You */}
+          <OutroSection />
+
+        </FlyThroughParallax>
+      </div>
+    </main>
   );
 }
