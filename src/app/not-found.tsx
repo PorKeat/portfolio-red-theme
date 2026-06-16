@@ -27,38 +27,43 @@ export default function NotFound() {
           SYS.ERROR: Sector Not Found
         </motion.p>
         
-        {/* 3D Sliced & Glitched 404 Text */}
+        {/* 3D Sliced, Hollow & Glitched 404 Text */}
         <div className="relative w-full h-[250px] md:h-[400px] flex items-center justify-center group mb-6">
           
-          {/* Base 3D Layer */}
-          <h1 className="absolute text-[180px] md:text-[350px] font-black leading-none tracking-tighter text-slate-100 select-none text-3d">
+          {/* Base Hollow 3D Layer */}
+          <h1 className="absolute text-[180px] md:text-[350px] font-black leading-none tracking-tighter select-none text-hollow text-3d animate-pulse-fast">
             404
           </h1>
           
-          {/* Glitch Layer 1 - Red */}
+          {/* Glitch Layer 1 - Red (Solid) */}
           <h1 
-            className="absolute text-[180px] md:text-[350px] font-black leading-none tracking-tighter text-red-500 mix-blend-screen animate-glitch-1 select-none opacity-80"
-            style={{ transform: 'translate(-4px, 2px)' }}
+            className="absolute text-[180px] md:text-[350px] font-black leading-none tracking-tighter text-red-500 mix-blend-screen animate-glitch-1 select-none opacity-70"
+            style={{ transform: 'translate(-8px, 4px)' }}
           >
             404
           </h1>
           
-          {/* Glitch Layer 2 - Cyan */}
+          {/* Glitch Layer 2 - Cyan (Solid) */}
           <h1 
-            className="absolute text-[180px] md:text-[350px] font-black leading-none tracking-tighter text-cyan-500 mix-blend-screen animate-glitch-2 select-none opacity-80"
-            style={{ transform: 'translate(4px, -2px)' }}
+            className="absolute text-[180px] md:text-[350px] font-black leading-none tracking-tighter text-cyan-500 mix-blend-screen animate-glitch-2 select-none opacity-70"
+            style={{ transform: 'translate(8px, -4px)' }}
           >
             404
           </h1>
           
           {/* Sliced Gaps - perfectly matching website theme */}
           <div className="absolute inset-0 w-full h-full pointer-events-none flex items-center justify-center mix-blend-overlay">
-             <div className="w-[150%] h-[10px] bg-slate-950 rotate-[15deg] absolute drop-shadow-[0_0_10px_black]"></div>
-             <div className="w-[150%] h-[12px] bg-slate-950 -rotate-[30deg] absolute drop-shadow-[0_0_10px_black]"></div>
+             <div className="w-[150%] h-[15px] bg-slate-950 rotate-[15deg] absolute drop-shadow-[0_0_10px_black]"></div>
+             <div className="w-[150%] h-[20px] bg-slate-950 -rotate-[30deg] absolute drop-shadow-[0_0_10px_black]"></div>
+             <div className="w-[150%] h-[5px] bg-red-primary/50 rotate-[45deg] absolute blur-[2px]"></div>
           </div>
 
-          <div className="absolute bottom-[15%] md:bottom-[15%] left-[25%] md:left-[30%] -rotate-[15deg]">
-            <span className="font-mono text-lg md:text-2xl font-bold tracking-widest text-slate-300 uppercase drop-shadow-md">Error</span>
+          {/* Glitching Error Tag */}
+          <div className="absolute bottom-[15%] md:bottom-[15%] left-[25%] md:left-[30%] -rotate-[15deg] relative">
+            <span className="font-mono text-lg md:text-2xl font-bold tracking-widest text-slate-300 uppercase drop-shadow-md absolute inset-0">Error</span>
+            <span className="font-mono text-lg md:text-2xl font-bold tracking-widest text-red-500 uppercase absolute inset-0 animate-glitch-1 mix-blend-screen" style={{ transform: 'translate(-2px, 1px)' }}>Error</span>
+            <span className="font-mono text-lg md:text-2xl font-bold tracking-widest text-cyan-500 uppercase absolute inset-0 animate-glitch-2 mix-blend-screen" style={{ transform: 'translate(2px, -1px)' }}>Error</span>
+            <span className="font-mono text-lg md:text-2xl font-bold tracking-widest text-transparent uppercase">Error</span> {/* Spacer */}
           </div>
         </div>
         
@@ -90,15 +95,26 @@ export default function NotFound() {
       </div>
 
       <style dangerouslySetInnerHTML={{__html: `
+        .text-hollow {
+          color: transparent;
+          -webkit-text-stroke: 2px rgba(248, 250, 252, 0.8);
+        }
         .text-3d {
           text-shadow: 
-            0px 2px 0px #cbd5e1,
-            0px 4px 0px #94a3b8,
-            0px 6px 0px #64748b,
-            0px 8px 0px #475569,
-            0px 10px 0px #334155,
+            0px 2px 0px rgba(203, 213, 225, 0.5),
+            0px 4px 0px rgba(148, 163, 184, 0.5),
+            0px 6px 0px rgba(100, 116, 139, 0.5),
+            0px 8px 0px rgba(71, 85, 105, 0.5),
+            0px 10px 0px rgba(51, 65, 85, 0.5),
             0px 12px 20px rgba(0,0,0,0.8),
             0px 20px 40px rgba(0,0,0,0.6);
+        }
+        @keyframes pulse-fast {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.7; }
+        }
+        .animate-pulse-fast {
+          animation: pulse-fast 0.15s infinite;
         }
         @keyframes glitch-1 {
           0% { clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%); transform: translate(-2px, 2px); }
@@ -117,10 +133,10 @@ export default function NotFound() {
           100% { clip-path: polygon(0 52%, 100% 52%, 100% 59%, 0 59%); transform: translate(-2px, 2px); }
         }
         .animate-glitch-1 {
-          animation: glitch-1 2.5s infinite linear alternate-reverse;
+          animation: glitch-1 1s infinite linear alternate-reverse;
         }
         .animate-glitch-2 {
-          animation: glitch-2 3s infinite linear alternate-reverse;
+          animation: glitch-2 1.2s infinite linear alternate-reverse;
         }
       `}} />
     </main>
