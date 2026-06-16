@@ -31,15 +31,10 @@ export default function NotFound() {
           </p>
         </motion.div>
         
-        {/* 3D Sliced & Glitched 404 Text with intense lighting */}
+        {/* 3D Shattered & Glitched 404 Text */}
         <div className="relative w-full h-[250px] md:h-[400px] flex items-center justify-center group mb-2">
           
-          <h1 
-            className="absolute text-[150px] md:text-[350px] font-mono font-black leading-none tracking-tighter text-slate-100 select-none text-3d drop-shadow-[0_0_40px_rgba(239,68,68,0.5)]"
-          >
-            404
-          </h1>
-          
+          {/* Glitch Layer 1 - Red */}
           <h1 
             className="absolute text-[150px] md:text-[350px] font-mono font-black leading-none tracking-tighter text-red-500 mix-blend-screen animate-glitch-1 select-none opacity-80"
             style={{ transform: 'translate(-4px, 2px)' }}
@@ -47,20 +42,32 @@ export default function NotFound() {
             404
           </h1>
           
+          {/* Glitch Layer 2 - Cyan */}
           <h1 
             className="absolute text-[150px] md:text-[350px] font-mono font-black leading-none tracking-tighter text-cyan-500 mix-blend-screen animate-glitch-2 select-none opacity-80"
             style={{ transform: 'translate(4px, -2px)' }}
           >
             404
           </h1>
-          
-          <div className="absolute inset-0 w-full h-full pointer-events-none flex items-center justify-center mix-blend-overlay">
-             <div className="w-[150%] h-[10px] bg-slate-950 rotate-[15deg] absolute drop-shadow-[0_0_10px_black]"></div>
-             <div className="w-[150%] h-[12px] bg-slate-950 -rotate-[30deg] absolute drop-shadow-[0_0_10px_black]"></div>
-          </div>
+
+          {/* Shard 1 (Top Left Half) */}
+          <h1 
+            className="absolute text-[150px] md:text-[350px] font-mono font-black leading-none tracking-tighter text-slate-100 select-none text-3d drop-shadow-[0_0_20px_rgba(239,68,68,0.5)]"
+            style={{ clipPath: 'polygon(0 0, 100% 0, 100% 35%, 0 65%)', transform: 'translate(-12px, -8px) rotate(-1deg)' }}
+          >
+            404
+          </h1>
+
+          {/* Shard 2 (Bottom Right Half) */}
+          <h1 
+            className="absolute text-[150px] md:text-[350px] font-mono font-black leading-none tracking-tighter text-slate-100 select-none text-3d drop-shadow-[0_0_20px_rgba(239,68,68,0.5)]"
+            style={{ clipPath: 'polygon(0 65%, 100% 35%, 100% 100%, 0 100%)', transform: 'translate(12px, 8px) rotate(1deg)' }}
+          >
+            404
+          </h1>
         </div>
 
-        <div className="relative z-30 mb-10 -mt-6 md:-mt-10">
+        <div className="relative z-30 mb-8 -mt-6 md:-mt-10">
           <GlitchText speed={1.2} className="font-mono text-2xl md:text-3xl font-bold tracking-widest text-red-500 uppercase drop-shadow-[0_0_15px_rgba(239,68,68,1)] border-2 border-red-500 px-6 py-2 bg-[#020617]/90 backdrop-blur-md transform -rotate-2">
             SYSTEM_FAULT
           </GlitchText>
@@ -70,9 +77,9 @@ export default function NotFound() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-slate-400 text-sm md:text-base mb-12 font-mono tracking-wide max-w-lg text-center bg-slate-900/40 p-4 border border-slate-800 rounded-md backdrop-blur-sm shadow-[0_0_20px_rgba(239,68,68,0.05)]"
+          className="text-red-primary/80 text-sm md:text-base mb-12 font-mono tracking-[0.2em] uppercase text-center"
         >
-          Access Denied. The routing sector requested does not exist in the DevOps pipeline. Potential misconfiguration or corrupted deployment.
+          // ROUTE_SEVERED
         </motion.p>
 
         <motion.div
