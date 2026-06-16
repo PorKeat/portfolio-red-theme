@@ -42,26 +42,50 @@ export default function NotFound() {
             404
           </h1>
           
-          {/* Glitch Layer 2 - Cyan */}
+          {/* Shard 1 (Top Left) */}
           <h1 
-            className="absolute text-[150px] md:text-[350px] font-mono font-black leading-none tracking-tighter text-cyan-500 mix-blend-screen animate-glitch-2 select-none opacity-80"
-            style={{ transform: 'translate(4px, -2px)' }}
+            className="absolute text-[150px] md:text-[350px] font-mono font-black leading-none tracking-tighter text-slate-100 select-none text-3d drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]"
+            style={{ clipPath: 'polygon(0 0, 40% 0, 30% 30%, 0 40%)', transform: 'translate(-15px, -20px) rotate(-4deg)' }}
           >
             404
           </h1>
 
-          {/* Shard 1 (Top Left Half) */}
+          {/* Shard 2 (Top Right) */}
           <h1 
-            className="absolute text-[150px] md:text-[350px] font-mono font-black leading-none tracking-tighter text-slate-100 select-none text-3d drop-shadow-[0_0_20px_rgba(239,68,68,0.5)]"
-            style={{ clipPath: 'polygon(0 0, 100% 0, 100% 35%, 0 65%)', transform: 'translate(-12px, -8px) rotate(-1deg)' }}
+            className="absolute text-[150px] md:text-[350px] font-mono font-black leading-none tracking-tighter text-slate-100 select-none text-3d drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]"
+            style={{ clipPath: 'polygon(40% 0, 100% 0, 100% 20%, 60% 40%, 30% 30%)', transform: 'translate(10px, -15px) rotate(3deg)' }}
           >
             404
           </h1>
 
-          {/* Shard 2 (Bottom Right Half) */}
+          {/* Shard 3 (Mid Left) */}
           <h1 
-            className="absolute text-[150px] md:text-[350px] font-mono font-black leading-none tracking-tighter text-slate-100 select-none text-3d drop-shadow-[0_0_20px_rgba(239,68,68,0.5)]"
-            style={{ clipPath: 'polygon(0 65%, 100% 35%, 100% 100%, 0 100%)', transform: 'translate(12px, 8px) rotate(1deg)' }}
+            className="absolute text-[150px] md:text-[350px] font-mono font-black leading-none tracking-tighter text-slate-100 select-none text-3d drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]"
+            style={{ clipPath: 'polygon(0 40%, 30% 30%, 60% 40%, 70% 80%, 0 70%)', transform: 'translate(-25px, 5px) rotate(-2deg)' }}
+          >
+            404
+          </h1>
+
+          {/* Shard 4 (Mid Right) */}
+          <h1 
+            className="absolute text-[150px] md:text-[350px] font-mono font-black leading-none tracking-tighter text-slate-100 select-none text-3d drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]"
+            style={{ clipPath: 'polygon(100% 20%, 100% 70%, 70% 80%, 60% 40%)', transform: 'translate(25px, -5px) rotate(6deg)' }}
+          >
+            404
+          </h1>
+
+          {/* Shard 5 (Bottom Left) */}
+          <h1 
+            className="absolute text-[150px] md:text-[350px] font-mono font-black leading-none tracking-tighter text-slate-100 select-none text-3d drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]"
+            style={{ clipPath: 'polygon(0 70%, 70% 80%, 40% 100%, 0 100%)', transform: 'translate(-10px, 20px) rotate(2deg)' }}
+          >
+            404
+          </h1>
+
+          {/* Shard 6 (Bottom Right) */}
+          <h1 
+            className="absolute text-[150px] md:text-[350px] font-mono font-black leading-none tracking-tighter text-slate-100 select-none text-3d drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]"
+            style={{ clipPath: 'polygon(70% 80%, 100% 70%, 100% 100%, 40% 100%)', transform: 'translate(20px, 30px) rotate(-5deg)' }}
           >
             404
           </h1>
