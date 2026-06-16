@@ -34,6 +34,9 @@ export default function Home() {
           {/* Section 2: About */}
           <AboutSection />
           
+          {/* Section 3: Tech Stack */}
+          <SkillsSection />
+          
           {/* Section 4: Education Title */}
           <SectionTitle sysNum="SYS.03" title="Education" />
 
