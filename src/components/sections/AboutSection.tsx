@@ -59,7 +59,7 @@ export default function AboutSection() {
               <Terminal className="text-red-primary w-5 h-5" />
               <h3 className="text-white font-mono text-sm tracking-wider">ROLE</h3>
             </div>
-            <p className="text-slate-300 text-sm">Fullstack Developer & Cyber Security Associate blending code with secure infrastructure.</p>
+            <p className="text-slate-300 text-sm">DevOps Engineer & Software Engineering student blending code with secure cloud-native infrastructure.</p>
           </motion.div>
 
           <motion.div 
@@ -74,7 +74,7 @@ export default function AboutSection() {
               <h3 className="text-white font-mono text-sm tracking-wider md:order-1 order-2">ACADEMICS</h3>
               <BookOpen className="text-red-accent w-5 h-5 md:order-2 order-1" />
             </div>
-            <p className="text-slate-300 text-sm md:text-right">MIS at SETEC Institute & Cyber Security at Tux Global Institute.</p>
+            <p className="text-slate-300 text-sm md:text-right">MIS at SETEC Institute & Software Expert Training at ISTAD.</p>
           </motion.div>
 
           <motion.div 

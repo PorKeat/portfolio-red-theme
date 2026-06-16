@@ -6,7 +6,8 @@ import RevealText from "@/components/react-bits/RevealText";
 import { 
   SiJavascript, SiNextdotjs, SiExpress, SiSpring, SiPython,
   SiJenkins, SiGithubactions, SiDocker, SiKubernetes, SiArgo, SiAnsible, 
-  SiPrometheus, SiLinux 
+  SiPrometheus, SiLinux, SiPostgresql, SiMongodb, SiCplusplus, SiCsharp, 
+  SiTerraform, SiGrafana
 } from "react-icons/si";
 import { FaJava, FaShieldAlt, FaHtml5, FaCss3Alt, FaWindows } from "react-icons/fa";
 
@@ -36,6 +37,16 @@ const SKILLS = [
   { name: "Jenkins", icon: SiJenkins, color: "#D24939", x: 156, y: 270 },
   { name: "GH Actions", icon: SiGithubactions, color: "#2088FF", x: 260, y: 270 },
   { name: "Security", icon: FaShieldAlt, color: "#EF4444", x: 364, y: 270 },
+
+  // Row 4 (Y=360)
+  { name: "PostgreSQL", icon: SiPostgresql, color: "#336791", x: 0, y: 360 },
+  { name: "MongoDB", icon: SiMongodb, color: "#47A248", x: 104, y: 360 },
+  { name: "C++", icon: SiCplusplus, color: "#00599C", x: 208, y: 360 },
+  { name: "C#", icon: SiCsharp, color: "#239120", x: 312, y: 360 },
+
+  // Row 5 (Y=450)
+  { name: "Terraform", icon: SiTerraform, color: "#7B42BC", x: 52, y: 450 },
+  { name: "Grafana", icon: SiGrafana, color: "#F46800", x: 156, y: 450 },
 ];
 
 function Hexagon({ skill, index }: { skill: any, index: number }) {
@@ -117,9 +128,9 @@ export default function SkillsSection() {
 
       <div className="w-full flex items-center justify-center relative z-20">
         {/* The mathematical container for the absolute grid. 
-            Width: 464px + 52px (padding) = 516px. Height: 270px + 115px = 385px.
+            Width: 464px + 52px (padding) = 516px. Height: 450px + 115px = 565px.
             We scale it to be responsive. */}
-        <div className="relative w-[516px] h-[385px] scale-75 md:scale-100 lg:scale-[1.15] xl:scale-125 transform-origin-center">
+        <div className="relative w-[516px] h-[565px] scale-75 md:scale-100 lg:scale-[1.15] xl:scale-125 transform-origin-center">
           {SKILLS.map((skill, i) => (
             <Hexagon key={skill.name} skill={skill} index={i} />
           ))}

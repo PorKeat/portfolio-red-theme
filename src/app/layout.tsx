@@ -19,8 +19,8 @@ const baseUrl = "https://sengporkeat.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
-  title: "Alex KGM (Seng PorKeat) | DevOps & Fullstack Developer",
-  description: "Portfolio of Alex KGM, a Fullstack Developer & Cyber Security Associate specializing in DevOps practices, application deployment, CI/CD, and infrastructure management.",
+  title: "Alex KGM (Seng PorKeat) | DevOps Engineer & Fullstack Developer",
+  description: "Portfolio of Alex KGM, a DevOps Engineer & Software Engineering student specializing in scalable, secure, and cloud-native systems, automation, and full-stack development.",
   keywords: ["Alex KGM", "Seng PorKeat", "Portfolio", "DevOps", "Fullstack Developer", "Cyber Security", "Next.js", "React", "Docker", "Kubernetes", "AWS", "Terraform", "CI/CD"],
   authors: [{ name: "Alex KGM", url: baseUrl }],
   creator: "Alex KGM",
@@ -40,8 +40,8 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Alex KGM | DevOps & Fullstack Developer",
-    description: "Creative Developer x System Architect. Automating today, scaling tomorrow.",
+    title: "Alex KGM | DevOps Engineer & Fullstack Developer",
+    description: "Building scalable, secure, and cloud-native systems. Automating today, scaling tomorrow.",
     url: baseUrl,
     siteName: "Alex KGM Portfolio",
     locale: "en_US",
@@ -49,8 +49,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Alex KGM | DevOps & Fullstack Developer",
-    description: "Automating today, scaling tomorrow. Explore my projects and infrastructure deployments.",
+    title: "Alex KGM | DevOps Engineer & Fullstack Developer",
+    description: "Building scalable, secure, and cloud-native systems. Explore my projects and infrastructure deployments.",
   },
 };
 
