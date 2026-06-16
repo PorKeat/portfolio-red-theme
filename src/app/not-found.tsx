@@ -6,79 +6,123 @@ import MouseSpotlight from "@/components/ui/MouseSpotlight";
 
 export default function NotFound() {
   return (
-    <main className="w-full min-h-screen bg-slate-950 relative overflow-hidden flex flex-col items-center justify-center text-slate-200">
+    <main className="w-full h-screen bg-[#0f111a] relative overflow-hidden flex flex-col items-center justify-center text-slate-200">
       <MouseSpotlight />
       
-      {/* Dynamic Grid Background */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ef44440a_1px,transparent_1px),linear-gradient(to_bottom,#ef44440a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
+      {/* Geometric Background Shards */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute w-full h-full bg-[#16192b]" style={{ clipPath: 'polygon(0 0, 50% 0, 100% 100%, 0% 100%)' }} />
+        <div className="absolute w-full h-full bg-[#0a0c13] shadow-2xl drop-shadow-2xl" style={{ clipPath: 'polygon(100% 0, 40% 0, 70% 100%, 100% 100%)' }} />
+        <div className="absolute w-full h-full bg-[#12141e] shadow-2xl" style={{ clipPath: 'polygon(0 0, 100% 0, 0 60%)' }} />
+      </div>
 
-      {/* Massive Glowing Orbs */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-red-primary/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-red-600/20 rounded-full blur-[80px] pointer-events-none animate-pulse" />
-      
-      <motion.div 
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="relative z-10 w-full max-w-4xl px-4 flex flex-col items-center text-center"
-      >
-        {/* The 404 Text */}
-        <div className="relative mb-8 flex justify-center items-center">
-          <motion.h1 
-            initial={{ scale: 0.8, filter: "blur(10px)" }}
-            animate={{ scale: 1, filter: "blur(0px)" }}
-            transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
-            className="text-[12rem] md:text-[20rem] font-black tracking-tighter leading-none text-transparent bg-clip-text bg-gradient-to-b from-slate-100 to-slate-800 select-none opacity-20 absolute"
+      {/* Diagonal slice lines cutting across the whole screen */}
+      <div className="absolute inset-0 z-10 pointer-events-none flex items-center justify-center opacity-80">
+        <div className="w-[200%] h-[6px] bg-[#0a0c13] rotate-[15deg] absolute shadow-[0_0_30px_rgba(0,0,0,0.8)]"></div>
+        <div className="w-[200%] h-[8px] bg-[#0a0c13] -rotate-[30deg] absolute shadow-[0_0_30px_rgba(0,0,0,0.8)]"></div>
+      </div>
+
+      <div className="relative z-20 text-center px-4 flex flex-col items-center w-full max-w-5xl">
+        <motion.p 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-blue-500/80 font-sans text-2xl md:text-3xl font-light tracking-wide mb-2 md:mb-6"
+        >
+          Page not found
+        </motion.p>
+        
+        {/* Sliced & Glitched 404 Text */}
+        <div className="relative w-full h-[250px] md:h-[400px] flex items-center justify-center group mb-6">
+          
+          {/* Base Layer */}
+          <h1 className="absolute text-[180px] md:text-[350px] font-black leading-none tracking-tighter text-white select-none">
+            404
+          </h1>
+          
+          {/* Glitch Layer 1 - Red */}
+          <h1 
+            className="absolute text-[180px] md:text-[350px] font-black leading-none tracking-tighter text-red-500 mix-blend-screen animate-glitch-1 select-none"
+            style={{ transform: 'translate(-4px, 2px)' }}
           >
             404
-          </motion.h1>
-          <div className="z-10 flex flex-col items-center mt-12 md:mt-24">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-              className="px-4 py-1.5 rounded-full border border-red-primary/30 bg-red-primary/10 text-red-primary font-mono text-sm tracking-widest mb-6 backdrop-blur-md"
-            >
-              SYS.ERROR_CODE: 404
-            </motion.div>
-            <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7 }}
-              className="text-4xl md:text-6xl font-bold text-white tracking-tight mb-6"
-            >
-              Signal <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-primary to-orange-500">Lost</span>
-            </motion.h2>
-            <motion.p 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.9 }}
-              className="text-slate-400 text-lg md:text-xl max-w-lg font-mono leading-relaxed"
-            >
-              The node you are trying to reach has been removed, renamed, or is temporarily unavailable in the mainframe.
-            </motion.p>
+          </h1>
+          
+          {/* Glitch Layer 2 - Cyan */}
+          <h1 
+            className="absolute text-[180px] md:text-[350px] font-black leading-none tracking-tighter text-cyan-500 mix-blend-screen animate-glitch-2 select-none"
+            style={{ transform: 'translate(4px, -2px)' }}
+          >
+            404
+          </h1>
+          
+          {/* Sliced Gaps exactly matching the background lines to "cut" the text */}
+          <div className="absolute inset-0 w-full h-full pointer-events-none flex items-center justify-center">
+             <div className="w-[150%] h-[12px] bg-[#0f111a] rotate-[15deg] absolute"></div>
+             <div className="w-[150%] h-[15px] bg-[#0f111a] -rotate-[30deg] absolute"></div>
+          </div>
+
+          <div className="absolute bottom-[20%] left-[25%] md:left-[30%] -rotate-[15deg]">
+            <span className="font-sans text-xl md:text-3xl font-bold tracking-wide text-white drop-shadow-md">Error</span>
           </div>
         </div>
+        
+        <motion.p 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="text-slate-300 text-sm md:text-base mb-6 font-sans font-light tracking-wide"
+        >
+          Please, check url address or use the links below
+        </motion.p>
 
-        {/* Action Button */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.1 }}
-          className="mt-12"
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="flex flex-wrap items-center justify-center gap-4 text-sm font-sans tracking-wide text-blue-500/80"
         >
-          <Link 
-            href="/"
-            className="relative group inline-flex items-center justify-center gap-3 px-8 py-4 bg-slate-900/80 backdrop-blur-xl border border-slate-700 hover:border-red-primary/80 transition-all duration-500 rounded-2xl overflow-hidden shadow-[0_0_40px_-15px_rgba(239,68,68,0)] hover:shadow-[0_0_40px_-15px_rgba(239,68,68,0.5)] hover:-translate-y-1"
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-red-primary/0 via-red-primary/10 to-red-primary/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-red-primary group-hover:text-white transition-colors"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
-            <span className="font-mono font-bold tracking-widest text-slate-200 group-hover:text-white transition-colors">
-              REROUTE TO ORIGIN
-            </span>
+          <Link href="/" className="hover:text-blue-400 transition-colors duration-300 relative group">
+            Main
+            <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-blue-400 transition-all group-hover:w-full"></span>
+          </Link>
+          <span className="text-slate-700">/</span>
+          <Link href="/#about" className="hover:text-blue-400 transition-colors duration-300 relative group">
+            About
+            <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-blue-400 transition-all group-hover:w-full"></span>
+          </Link>
+          <span className="text-slate-700">/</span>
+          <Link href="/#contact" className="hover:text-blue-400 transition-colors duration-300 relative group">
+            Contacts
+            <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-blue-400 transition-all group-hover:w-full"></span>
           </Link>
         </motion.div>
-      </motion.div>
+      </div>
+
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes glitch-1 {
+          0% { clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%); transform: translate(-2px, 2px); }
+          20% { clip-path: polygon(0 15%, 100% 15%, 100% 15%, 0 15%); transform: translate(2px, -2px); }
+          40% { clip-path: polygon(0 10%, 100% 10%, 100% 20%, 0 20%); transform: translate(-2px, 2px); }
+          60% { clip-path: polygon(0 1%, 100% 1%, 100% 2%, 0 2%); transform: translate(2px, -2px); }
+          80% { clip-path: polygon(0 33%, 100% 33%, 100% 33%, 0 33%); transform: translate(-2px, 2px); }
+          100% { clip-path: polygon(0 44%, 100% 44%, 100% 44%, 0 44%); transform: translate(2px, -2px); }
+        }
+        @keyframes glitch-2 {
+          0% { clip-path: polygon(0 25%, 100% 25%, 100% 30%, 0 30%); transform: translate(2px, -2px); }
+          20% { clip-path: polygon(0 3%, 100% 3%, 100% 3%, 0 3%); transform: translate(-2px, 2px); }
+          40% { clip-path: polygon(0 5%, 100% 5%, 100% 20%, 0 20%); transform: translate(2px, -2px); }
+          60% { clip-path: polygon(0 20%, 100% 20%, 100% 20%, 0 20%); transform: translate(-2px, 2px); }
+          80% { clip-path: polygon(0 40%, 100% 40%, 100% 40%, 0 40%); transform: translate(2px, -2px); }
+          100% { clip-path: polygon(0 52%, 100% 52%, 100% 59%, 0 59%); transform: translate(-2px, 2px); }
+        }
+        .animate-glitch-1 {
+          animation: glitch-1 2.5s infinite linear alternate-reverse;
+        }
+        .animate-glitch-2 {
+          animation: glitch-2 3s infinite linear alternate-reverse;
+        }
+      `}} />
     </main>
   );
 }
