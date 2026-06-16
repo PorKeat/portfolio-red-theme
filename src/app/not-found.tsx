@@ -5,6 +5,62 @@ import { motion } from "framer-motion";
 import MouseSpotlight from "@/components/ui/MouseSpotlight";
 import GlitchText from "@/components/react-bits/GlitchText";
 
+const ShatteredPiece = ({ clipPath, translate, rotate }: { clipPath: string, translate: string, rotate: string }) => {
+  const depth = 25; // Massive 3D thickness
+  return (
+    <div className="absolute inset-0 w-full h-full" style={{ transform: `${translate} ${rotate}` }}>
+      {/* Deep Shadow */}
+      <div 
+        className="absolute inset-0"
+        style={{ 
+          clipPath,
+          transform: `translate(${depth * 1.2 + 20}px, ${depth * 1.2 + 20}px)`,
+          filter: 'blur(15px)',
+          backgroundColor: 'rgba(239, 68, 68, 0.4)',
+          zIndex: 0
+        }}
+      />
+      {/* 3D Extrusion Walls */}
+      {Array.from({ length: depth }).map((_, i) => (
+        <h1 
+          key={i}
+          className="absolute inset-0 flex items-center justify-center text-[150px] md:text-[350px] font-sans font-black leading-none tracking-tighter select-none"
+          style={{ 
+            clipPath,
+            transform: `translate(${i * 1.5}px, ${i * 1.5}px)`,
+            zIndex: depth - i,
+            color: `rgb(${40 - i}, ${45 - i}, ${55 - i})` // Slate-800 getting darker
+          }}
+        >
+          404
+        </h1>
+      ))}
+      {/* Top Face */}
+      <h1 
+        className="absolute inset-0 flex items-center justify-center text-[150px] md:text-[350px] font-sans font-black leading-none tracking-tighter text-slate-100 select-none"
+        style={{ 
+          clipPath,
+          zIndex: depth + 1,
+          filter: 'drop-shadow(0 0 5px rgba(255,255,255,0.3))'
+        }}
+      >
+        404
+      </h1>
+      {/* Highlight Edge for realism */}
+      <h1 
+        className="absolute inset-0 flex items-center justify-center text-[150px] md:text-[350px] font-sans font-black leading-none tracking-tighter text-transparent select-none pointer-events-none"
+        style={{ 
+          clipPath,
+          zIndex: depth + 2,
+          WebkitTextStroke: '2px rgba(255,255,255,0.2)'
+        }}
+      >
+        404
+      </h1>
+    </div>
+  );
+};
+
 export default function NotFound() {
   return (
     <main className="w-full min-h-screen bg-slate-950 relative overflow-hidden flex flex-col items-center justify-center text-slate-200">
@@ -31,58 +87,50 @@ export default function NotFound() {
           </p>
         </motion.div>
         
-        {/* 3D Shattered & Glitched 404 Text */}
+        {/* True 3D Jagged Shattered 404 */}
         <div className="relative w-full h-[250px] md:h-[400px] flex items-center justify-center group mb-2">
-          {/* Glitch Layers Behind */}
-          <h1 
-            className="absolute text-[150px] md:text-[350px] font-sans font-black leading-none tracking-tighter text-red-500 mix-blend-screen animate-glitch-1 select-none opacity-50"
-            style={{ transform: 'translate(-4px, 2px)' }}
-          >
-            404
-          </h1>
           
+          {/* Ambient Glitch Glows */}
           <h1 
-            className="absolute text-[150px] md:text-[350px] font-sans font-black leading-none tracking-tighter text-cyan-500 mix-blend-screen animate-glitch-2 select-none opacity-50"
-            style={{ transform: 'translate(4px, -2px)' }}
+            className="absolute inset-0 flex items-center justify-center text-[150px] md:text-[350px] font-sans font-black leading-none tracking-tighter text-red-500 mix-blend-screen animate-glitch-1 select-none opacity-40 blur-[4px]"
+            style={{ transform: 'translate(-10px, 5px)' }}
+          >
+            404
+          </h1>
+          <h1 
+            className="absolute inset-0 flex items-center justify-center text-[150px] md:text-[350px] font-sans font-black leading-none tracking-tighter text-cyan-500 mix-blend-screen animate-glitch-2 select-none opacity-40 blur-[4px]"
+            style={{ transform: 'translate(10px, -5px)' }}
           >
             404
           </h1>
 
-          {/* Shard 1 (Top Left) */}
-          <h1 
-            className="absolute text-[150px] md:text-[350px] font-sans font-black leading-none tracking-tighter text-slate-100 select-none"
-            style={{ 
-              clipPath: 'polygon(0 0, 60% 0, 40% 50%, 0 60%)', 
-              transform: 'translate(-10px, -15px)',
-              filter: 'drop-shadow(-4px 8px 0px #334155) drop-shadow(-8px 16px 20px rgba(0,0,0,0.8))'
-            }}
-          >
-            404
-          </h1>
+          {/* Top Left Jagged Shard */}
+          <ShatteredPiece 
+            clipPath="polygon(0% 0%, 40% 0%, 30% 10%, 45% 25%, 35% 40%, 20% 55%, 0% 45%)"
+            translate="translate(-15px, -20px)"
+            rotate="rotate(-4deg)"
+          />
 
-          {/* Shard 2 (Top Right) */}
-          <h1 
-            className="absolute text-[150px] md:text-[350px] font-sans font-black leading-none tracking-tighter text-slate-100 select-none"
-            style={{ 
-              clipPath: 'polygon(60% 0, 100% 0, 100% 80%, 40% 50%)', 
-              transform: 'translate(15px, -10px)',
-              filter: 'drop-shadow(-4px 8px 0px #334155) drop-shadow(-8px 16px 20px rgba(0,0,0,0.8))'
-            }}
-          >
-            404
-          </h1>
+          {/* Top Right Jagged Shard */}
+          <ShatteredPiece 
+            clipPath="polygon(40% 0%, 100% 0%, 100% 45%, 85% 55%, 70% 45%, 50% 60%, 35% 40%, 45% 25%, 30% 10%)"
+            translate="translate(10px, -15px)"
+            rotate="rotate(3deg)"
+          />
 
-          {/* Shard 3 (Bottom) */}
-          <h1 
-            className="absolute text-[150px] md:text-[350px] font-sans font-black leading-none tracking-tighter text-slate-100 select-none"
-            style={{ 
-              clipPath: 'polygon(0 60%, 40% 50%, 100% 80%, 100% 100%, 0 100%)', 
-              transform: 'translate(0px, 15px)',
-              filter: 'drop-shadow(-4px 8px 0px #334155) drop-shadow(-8px 16px 20px rgba(0,0,0,0.8))'
-            }}
-          >
-            404
-          </h1>
+          {/* Bottom Left Jagged Shard */}
+          <ShatteredPiece 
+            clipPath="polygon(0% 45%, 20% 55%, 35% 40%, 50% 60%, 45% 75%, 60% 85%, 50% 100%, 0% 100%)"
+            translate="translate(-20px, 15px)"
+            rotate="rotate(-2deg)"
+          />
+
+          {/* Bottom Right Jagged Shard */}
+          <ShatteredPiece 
+            clipPath="polygon(50% 60%, 70% 45%, 85% 55%, 100% 45%, 100% 100%, 50% 100%, 60% 85%, 45% 75%)"
+            translate="translate(15px, 25px)"
+            rotate="rotate(5deg)"
+          />
         </div>
 
         <div className="relative z-30 mb-8 -mt-6 md:-mt-10">
