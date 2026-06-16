@@ -1,34 +1,11 @@
 {
-  "workExperience": [
-    {
-      "year": "3 Months",
-      "title": "Backend Developer Intern",
-      "institution": "Microservice Migration & System Architecture",
-      "description": "Assisted in migrating backend systems from monolithic architecture to microservice-based architecture. Designed and documented system architecture diagrams for backend services and infrastructure workflows.",
-      "image": "/logo/backend.png"
-    }
-  ],
   "education": [
-    {
-      "year": "2021-2022",
-      "title": "BacII National certificated",
-      "institution": "Hun Sen Mittapheap High School",
-      "description": "Completed national high school diploma.",
-      "image": "/education/highschool.jpg"
-    },
     {
       "year": "2024",
       "title": "Foundation Student",
       "institution": "ISTAD",
       "description": "Developed web development skills in React and Java, with hands-on experience on real projects and collaborative teamwork.",
       "image": "/education/full-stack.jpg"
-    },
-    {
-      "year": "2024-Present",
-      "title": "Bachelor of MIS",
-      "institution": "SETEC Institute",
-      "description": "Management Information System degree covering C, C++, C#, Java, ASP.NET, SQL Server, Web Development, and Networking.",
-      "image": "/education/setec.png"
     },
     {
       "year": "2025",

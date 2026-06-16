@@ -34,27 +34,16 @@ export default function Home() {
           {/* Section 2: About */}
           <AboutSection />
           
-          {/* Section 3: Tech Stack */}
-          <SkillsSection />
-          
-          {/* Section 4: Work Experience Title */}
-          <SectionTitle sysNum="SYS.03" title="Experience" />
+          {/* Section 4: Education Title */}
+          <SectionTitle sysNum="SYS.03" title="Education" />
 
-          {/* Section 5: Work Experience Cards */}
-          {(portfolioData as any).workExperience.map((item: any, index: number) => (
-            <ExperienceCard key={`work-${index}`} item={item} index={index} />
-          ))}
-
-          {/* Section 6: Education Title */}
-          <SectionTitle sysNum="SYS.04" title="Education" />
-
-          {/* Section 7: Education Cards */}
+          {/* Section 5, 6, 7: Education Cards flying Left and Right */}
           {portfolioData.education.map((item, index) => (
             <ExperienceCard key={`edu-${index}`} item={item} index={index} />
           ))}
 
           {/* Section 8: Projects Title */}
-          <SectionTitle sysNum="SYS.05" title="Projects" />
+          <SectionTitle sysNum="SYS.04" title="Projects" />
 
           {/* Section 9: Project Cards flying Left and Right */}
           {portfolioData.projects.map((item, index) => (
