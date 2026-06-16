@@ -2,8 +2,56 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import MouseSpotlight from "@/components/ui/MouseSpotlight";
 import GlitchText from "@/components/react-bits/GlitchText";
+
+const playSmashSound = () => {
+  try {
+    const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
+    if (!AudioContext) return;
+    const ctx = new AudioContext();
+    const duration = 0.6;
+    
+    // 1. High-frequency shatter (glass noise)
+    const bufferSize = ctx.sampleRate * duration;
+    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) {
+      data[i] = Math.random() * 2 - 1; 
+    }
+    const noise = ctx.createBufferSource();
+    noise.buffer = buffer;
+    
+    const bandpass = ctx.createBiquadFilter();
+    bandpass.type = 'highpass';
+    bandpass.frequency.value = 2000;
+    
+    const gain = ctx.createGain();
+    gain.gain.setValueAtTime(0.8, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + duration);
+    
+    noise.connect(bandpass);
+    bandpass.connect(gain);
+    gain.connect(ctx.destination);
+    noise.start();
+
+    // 2. Heavy low-frequency THUD (concrete impact)
+    const osc = ctx.createOscillator();
+    osc.type = 'square';
+    osc.frequency.setValueAtTime(100, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(10, ctx.currentTime + 0.3);
+    
+    const oscGain = ctx.createGain();
+    oscGain.gain.setValueAtTime(1, ctx.currentTime);
+    oscGain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+    
+    osc.connect(oscGain);
+    oscGain.connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.3);
+  } catch(e) {
+    console.log("Audio play failed:", e);
+  }
+};
 
 const ShatteredPiece = ({ clipPath, targetX, targetY, targetRotate }: { clipPath: string, targetX: number, targetY: number, targetRotate: number }) => {
   const depth = 25; // Massive 3D thickness
@@ -12,7 +60,7 @@ const ShatteredPiece = ({ clipPath, targetX, targetY, targetRotate }: { clipPath
       className="absolute inset-0 w-full h-full" 
       initial={{ x: 0, y: 0, rotate: 0 }}
       animate={{ x: targetX, y: targetY, rotate: targetRotate }}
-      transition={{ delay: 0.5, type: "spring", stiffness: 200, damping: 15 }}
+      transition={{ delay: 0.4, type: "spring", stiffness: 400, damping: 15 }}
     >
       {/* Deep Shadow */}
       <h1 
@@ -71,7 +119,6 @@ const ShatteredPiece = ({ clipPath, targetX, targetY, targetRotate }: { clipPath
 export default function NotFound() {
   return (
     <main className="w-full min-h-screen bg-slate-950 relative overflow-hidden flex flex-col items-center justify-center text-slate-200">
-      <MouseSpotlight />
       
       {/* Immersive 3D Geometric Background */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
@@ -94,19 +141,34 @@ export default function NotFound() {
           </p>
         </motion.div>
         
-        {/* Animated Drop & Shatter */}
+        {/* Animated Drop & Shatter Container */}
         <motion.div 
           className="relative w-full h-[250px] md:h-[400px] flex items-center justify-center group mb-2"
-          initial={{ y: -800 }}
-          animate={{ y: [-800, 0, 15, -10, 5, -5, 0] }} // Hard drop and violent camera shake
-          transition={{ duration: 0.9, times: [0, 0.5, 0.55, 0.6, 0.65, 0.7, 1], ease: "linear" }}
+          initial={{ y: "-100vh" }}
+          animate={{ y: 0 }} 
+          transition={{ duration: 0.4, ease: "easeIn" }}
+          onAnimationComplete={() => {
+            // Slight camera shake on the container exactly on impact
+            const elem = document.getElementById('shatter-container');
+            if (elem) {
+              elem.animate([
+                { transform: 'translate(0px, 0px)' },
+                { transform: 'translate(-10px, 10px)' },
+                { transform: 'translate(10px, -10px)' },
+                { transform: 'translate(-5px, 5px)' },
+                { transform: 'translate(0px, 0px)' }
+              ], { duration: 300, easing: 'ease-out' });
+            }
+            playSmashSound();
+          }}
+          id="shatter-container"
         >
           
           {/* Ambient Glitch Glows (Delayed so they don't glow during the drop) */}
           <motion.h1 
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.4 }}
-            transition={{ delay: 0.5, duration: 0.2 }}
+            transition={{ delay: 0.4, duration: 0.2 }}
             className="absolute inset-0 flex items-center justify-center text-[150px] md:text-[350px] font-sans font-black leading-none tracking-tighter text-red-500 mix-blend-screen animate-glitch-1 select-none blur-[4px]"
             style={{ transform: 'translate(-10px, 5px)' }}
           >
@@ -115,7 +177,7 @@ export default function NotFound() {
           <motion.h1 
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.4 }}
-            transition={{ delay: 0.5, duration: 0.2 }}
+            transition={{ delay: 0.4, duration: 0.2 }}
             className="absolute inset-0 flex items-center justify-center text-[150px] md:text-[350px] font-sans font-black leading-none tracking-tighter text-cyan-500 mix-blend-screen animate-glitch-2 select-none blur-[4px]"
             style={{ transform: 'translate(10px, -5px)' }}
           >
