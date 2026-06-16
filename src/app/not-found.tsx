@@ -31,26 +31,25 @@ export default function NotFound() {
           </p>
         </motion.div>
         
-        {/* Sliced & Glitched 404 Text - Hollow Terminal Style */}
+        {/* 3D Sliced & Glitched 404 Text with intense lighting */}
         <div className="relative w-full h-[250px] md:h-[400px] flex items-center justify-center group mb-2">
           
           <h1 
-            className="absolute text-[150px] md:text-[350px] font-mono font-bold leading-none tracking-tighter text-transparent select-none drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]"
-            style={{ WebkitTextStroke: '4px #ef4444' }}
+            className="absolute text-[150px] md:text-[350px] font-mono font-black leading-none tracking-tighter text-slate-100 select-none text-3d drop-shadow-[0_0_40px_rgba(239,68,68,0.5)]"
           >
             404
           </h1>
           
           <h1 
-            className="absolute text-[150px] md:text-[350px] font-mono font-bold leading-none tracking-tighter text-transparent select-none animate-glitch-1 opacity-80"
-            style={{ WebkitTextStroke: '4px #ef4444', transform: 'translate(-4px, 2px)' }}
+            className="absolute text-[150px] md:text-[350px] font-mono font-black leading-none tracking-tighter text-red-500 mix-blend-screen animate-glitch-1 select-none opacity-80"
+            style={{ transform: 'translate(-4px, 2px)' }}
           >
             404
           </h1>
           
           <h1 
-            className="absolute text-[150px] md:text-[350px] font-mono font-bold leading-none tracking-tighter text-transparent select-none animate-glitch-2 opacity-80"
-            style={{ WebkitTextStroke: '4px #06b6d4', transform: 'translate(4px, -2px)' }}
+            className="absolute text-[150px] md:text-[350px] font-mono font-black leading-none tracking-tighter text-cyan-500 mix-blend-screen animate-glitch-2 select-none opacity-80"
+            style={{ transform: 'translate(4px, -2px)' }}
           >
             404
           </h1>
@@ -61,7 +60,7 @@ export default function NotFound() {
           </div>
 
           <div className="absolute bottom-[5%] md:bottom-[15%] left-[5%] md:left-[20%] -rotate-[10deg] z-30">
-            <GlitchText speed={1.2} className="font-mono text-2xl md:text-4xl font-bold tracking-widest text-red-500 uppercase drop-shadow-md border-2 border-red-500 p-2 bg-[#020617]/80 backdrop-blur-sm transform rotate-12">
+            <GlitchText speed={1.2} className="font-mono text-2xl md:text-4xl font-bold tracking-widest text-red-500 uppercase drop-shadow-[0_0_15px_rgba(239,68,68,1)] border-2 border-red-500 p-2 bg-[#020617]/80 backdrop-blur-sm transform rotate-12">
               SYSTEM_FAULT
             </GlitchText>
           </div>
@@ -71,7 +70,7 @@ export default function NotFound() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-slate-400 text-sm md:text-base mb-12 font-mono tracking-wide max-w-lg text-center bg-slate-900/40 p-4 border border-slate-800 rounded-md backdrop-blur-sm"
+          className="text-slate-400 text-sm md:text-base mb-12 font-mono tracking-wide max-w-lg text-center bg-slate-900/40 p-4 border border-slate-800 rounded-md backdrop-blur-sm shadow-[0_0_20px_rgba(239,68,68,0.05)]"
         >
           Access Denied. The routing sector requested does not exist in the DevOps pipeline. Potential misconfiguration or corrupted deployment.
         </motion.p>
@@ -87,13 +86,23 @@ export default function NotFound() {
             style={{ clipPath: "polygon(5% 0, 100% 0, 100% 80%, 95% 100%, 0 100%, 0 20%)" }}
           >
             <span className="text-red-primary group-hover:text-white transition-colors duration-300">{"$"}</span>
-            RESTART_CLUSTER
+            RESTART_SYSTEM
             <span className="text-red-primary group-hover:text-white transition-colors duration-300 opacity-50 block w-2 h-4 bg-red-primary group-hover:bg-white animate-pulse"></span>
           </Link>
         </motion.div>
       </div>
 
       <style dangerouslySetInnerHTML={{__html: `
+        .text-3d {
+          text-shadow: 
+            0px 2px 0px #7f1d1d,
+            0px 4px 0px #7f1d1d,
+            0px 6px 0px #450a0a,
+            0px 8px 0px #450a0a,
+            0px 10px 0px #450a0a,
+            0px 15px 30px rgba(239, 68, 68, 0.5),
+            0px 30px 60px rgba(239, 68, 68, 0.4);
+        }
         @keyframes glitch-1 {
           0% { clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%); transform: translate(-2px, 2px); }
           20% { clip-path: polygon(0 15%, 100% 15%, 100% 15%, 0 15%); transform: translate(2px, -2px); }
