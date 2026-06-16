@@ -10,16 +10,18 @@ const ShatteredPiece = ({ clipPath, translate, rotate }: { clipPath: string, tra
   return (
     <div className="absolute inset-0 w-full h-full" style={{ transform: `${translate} ${rotate}` }}>
       {/* Deep Shadow */}
-      <div 
-        className="absolute inset-0"
+      <h1 
+        className="absolute inset-0 flex items-center justify-center text-[150px] md:text-[350px] font-sans font-black leading-none tracking-tighter select-none"
         style={{ 
           clipPath,
           transform: `translate(${depth * 1.2 + 20}px, ${depth * 1.2 + 20}px)`,
           filter: 'blur(15px)',
-          backgroundColor: 'rgba(239, 68, 68, 0.4)',
+          color: 'rgba(239, 68, 68, 0.4)',
           zIndex: 0
         }}
-      />
+      >
+        404
+      </h1>
       {/* 3D Extrusion Walls */}
       {Array.from({ length: depth }).map((_, i) => (
         <h1 
@@ -133,7 +135,7 @@ export default function NotFound() {
           />
         </div>
 
-        <div className="relative z-30 mb-8 -mt-6 md:-mt-10">
+        <div className="relative z-30 mb-8 mt-8 md:mt-12">
           <GlitchText speed={1.2} className="font-mono text-2xl md:text-3xl font-bold tracking-widest text-red-500 uppercase drop-shadow-[0_0_15px_rgba(239,68,68,1)] border-2 border-red-500 px-6 py-2 bg-[#020617]/90 backdrop-blur-md transform -rotate-2">
             SYSTEM_FAULT
           </GlitchText>
