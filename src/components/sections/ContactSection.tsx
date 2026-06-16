@@ -45,12 +45,12 @@ export default function ContactSection() {
           </a>
         </motion.div>
 
-        {/* Info Blocks */}
         <div className="flex flex-col gap-6">
           <motion.a 
             href="https://github.com/PorKeat"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Visit my GitHub Profile"
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -58,7 +58,7 @@ export default function ContactSection() {
             className="flex-1 bg-slate-900/40 backdrop-blur-xl border border-white/10 p-6 flex flex-col justify-center hover:border-red-accent/50 transition-colors group"
             style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 10% 100%, 0 80%)" }}
           >
-            <GithubIcon className="text-slate-500 group-hover:text-red-accent w-8 h-8 mb-4 transition-colors" />
+            <GithubIcon className="text-slate-500 group-hover:text-red-accent w-8 h-8 mb-4 transition-colors" aria-hidden="true" />
             <h4 className="text-white font-bold text-lg">GitHub</h4>
             <p className="text-slate-400 text-sm font-mono mt-1">github.com/PorKeat</p>
           </motion.a>

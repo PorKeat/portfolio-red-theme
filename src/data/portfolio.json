@@ -19,7 +19,7 @@
       "title": "IT Professional (DevOps)",
       "institution": "ISTAD",
       "description": "Specializing in DevOps practices, gaining practical experience through real projects, application deployment, CI/CD, and infrastructure management.",
-      "image": "/placeholder-mountain.png"
+      "image": "/education/devops.png"
     }
   ],
   "projects": [
@@ -44,7 +44,7 @@
       "title": "Autonomous - A8S",
       "institution": "DevOps & Infrastructure Platform",
       "description": "A8S is an autonomous platform that helps teams create, deploy, operate, and manage application workloads and databases from one unified system. It combines guided project workflows, managed infrastructure operations, database tooling, and platform integrations into a single product experience for modern software delivery.",
-      "image": "/placeholder-mountain.png",
+      "image": "/projects/a8s.png",
       "logo": "/logo/a8s-logo.png"
     }
   ]
