@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, MapPin, Phone, ExternalLink } from "lucide-react";
+import { Mail, MapPin, Phone, ExternalLink, Send } from "lucide-react";
 import RevealText from "@/components/react-bits/RevealText";
 
 const GithubIcon = ({ className }: { className?: string }) => (
@@ -61,6 +61,22 @@ export default function ContactSection() {
             <GithubIcon className="text-slate-500 group-hover:text-red-accent w-8 h-8 mb-4 transition-colors" aria-hidden="true" />
             <h4 className="text-white font-bold text-lg">GitHub</h4>
             <p className="text-slate-400 text-sm font-mono mt-1">github.com/PorKeat</p>
+          </motion.a>
+
+          <motion.a 
+            href="https://t.me/PorKeat"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Message me on Telegram"
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="flex-1 bg-slate-900/40 backdrop-blur-xl border border-white/10 p-6 flex flex-col justify-center hover:border-[#229ED9]/50 transition-colors group"
+          >
+            <Send className="text-slate-500 group-hover:text-[#229ED9] w-8 h-8 mb-4 transition-colors" aria-hidden="true" />
+            <h4 className="text-white font-bold text-lg">Telegram</h4>
+            <p className="text-slate-400 text-sm font-mono mt-1">@PorKeat</p>
           </motion.a>
 
           <motion.div 
