@@ -93,7 +93,15 @@ export function ExperienceCard({ item, index }: { item: any, index: number }) {
       <div className="w-full max-w-7xl mx-auto flex justify-center">
         
         {/* The Card */}
-        <div className={`w-full md:w-[900px] md:h-[380px] flex flex-col md:flex-row ${isLeft ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 bg-slate-900/80 backdrop-blur-xl border border-red-primary/30 rounded-2xl p-6 md:p-8 shadow-[0_0_50px_rgba(239,68,68,0.15)] hover:border-red-primary hover:bg-slate-900/90 transition-all duration-300 relative group`}>
+        <div 
+          onClick={() => {
+            setSelectedIndex(index);
+            setIsFullscreen(false); // Reset fullscreen state when opening
+            // Ensure background video plays when opening modal
+            if (thumbnailVideoRef.current) thumbnailVideoRef.current.play();
+          }}
+          className={`w-full md:w-[900px] md:h-[380px] flex flex-col md:flex-row ${isLeft ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 bg-slate-900/80 backdrop-blur-xl border border-red-primary/30 rounded-2xl p-6 md:p-8 shadow-[0_0_50px_rgba(239,68,68,0.15)] hover:border-red-primary hover:bg-slate-900/90 transition-all duration-300 relative group cursor-pointer`}
+        >
           
           {/* Decorative neon accent */}
           <div className={`absolute top-1/2 -translate-y-1/2 w-2 h-1/2 bg-red-primary rounded-full opacity-50 group-hover:opacity-100 transition-opacity blur-[2px] ${isLeft ? '-right-1' : '-left-1'}`} />
@@ -101,13 +109,7 @@ export function ExperienceCard({ item, index }: { item: any, index: number }) {
           {/* Image Side */}
           <motion.div 
             layoutId={`image-container-${index}`}
-            onClick={() => {
-              setSelectedIndex(index);
-              setIsFullscreen(false); // Reset fullscreen state when opening
-              // Ensure background video plays when opening modal
-              if (thumbnailVideoRef.current) thumbnailVideoRef.current.play();
-            }}
-            className="w-full md:w-2/5 h-48 md:h-full min-h-[200px] rounded-xl overflow-hidden relative border border-slate-700/50 group-hover:border-red-primary/50 transition-colors duration-300 cursor-pointer bg-black"
+            className="w-full md:w-2/5 h-48 md:h-full min-h-[200px] rounded-xl overflow-hidden relative border border-slate-700/50 group-hover:border-red-primary/50 transition-colors duration-300 bg-black"
           >
             {isVideo ? (
               <motion.video
