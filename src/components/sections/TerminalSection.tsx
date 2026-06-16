@@ -17,6 +17,7 @@ const COMMANDS: Record<string, string[]> = {
     "  skills       - List core competencies",
     "  experience   - View work history",
     "  contact      - Get contact details",
+    "  download     - Download my Resume (CV)",
     "  sudo         - Execute command as superuser",
     "  clear        - Clear the terminal output"
   ],
@@ -49,7 +50,8 @@ const COMMANDS: Record<string, string[]> = {
 export default function TerminalSection() {
   const [logs, setLogs] = useState<Log[]>([
     { text: "AlexKGM OS v2.4.1 (tty1)" },
-    { text: "Type 'help' to see available commands." }
+    { text: "Type 'help' to see available commands." },
+    { text: "Hint: Try typing 'download' to get my resume!" }
   ]);
   const [input, setInput] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
@@ -59,8 +61,8 @@ export default function TerminalSection() {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [logs]);
 
-  const handleCommand = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleCommand = (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
     if (!input.trim()) return;
 
     const cmd = input.trim().toLowerCase();
@@ -71,8 +73,15 @@ export default function TerminalSection() {
       setInput("");
       return;
     }
-
-    if (cmd.startsWith("sudo ")) {
+    
+    if (cmd === "download" || cmd === "cv") {
+      newLogs.push({ text: "Downloading CV..." });
+      // Create a fake link and click it
+      const link = document.createElement("a");
+      link.href = "/Seng_PorKeat_Resume.pdf";
+      link.download = "Seng_PorKeat_Resume.pdf";
+      link.click();
+    } else if (cmd.startsWith("sudo ")) {
       newLogs.push({ text: `alexkgm is not in the sudoers file. This incident will be reported.`, isError: true });
     } else if (COMMANDS[cmd]) {
       COMMANDS[cmd].forEach(line => newLogs.push({ text: line }));
@@ -126,6 +135,12 @@ export default function TerminalSection() {
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  handleCommand();
+                }
+              }}
               className="flex-1 bg-transparent outline-none text-white caret-red-primary"
               autoComplete="off"
               spellCheck="false"

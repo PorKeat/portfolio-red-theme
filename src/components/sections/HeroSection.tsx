@@ -59,25 +59,6 @@ export default function HeroSection() {
               Creative Developer <span className="text-red-primary font-bold">x</span> System Architect
             </p>
           </RevealText>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 3.3 }}
-            className="flex justify-center mt-12 md:mt-16"
-          >
-            <a 
-              href="/Seng_PorKeat_Resume.pdf" 
-              download="Seng_PorKeat_Resume.pdf"
-              className="group relative inline-flex items-center gap-3 px-8 py-4 bg-red-primary/10 border border-red-primary/50 text-red-primary font-mono tracking-widest hover:bg-red-primary hover:text-white transition-all duration-300"
-            >
-              <span className="absolute inset-0 bg-red-primary/40 blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
-              <svg className="w-5 h-5 z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
-              </svg>
-              <span className="z-10">DOWNLOAD CV</span>
-            </a>
-          </motion.div>
         </div>
 
       </div>
