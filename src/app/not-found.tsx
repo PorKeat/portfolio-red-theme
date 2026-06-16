@@ -58,12 +58,12 @@ export default function NotFound() {
              <div className="w-[150%] h-[10px] bg-slate-950 rotate-[15deg] absolute drop-shadow-[0_0_10px_black]"></div>
              <div className="w-[150%] h-[12px] bg-slate-950 -rotate-[30deg] absolute drop-shadow-[0_0_10px_black]"></div>
           </div>
+        </div>
 
-          <div className="absolute bottom-[5%] md:bottom-[15%] left-[5%] md:left-[20%] -rotate-[10deg] z-30">
-            <GlitchText speed={1.2} className="font-mono text-2xl md:text-4xl font-bold tracking-widest text-red-500 uppercase drop-shadow-[0_0_15px_rgba(239,68,68,1)] border-2 border-red-500 p-2 bg-[#020617]/80 backdrop-blur-sm transform rotate-12">
-              SYSTEM_FAULT
-            </GlitchText>
-          </div>
+        <div className="relative z-30 mb-10 -mt-6 md:-mt-10">
+          <GlitchText speed={1.2} className="font-mono text-2xl md:text-3xl font-bold tracking-widest text-red-500 uppercase drop-shadow-[0_0_15px_rgba(239,68,68,1)] border-2 border-red-500 px-6 py-2 bg-[#020617]/90 backdrop-blur-md transform -rotate-2">
+            SYSTEM_FAULT
+          </GlitchText>
         </div>
         
         <motion.p 
