@@ -166,7 +166,6 @@ export default function NotFound() {
         
         {/* Animated Drop & Shatter Container */}
         <motion.div 
-          key={playCount}
           className="relative w-full h-[250px] md:h-[400px] flex items-center justify-center group mb-2"
           initial={{ y: "-100vh" }}
           animate={{ y: 0 }} 
