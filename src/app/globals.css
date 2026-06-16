@@ -111,6 +111,12 @@
   --theme-glow: #0e7490;       /* Cyan 700 */
 }
 
+[data-theme="custom"] {
+  --background: #020617;
+  --foreground: #e2e8f0;
+  /* --theme-primary, --theme-accent, --theme-glow are set via inline JS */
+}
+
 body {
   background: var(--background);
   color: var(--foreground);

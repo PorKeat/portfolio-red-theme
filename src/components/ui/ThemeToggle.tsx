@@ -1,29 +1,59 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { Palette } from "lucide-react";
 
-type Theme = "red" | "blue" | "green" | "purple" | "orange" | "pink" | "cyan";
+type Theme = "red" | "blue" | "green" | "purple" | "orange" | "pink" | "cyan" | "custom";
 
-const THEMES: { id: Theme; name: string; color: string }[] = [
-  { id: "red", name: "Cyber Red", color: "bg-red-500" },
-  { id: "blue", name: "Neon Blue", color: "bg-sky-500" },
-  { id: "green", name: "Matrix Green", color: "bg-green-500" },
-  { id: "purple", name: "Phantom Purple", color: "bg-purple-500" },
-  { id: "orange", name: "Solar Orange", color: "bg-orange-500" },
-  { id: "pink", name: "Neon Pink", color: "bg-pink-500" },
-  { id: "cyan", name: "Arctic Cyan", color: "bg-cyan-500" },
+const THEMES: { id: Theme; name: string; hex: string }[] = [
+  { id: "red", name: "Cyber Red", hex: "#ef4444" },
+  { id: "blue", name: "Neon Blue", hex: "#0ea5e9" },
+  { id: "green", name: "Matrix Green", hex: "#22c55e" },
+  { id: "purple", name: "Phantom Purple", hex: "#a855f7" },
+  { id: "orange", name: "Solar Orange", hex: "#f97316" },
+  { id: "pink", name: "Neon Pink", hex: "#ec4899" },
+  { id: "cyan", name: "Arctic Cyan", hex: "#06b6d4" },
 ];
+
+function darkenHex(hex: string, amount: number): string {
+  const num = parseInt(hex.replace("#", ""), 16);
+  const r = Math.max(0, (num >> 16) - amount);
+  const g = Math.max(0, ((num >> 8) & 0x00ff) - amount);
+  const b = Math.max(0, (num & 0x0000ff) - amount);
+  return `#${(r << 16 | g << 8 | b).toString(16).padStart(6, "0")}`;
+}
+
+function applyCustomColor(hex: string) {
+  const root = document.documentElement;
+  root.style.setProperty("--theme-primary", hex);
+  root.style.setProperty("--theme-accent", darkenHex(hex, 30));
+  root.style.setProperty("--theme-glow", darkenHex(hex, 60));
+}
+
+function clearCustomColor() {
+  const root = document.documentElement;
+  root.style.removeProperty("--theme-primary");
+  root.style.removeProperty("--theme-accent");
+  root.style.removeProperty("--theme-glow");
+}
 
 export default function ThemeToggle() {
   const [isOpen, setIsOpen] = useState(false);
   const [currentTheme, setCurrentTheme] = useState<Theme>("red");
+  const [customHex, setCustomHex] = useState("#ef4444");
+  const colorInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    // Load theme from localStorage if available
     const savedTheme = localStorage.getItem("app-theme") as Theme;
-    if (savedTheme && ["red", "blue", "green", "purple", "orange", "pink", "cyan"].includes(savedTheme)) {
+    const savedCustom = localStorage.getItem("app-theme-custom");
+
+    if (savedTheme === "custom" && savedCustom) {
+      setCurrentTheme("custom");
+      setCustomHex(savedCustom);
+      document.documentElement.setAttribute("data-theme", "custom");
+      applyCustomColor(savedCustom);
+    } else if (savedTheme && THEMES.some(t => t.id === savedTheme)) {
       setCurrentTheme(savedTheme);
       document.documentElement.setAttribute("data-theme", savedTheme);
     } else {
@@ -32,10 +62,20 @@ export default function ThemeToggle() {
   }, []);
 
   const changeTheme = (theme: Theme) => {
+    clearCustomColor();
     setCurrentTheme(theme);
     localStorage.setItem("app-theme", theme);
+    localStorage.removeItem("app-theme-custom");
     document.documentElement.setAttribute("data-theme", theme);
-    setIsOpen(false);
+  };
+
+  const applyCustom = (hex: string) => {
+    setCustomHex(hex);
+    setCurrentTheme("custom");
+    localStorage.setItem("app-theme", "custom");
+    localStorage.setItem("app-theme-custom", hex);
+    document.documentElement.setAttribute("data-theme", "custom");
+    applyCustomColor(hex);
   };
 
   return (
@@ -48,8 +88,9 @@ export default function ThemeToggle() {
           y: isOpen ? 0 : 20,
           pointerEvents: isOpen ? "auto" : "none"
         }}
-        className="flex flex-col gap-2 bg-slate-900/90 backdrop-blur-md border border-slate-700 p-2 rounded-2xl shadow-xl"
+        className="flex flex-col gap-1 bg-slate-900/90 backdrop-blur-md border border-slate-700 p-2 rounded-2xl shadow-xl max-h-[70vh] overflow-y-auto custom-scrollbar"
       >
+        {/* Preset Themes */}
         {THEMES.map((theme) => (
           <button
             key={theme.id}
@@ -57,16 +98,62 @@ export default function ThemeToggle() {
             className={`flex items-center gap-3 px-3 py-2 rounded-xl transition-colors hover:bg-slate-800 ${currentTheme === theme.id ? 'bg-slate-800/50' : ''}`}
             aria-label={`Switch to ${theme.name} theme`}
           >
-            <div className={`w-4 h-4 rounded-full ${theme.color} shadow-[0_0_10px_currentColor]`} style={{ color: `var(--theme-primary)` }} />
-            <span className="text-xs font-mono text-slate-300">{theme.name}</span>
+            <div className="w-4 h-4 rounded-full shrink-0" style={{ backgroundColor: theme.hex, boxShadow: `0 0 10px ${theme.hex}` }} />
+            <span className="text-xs font-mono text-slate-300 whitespace-nowrap">{theme.name}</span>
           </button>
         ))}
+
+        {/* Divider */}
+        <div className="w-full h-px bg-slate-700 my-1" />
+
+        {/* Custom Color Picker */}
+        <div className="px-3 py-2">
+          <span className="text-[10px] font-mono text-slate-500 uppercase tracking-widest mb-2 block">Custom Color</span>
+          
+          <div className="flex items-center gap-2">
+            {/* Native color picker (drag to choose) */}
+            <div 
+              className="relative w-8 h-8 rounded-lg overflow-hidden border border-slate-600 cursor-pointer shrink-0"
+              onClick={() => colorInputRef.current?.click()}
+            >
+              <div className="w-full h-full" style={{ backgroundColor: customHex }} />
+              <input
+                ref={colorInputRef}
+                type="color"
+                value={customHex}
+                onChange={(e) => applyCustom(e.target.value)}
+                className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
+              />
+            </div>
+
+            {/* Hex code input */}
+            <input
+              type="text"
+              value={customHex}
+              onChange={(e) => {
+                const val = e.target.value;
+                setCustomHex(val);
+                if (/^#[0-9a-fA-F]{6}$/.test(val)) {
+                  applyCustom(val);
+                }
+              }}
+              placeholder="#ff00ff"
+              maxLength={7}
+              className="w-[85px] bg-slate-800 border border-slate-600 rounded-lg px-2 py-1.5 text-xs font-mono text-white outline-none focus:border-slate-400 transition-colors"
+            />
+          </div>
+        </div>
       </motion.div>
 
       {/* Main Toggle Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-12 h-12 rounded-full bg-slate-900/90 backdrop-blur-md border border-red-primary/30 flex items-center justify-center text-red-primary shadow-[0_0_20px_rgba(239,68,68,0.2)] hover:scale-110 hover:shadow-[0_0_30px_rgba(239,68,68,0.4)] transition-all duration-300 group"
+        className="w-12 h-12 rounded-full bg-slate-900/90 backdrop-blur-md border border-red-primary/30 flex items-center justify-center text-red-primary hover:scale-110 transition-all duration-300 group"
+        style={{ 
+          borderColor: `color-mix(in srgb, var(--theme-primary) 30%, transparent)`,
+          color: `var(--theme-primary)`,
+          boxShadow: `0 0 20px color-mix(in srgb, var(--theme-primary) 20%, transparent)`
+        }}
         aria-label="Toggle Theme Options"
       >
         <Palette className="w-5 h-5 group-hover:rotate-12 transition-transform" />
