@@ -4,7 +4,6 @@ import "./globals.css";
 import LenisProvider from "@/components/providers/LenisProvider";
 import CustomCursor from "@/components/ui/CustomCursor";
 import MusicPlayer from "@/components/ui/MusicPlayer";
-import AnimatePresenceProvider from "@/components/providers/AnimatePresenceProvider";
 
 const mainFont = Outfit({
   variable: "--font-sans",
@@ -69,9 +68,7 @@ export default function RootLayout({
         <CustomCursor />
         <MusicPlayer />
         <LenisProvider>
-          <AnimatePresenceProvider>
-            {children}
-          </AnimatePresenceProvider>
+          {children}
         </LenisProvider>
       </body>
     </html>
