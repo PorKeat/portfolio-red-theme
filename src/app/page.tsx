@@ -11,6 +11,7 @@ import OutroSection from "@/components/sections/OutroSection";
 import MouseSpotlight from "@/components/ui/MouseSpotlight";
 import FlyThroughParallax from "@/components/ui/FlyThroughParallax";
 import TerminalBootLoader from "@/components/ui/TerminalBootLoader";
+import TerminalSection from "@/components/sections/TerminalSection";
 
 export default function Home() {
   const [isBooting, setIsBooting] = useState(true);
@@ -52,6 +53,9 @@ export default function Home() {
           {portfolioData.projects.map((item, index) => (
             <ExperienceCard key={`proj-${index}`} item={item} index={index} />
           ))}
+
+          {/* Section 9.5: Hacker Terminal */}
+          <TerminalSection />
 
           {/* Section 10: Contact */}
           <ContactSection />

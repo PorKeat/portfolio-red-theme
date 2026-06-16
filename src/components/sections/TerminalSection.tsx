@@ -1,0 +1,139 @@
+"use client";
+
+import { useState, useRef, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Terminal as TerminalIcon } from "lucide-react";
+
+type Log = {
+  text: string;
+  isCommand?: boolean;
+  isError?: boolean;
+};
+
+const COMMANDS: Record<string, string[]> = {
+  help: [
+    "Available commands:",
+    "  whoami       - Display identity info",
+    "  skills       - List core competencies",
+    "  experience   - View work history",
+    "  contact      - Get contact details",
+    "  sudo         - Execute command as superuser",
+    "  clear        - Clear the terminal output"
+  ],
+  whoami: [
+    "ALEX KGM (Seng PorKeat)",
+    "Role: DevOps Engineer & Fullstack Developer",
+    "Location: Phnom Penh, Cambodia",
+    "Status: ONLINE"
+  ],
+  skills: [
+    "[CORE] React, Next.js, TypeScript, TailwindCSS",
+    "[BACKEND] Node.js, Python, Java, C++",
+    "[DEVOPS] Docker, Kubernetes, AWS, Terraform, CI/CD",
+    "[DB] PostgreSQL, MongoDB, Redis"
+  ],
+  experience: [
+    "Fetching data from encrypted storage...",
+    "> DevOps Intern @ SabaiCode",
+    "> Hackathon Finalist @ Multiple Events",
+    "For full details, scroll up to the visual experience section."
+  ],
+  contact: [
+    "Establishing secure connection...",
+    "Email: alexkgm2412@gmail.com",
+    "GitHub: github.com/PorKeat",
+    "Telegram: t.me/PorKeat"
+  ]
+};
+
+export default function TerminalSection() {
+  const [logs, setLogs] = useState<Log[]>([
+    { text: "AlexKGM OS v2.4.1 (tty1)" },
+    { text: "Type 'help' to see available commands." }
+  ]);
+  const [input, setInput] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
+  const bottomRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [logs]);
+
+  const handleCommand = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!input.trim()) return;
+
+    const cmd = input.trim().toLowerCase();
+    const newLogs: Log[] = [...logs, { text: `user@alexkgm:~$ ${cmd}`, isCommand: true }];
+    
+    if (cmd === "clear") {
+      setLogs([]);
+      setInput("");
+      return;
+    }
+
+    if (cmd.startsWith("sudo ")) {
+      newLogs.push({ text: `alexkgm is not in the sudoers file. This incident will be reported.`, isError: true });
+    } else if (COMMANDS[cmd]) {
+      COMMANDS[cmd].forEach(line => newLogs.push({ text: line }));
+    } else {
+      newLogs.push({ text: `command not found: ${cmd}`, isError: true });
+    }
+
+    setLogs(newLogs);
+    setInput("");
+  };
+
+  return (
+    <section id="terminal" className="w-full max-w-4xl mx-auto px-4 py-24 relative z-10 font-mono">
+      <div className="flex items-center gap-4 mb-8">
+        <TerminalIcon className="w-8 h-8 text-red-primary" style={{ color: `var(--theme-primary)` }} />
+        <h2 className="text-3xl font-bold text-white tracking-widest uppercase">System Console</h2>
+      </div>
+
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="w-full bg-slate-950/80 backdrop-blur-xl border border-red-primary/30 rounded-lg overflow-hidden shadow-[0_0_40px_rgba(239,68,68,0.15)] group"
+      >
+        {/* macOS style header */}
+        <div className="w-full h-8 bg-slate-900 border-b border-red-primary/30 flex items-center px-4 gap-2">
+          <div className="w-3 h-3 rounded-full bg-red-500/80" />
+          <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+          <div className="w-3 h-3 rounded-full bg-green-500/80" />
+          <span className="ml-auto text-[10px] text-slate-500 select-none">alexkgm — bash — 80x24</span>
+        </div>
+
+        {/* Terminal Body */}
+        <div 
+          className="p-6 h-[400px] overflow-y-auto cursor-text text-sm md:text-base flex flex-col custom-scrollbar"
+          onClick={() => inputRef.current?.focus()}
+        >
+          {logs.map((log, i) => (
+            <div 
+              key={i} 
+              className={`mb-1 ${log.isCommand ? 'text-slate-300 mt-2' : log.isError ? 'text-red-500' : 'text-slate-400'}`}
+            >
+              {log.text}
+            </div>
+          ))}
+          
+          <form onSubmit={handleCommand} className="mt-2 flex items-center text-slate-300">
+            <span className="text-red-primary font-bold mr-2" style={{ color: `var(--theme-primary)` }}>user@alexkgm:~$</span>
+            <input
+              ref={inputRef}
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              className="flex-1 bg-transparent outline-none text-white caret-red-primary"
+              autoComplete="off"
+              spellCheck="false"
+            />
+          </form>
+          <div ref={bottomRef} />
+        </div>
+      </motion.div>
+    </section>
+  );
+}
