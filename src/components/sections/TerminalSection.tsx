@@ -55,10 +55,12 @@ export default function TerminalSection() {
   ]);
   const [input, setInput] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
-  const bottomRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (containerRef.current) {
+      containerRef.current.scrollTop = containerRef.current.scrollHeight;
+    }
   }, [logs]);
 
   const handleCommand = (e?: React.FormEvent) => {
@@ -116,6 +118,7 @@ export default function TerminalSection() {
 
         {/* Terminal Body */}
         <div 
+          ref={containerRef}
           className="p-6 h-[400px] overflow-y-auto cursor-text text-sm md:text-base flex flex-col custom-scrollbar"
           onClick={() => inputRef.current?.focus()}
         >
@@ -146,7 +149,6 @@ export default function TerminalSection() {
               spellCheck="false"
             />
           </form>
-          <div ref={bottomRef} />
         </div>
       </motion.div>
     </section>
