@@ -6,10 +6,11 @@ import RevealText from "@/components/react-bits/RevealText";
 import { 
   SiJavascript, SiNextdotjs, SiExpress, SiSpring, SiPython,
   SiJenkins, SiGithubactions, SiDocker, SiKubernetes, SiArgo, SiAnsible, 
-  SiPrometheus, SiLinux, SiPostgresql, SiMongodb, SiCplusplus, SiCsharp, 
+  SiPrometheus, SiLinux, SiPostgresql, SiMongodb, SiCplusplus, 
   SiTerraform, SiGrafana
 } from "react-icons/si";
 import { FaJava, FaShieldAlt, FaHtml5, FaCss3Alt, FaWindows } from "react-icons/fa";
+import { TbBrandCSharp } from "react-icons/tb";
 
 const SKILLS = [
   // Row 0 (Y=0)
@@ -42,7 +43,7 @@ const SKILLS = [
   { name: "PostgreSQL", icon: SiPostgresql, color: "#336791", x: 0, y: 360 },
   { name: "MongoDB", icon: SiMongodb, color: "#47A248", x: 104, y: 360 },
   { name: "C++", icon: SiCplusplus, color: "#00599C", x: 208, y: 360 },
-  { name: "C#", icon: SiCsharp, color: "#239120", x: 312, y: 360 },
+  { name: "C#", icon: TbBrandCSharp, color: "#239120", x: 312, y: 360 },
 
   // Row 5 (Y=450)
   { name: "Terraform", icon: SiTerraform, color: "#7B42BC", x: 52, y: 450 },
