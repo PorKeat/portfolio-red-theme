@@ -131,25 +131,35 @@ const ShatteredPiece = ({ clipPath, targetX, targetY, targetRotate }: { clipPath
 
 export default function NotFound() {
   const [playCount, setPlayCount] = useState(0);
+  const [isInitiated, setIsInitiated] = useState(false);
 
-  // Ensure AudioContext is ready if user interacts before drop happens
-  useEffect(() => {
-    const handleInteraction = () => {
-      if (!globalAudioCtx) {
-        const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
-        if (AudioContextClass) globalAudioCtx = new AudioContextClass();
-      }
-      if (globalAudioCtx?.state === 'suspended') {
-        globalAudioCtx.resume();
-      }
-      document.removeEventListener('click', handleInteraction);
-    };
-    document.addEventListener('click', handleInteraction);
-    return () => document.removeEventListener('click', handleInteraction);
-  }, []);
+  if (!isInitiated) {
+    return (
+      <main className="w-full min-h-screen bg-slate-950 relative overflow-hidden flex flex-col items-center justify-center text-slate-200">
+        <button 
+          onClick={() => {
+            if (!globalAudioCtx) {
+              const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+              if (AudioContextClass) globalAudioCtx = new AudioContextClass();
+            }
+            if (globalAudioCtx?.state === 'suspended') {
+              globalAudioCtx.resume();
+            }
+            setIsInitiated(true);
+          }}
+          className="group relative px-8 py-4 font-mono font-bold tracking-widest text-red-500 border border-red-500 hover:bg-red-500/10 transition-all shadow-[0_0_15px_rgba(239,68,68,0.2)] hover:shadow-[0_0_30px_rgba(239,68,68,0.5)]"
+        >
+          <span className="animate-pulse">INITIALIZE_SYSTEM_DIAGNOSTIC</span>
+          <div className="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-white opacity-50" />
+          <div className="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-white opacity-50" />
+        </button>
+      </main>
+    );
+  }
 
   return (
     <main className="w-full min-h-screen bg-slate-950 relative overflow-hidden flex flex-col items-center justify-center text-slate-200">
+
       
       <div className="relative z-20 text-center px-4 flex flex-col items-center w-full max-w-5xl">
 
