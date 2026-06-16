@@ -3,6 +3,82 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+const playHackingSound = () => {
+  try {
+    const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+    if (!AudioContextClass) return null;
+    const ctx = new AudioContextClass();
+
+    if (ctx.state === 'suspended') {
+      ctx.resume().catch(() => {});
+    }
+
+    // Low background hum
+    const hum = ctx.createOscillator();
+    hum.type = 'sine';
+    hum.frequency.value = 50;
+    const humGain = ctx.createGain();
+    humGain.gain.value = 0.1;
+    hum.connect(humGain);
+    humGain.connect(ctx.destination);
+    hum.start();
+
+    // Rapid data processing beeps
+    const beepInterval = setInterval(() => {
+      if (ctx.state !== 'running') return;
+      const osc = ctx.createOscillator();
+      osc.type = 'square';
+      osc.frequency.setValueAtTime(800 + Math.random() * 1000, ctx.currentTime);
+      
+      const beepGain = ctx.createGain();
+      beepGain.gain.setValueAtTime(0.02, ctx.currentTime);
+      beepGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.05);
+      
+      osc.connect(beepGain);
+      beepGain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.05);
+    }, 50);
+
+    return { ctx, hum, beepInterval };
+  } catch (e) {
+    return null;
+  }
+};
+
+const playSuccessSound = (audioState: any) => {
+  if (!audioState || !audioState.ctx) return;
+  const { ctx, hum, beepInterval } = audioState;
+  
+  clearInterval(beepInterval);
+  try {
+    hum.stop(ctx.currentTime + 0.5);
+  } catch (e) {}
+
+  // Success chime
+  try {
+    const osc = ctx.createOscillator();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(800, ctx.currentTime);
+    osc.frequency.setValueAtTime(1200, ctx.currentTime + 0.1);
+    
+    const gain = ctx.createGain();
+    gain.gain.setValueAtTime(0.2, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
+    
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.5);
+  } catch (e) {}
+
+  setTimeout(() => {
+    if (ctx.state !== 'closed') {
+      ctx.close().catch(() => {});
+    }
+  }, 1000);
+};
+
 export default function TerminalBootLoader({ onComplete }: { onComplete?: () => void }) {
   const [isBooting, setIsBooting] = useState(true);
   const [showAccessGranted, setShowAccessGranted] = useState(false);
@@ -38,6 +114,8 @@ export default function TerminalBootLoader({ onComplete }: { onComplete?: () => 
     let lastTime = 0;
     const fps = 30; // Throttle to 30fps for a classic, smooth Matrix look
     const intervalTime = 1000 / fps;
+
+    const audioState = playHackingSound();
 
     const draw = (time: number) => {
       if (!isActive) return;
@@ -84,6 +162,7 @@ export default function TerminalBootLoader({ onComplete }: { onComplete?: () => 
     const timer1 = setTimeout(() => {
       isActive = false;
       setShowAccessGranted(true);
+      if (audioState) playSuccessSound(audioState);
     }, 1500); // Reduced from 2500ms to 1500ms
 
     // Hide the loader quickly after Access Granted
@@ -97,6 +176,12 @@ export default function TerminalBootLoader({ onComplete }: { onComplete?: () => 
       cancelAnimationFrame(animationFrame);
       clearTimeout(timer1);
       clearTimeout(timer2);
+      if (audioState) {
+        clearInterval(audioState.beepInterval);
+        try {
+          if (audioState.ctx.state !== 'closed') audioState.ctx.close();
+        } catch(e) {}
+      }
     };
   }, []);
 
