@@ -3,12 +3,16 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import GlitchText from "@/components/react-bits/GlitchText";
+import { useState, useEffect } from "react";
 
 const playSmashSound = () => {
   try {
     const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
     if (!AudioContext) return;
     const ctx = new AudioContext();
+    if (ctx.state === 'suspended') {
+      ctx.resume();
+    }
     const duration = 0.6;
     
     // 1. High-frequency shatter (glass noise)
@@ -64,12 +68,11 @@ const ShatteredPiece = ({ clipPath, targetX, targetY, targetRotate }: { clipPath
     >
       {/* Deep Shadow */}
       <h1 
-        className="absolute inset-0 flex items-center justify-center text-[150px] md:text-[350px] font-sans font-black leading-none tracking-tighter select-none"
+        className="absolute inset-0 flex items-center justify-center text-[150px] md:text-[350px] font-sans font-black leading-none tracking-tighter select-none text-transparent"
         style={{ 
           clipPath,
           transform: `translate(${depth * 1.2 + 20}px, ${depth * 1.2 + 20}px)`,
-          filter: 'blur(15px)',
-          color: 'rgba(239, 68, 68, 0.4)',
+          filter: 'drop-shadow(0 0 15px rgba(239,68,68,0.5))',
           zIndex: 0
         }}
       >
@@ -117,6 +120,16 @@ const ShatteredPiece = ({ clipPath, targetX, targetY, targetRotate }: { clipPath
 };
 
 export default function NotFound() {
+  const [playCount, setPlayCount] = useState(0);
+
+  // Loop the crash animation and sound every 6 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPlayCount(c => c + 1);
+    }, 6000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <main className="w-full min-h-screen bg-slate-950 relative overflow-hidden flex flex-col items-center justify-center text-slate-200">
       
@@ -143,6 +156,7 @@ export default function NotFound() {
         
         {/* Animated Drop & Shatter Container */}
         <motion.div 
+          key={playCount}
           className="relative w-full h-[250px] md:h-[400px] flex items-center justify-center group mb-2"
           initial={{ y: "-100vh" }}
           animate={{ y: 0 }} 
@@ -217,8 +231,8 @@ export default function NotFound() {
           />
         </motion.div>
 
-        <div className="relative z-30 mb-8 mt-8 md:mt-12">
-          <GlitchText speed={1.2} className="font-mono text-2xl md:text-3xl font-bold tracking-widest text-red-500 uppercase drop-shadow-[0_0_15px_rgba(239,68,68,1)] border-2 border-red-500 px-6 py-2 bg-[#020617]/90 backdrop-blur-md transform -rotate-2">
+        <div className="relative z-30 mb-8 mt-8 md:mt-12 bg-[#020617]/90 border-2 border-red-500 px-6 py-2 backdrop-blur-md transform -rotate-2 drop-shadow-[0_0_15px_rgba(239,68,68,1)]">
+          <GlitchText speed={1.2} className="font-mono text-2xl md:text-3xl font-bold tracking-widest text-red-500 uppercase">
             SYSTEM_FAULT
           </GlitchText>
         </div>
