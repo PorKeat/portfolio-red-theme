@@ -131,38 +131,27 @@ const ShatteredPiece = ({ clipPath, targetX, targetY, targetRotate }: { clipPath
 
 export default function NotFound() {
   const [playCount, setPlayCount] = useState(0);
-  const [isInitiated, setIsInitiated] = useState(false);
 
-  if (!isInitiated) {
-    return (
-      <main className="w-full min-h-screen bg-slate-950 relative overflow-hidden flex flex-col items-center justify-center text-slate-200">
-        <button 
-          onClick={() => {
-            if (!globalAudioCtx) {
-              const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
-              if (AudioContextClass) globalAudioCtx = new AudioContextClass();
-            }
-            if (globalAudioCtx?.state === 'suspended') {
-              globalAudioCtx.resume();
-            }
-            setIsInitiated(true);
-          }}
-          className="group relative px-8 py-4 font-mono font-bold tracking-widest text-red-500 border border-red-500 hover:bg-red-500/10 transition-all shadow-[0_0_15px_rgba(239,68,68,0.2)] hover:shadow-[0_0_30px_rgba(239,68,68,0.5)]"
-        >
-          <span className="animate-pulse">INITIALIZE_SYSTEM_DIAGNOSTIC</span>
-          <div className="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-white opacity-50" />
-          <div className="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-white opacity-50" />
-        </button>
-      </main>
-    );
-  }
+  // Ensure AudioContext is ready if user interacts before drop happens
+  useEffect(() => {
+    const handleInteraction = () => {
+      if (!globalAudioCtx) {
+        const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+        if (AudioContextClass) globalAudioCtx = new AudioContextClass();
+      }
+      if (globalAudioCtx?.state === 'suspended') {
+        globalAudioCtx.resume();
+      }
+      document.removeEventListener('click', handleInteraction);
+    };
+    document.addEventListener('click', handleInteraction);
+    return () => document.removeEventListener('click', handleInteraction);
+  }, []);
 
   return (
     <main className="w-full min-h-screen bg-slate-950 relative overflow-hidden flex flex-col items-center justify-center text-slate-200">
-
       
       <div className="relative z-20 text-center px-4 flex flex-col items-center w-full max-w-5xl">
-
         
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
@@ -200,26 +189,6 @@ export default function NotFound() {
           id="shatter-container"
         >
           
-          {/* Ambient Glitch Glows (Delayed so they don't glow during the drop) */}
-          <motion.h1 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.4 }}
-            transition={{ delay: 0.4, duration: 0.2 }}
-            className="absolute inset-0 flex items-center justify-center text-[150px] md:text-[350px] font-sans font-black leading-none tracking-tighter text-red-500 mix-blend-screen animate-glitch-1 select-none blur-[4px]"
-            style={{ transform: 'translate(-10px, 5px)' }}
-          >
-            404
-          </motion.h1>
-          <motion.h1 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.4 }}
-            transition={{ delay: 0.4, duration: 0.2 }}
-            className="absolute inset-0 flex items-center justify-center text-[150px] md:text-[350px] font-sans font-black leading-none tracking-tighter text-cyan-500 mix-blend-screen animate-glitch-2 select-none blur-[4px]"
-            style={{ transform: 'translate(10px, -5px)' }}
-          >
-            404
-          </motion.h1>
-
           {/* Top Left Jagged Shard */}
           <ShatteredPiece 
             clipPath="polygon(0% 0%, 40% 0%, 30% 10%, 45% 25%, 35% 40%, 20% 55%, 0% 45%)"
