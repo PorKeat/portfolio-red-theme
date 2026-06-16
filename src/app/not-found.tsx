@@ -5,19 +5,11 @@ import { motion } from "framer-motion";
 import GlitchText from "@/components/react-bits/GlitchText";
 import { useState, useEffect } from "react";
 
-let globalAudioCtx: AudioContext | null = null;
-
 const playSmashSound = () => {
   try {
-    if (!globalAudioCtx) {
-      const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
-      if (AudioContextClass) {
-        globalAudioCtx = new AudioContextClass();
-      }
-    }
-    
-    const ctx = globalAudioCtx;
-    if (!ctx) return;
+    const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+    if (!AudioContextClass) return;
+    const ctx = new AudioContextClass();
 
     if (ctx.state === 'suspended') {
       ctx.resume().catch(() => {}); // catch autoplay rejection
@@ -62,6 +54,14 @@ const playSmashSound = () => {
     oscGain.connect(ctx.destination);
     osc.start();
     osc.stop(ctx.currentTime + 0.3);
+
+    // Clean up context to prevent hitting browser hardware limits
+    setTimeout(() => {
+      if (ctx.state !== 'closed') {
+        ctx.close().catch(() => {});
+      }
+    }, 1000);
+
   } catch(e) {
     console.log("Audio play failed:", e);
   }
@@ -255,16 +255,7 @@ export default function NotFound() {
 
         {/* Replay Sequence Button */}
         <button
-          onClick={() => {
-            if (!globalAudioCtx) {
-              const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
-              if (AudioContextClass) globalAudioCtx = new AudioContextClass();
-            }
-            if (globalAudioCtx?.state === 'suspended') {
-              globalAudioCtx.resume();
-            }
-            setPlayCount(c => c + 1);
-          }}
+          onClick={() => setPlayCount(c => c + 1)}
           className="mt-8 text-xs font-mono text-slate-500 hover:text-red-500 transition-colors uppercase tracking-widest flex items-center gap-2"
         >
           <span className="w-1.5 h-1.5 bg-slate-500 rounded-full animate-pulse" />
