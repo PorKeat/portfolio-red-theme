@@ -68,17 +68,12 @@ function Hexagon({ skill, index }: { skill: any, index: number }) {
         height: "115px",
       }}
     >
-      {/* Background glow using the brand color */}
-      <div 
-        className="absolute inset-0 blur-xl opacity-0 group-hover:opacity-60 transition-opacity duration-500 rounded-full"
-        style={{ backgroundColor: skill.color }}
-      />
-      
       {/* Hexagon Border Wrapper */}
       <div 
         className="w-full h-full clip-hex p-[2px] transition-all duration-300 group-hover:-translate-y-2 group-hover:scale-110 z-10 relative"
         style={{ 
-          backgroundColor: isHovered ? skill.color : "rgba(30, 41, 59, 1)"
+          backgroundColor: isHovered ? skill.color : "rgba(30, 41, 59, 1)",
+          boxShadow: isHovered ? `0 0 20px ${skill.color}` : "none"
         }}
       >
         {/* Inner Hexagon */}
@@ -86,22 +81,16 @@ function Hexagon({ skill, index }: { skill: any, index: number }) {
           className="w-full h-full clip-hex flex flex-col items-center justify-center transition-colors duration-300 relative overflow-hidden"
           style={{ backgroundColor: "rgba(2, 6, 23, 1)" }}
         >
-          {/* Subtle color tint background on hover */}
-          <div 
-            className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300" 
-            style={{ backgroundColor: skill.color }} 
-          />
-          
           <Icon 
-            size={36} 
-            className="transition-colors duration-300 mb-1 relative z-20" 
+            size={40} 
+            className="transition-colors duration-300 mb-2 relative z-20" 
             color={isHovered ? skill.color : "#64748b"}
-            style={isHovered ? { filter: `drop-shadow(0 0 10px ${skill.color})` } : {}}
+            style={isHovered ? { filter: `drop-shadow(0 0 12px ${skill.color})` } : {}}
           />
           
           <span 
             className="text-[10px] font-mono font-bold transition-colors duration-300 text-center px-1 relative z-20"
-            style={{ color: isHovered ? "#ffffff" : "#64748b" }}
+            style={{ color: isHovered ? skill.color : "#64748b" }}
           >
             {skill.name}
           </span>
