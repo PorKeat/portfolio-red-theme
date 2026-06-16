@@ -33,59 +33,53 @@ export default function NotFound() {
         
         {/* 3D Shattered & Glitched 404 Text */}
         <div className="relative w-full h-[250px] md:h-[400px] flex items-center justify-center group mb-2">
-          
-          {/* Glitch Layer 1 - Red */}
+          {/* Glitch Layers Behind */}
           <h1 
-            className="absolute text-[150px] md:text-[350px] font-mono font-black leading-none tracking-tighter text-red-500 mix-blend-screen animate-glitch-1 select-none opacity-80"
+            className="absolute text-[150px] md:text-[350px] font-sans font-black leading-none tracking-tighter text-red-500 mix-blend-screen animate-glitch-1 select-none opacity-50"
             style={{ transform: 'translate(-4px, 2px)' }}
           >
             404
           </h1>
           
+          <h1 
+            className="absolute text-[150px] md:text-[350px] font-sans font-black leading-none tracking-tighter text-cyan-500 mix-blend-screen animate-glitch-2 select-none opacity-50"
+            style={{ transform: 'translate(4px, -2px)' }}
+          >
+            404
+          </h1>
+
           {/* Shard 1 (Top Left) */}
           <h1 
-            className="absolute text-[150px] md:text-[350px] font-mono font-black leading-none tracking-tighter text-slate-100 select-none text-3d drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]"
-            style={{ clipPath: 'polygon(0 0, 40% 0, 30% 30%, 0 40%)', transform: 'translate(-15px, -20px) rotate(-4deg)' }}
+            className="absolute text-[150px] md:text-[350px] font-sans font-black leading-none tracking-tighter text-slate-100 select-none"
+            style={{ 
+              clipPath: 'polygon(0 0, 60% 0, 40% 50%, 0 60%)', 
+              transform: 'translate(-10px, -15px)',
+              filter: 'drop-shadow(-4px 8px 0px #334155) drop-shadow(-8px 16px 20px rgba(0,0,0,0.8))'
+            }}
           >
             404
           </h1>
 
           {/* Shard 2 (Top Right) */}
           <h1 
-            className="absolute text-[150px] md:text-[350px] font-mono font-black leading-none tracking-tighter text-slate-100 select-none text-3d drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]"
-            style={{ clipPath: 'polygon(40% 0, 100% 0, 100% 20%, 60% 40%, 30% 30%)', transform: 'translate(10px, -15px) rotate(3deg)' }}
+            className="absolute text-[150px] md:text-[350px] font-sans font-black leading-none tracking-tighter text-slate-100 select-none"
+            style={{ 
+              clipPath: 'polygon(60% 0, 100% 0, 100% 80%, 40% 50%)', 
+              transform: 'translate(15px, -10px)',
+              filter: 'drop-shadow(-4px 8px 0px #334155) drop-shadow(-8px 16px 20px rgba(0,0,0,0.8))'
+            }}
           >
             404
           </h1>
 
-          {/* Shard 3 (Mid Left) */}
+          {/* Shard 3 (Bottom) */}
           <h1 
-            className="absolute text-[150px] md:text-[350px] font-mono font-black leading-none tracking-tighter text-slate-100 select-none text-3d drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]"
-            style={{ clipPath: 'polygon(0 40%, 30% 30%, 60% 40%, 70% 80%, 0 70%)', transform: 'translate(-25px, 5px) rotate(-2deg)' }}
-          >
-            404
-          </h1>
-
-          {/* Shard 4 (Mid Right) */}
-          <h1 
-            className="absolute text-[150px] md:text-[350px] font-mono font-black leading-none tracking-tighter text-slate-100 select-none text-3d drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]"
-            style={{ clipPath: 'polygon(100% 20%, 100% 70%, 70% 80%, 60% 40%)', transform: 'translate(25px, -5px) rotate(6deg)' }}
-          >
-            404
-          </h1>
-
-          {/* Shard 5 (Bottom Left) */}
-          <h1 
-            className="absolute text-[150px] md:text-[350px] font-mono font-black leading-none tracking-tighter text-slate-100 select-none text-3d drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]"
-            style={{ clipPath: 'polygon(0 70%, 70% 80%, 40% 100%, 0 100%)', transform: 'translate(-10px, 20px) rotate(2deg)' }}
-          >
-            404
-          </h1>
-
-          {/* Shard 6 (Bottom Right) */}
-          <h1 
-            className="absolute text-[150px] md:text-[350px] font-mono font-black leading-none tracking-tighter text-slate-100 select-none text-3d drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]"
-            style={{ clipPath: 'polygon(70% 80%, 100% 70%, 100% 100%, 40% 100%)', transform: 'translate(20px, 30px) rotate(-5deg)' }}
+            className="absolute text-[150px] md:text-[350px] font-sans font-black leading-none tracking-tighter text-slate-100 select-none"
+            style={{ 
+              clipPath: 'polygon(0 60%, 40% 50%, 100% 80%, 100% 100%, 0 100%)', 
+              transform: 'translate(0px, 15px)',
+              filter: 'drop-shadow(-4px 8px 0px #334155) drop-shadow(-8px 16px 20px rgba(0,0,0,0.8))'
+            }}
           >
             404
           </h1>
