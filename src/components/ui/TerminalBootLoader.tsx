@@ -80,15 +80,11 @@ const playSuccessSound = (audioState: any) => {
 };
 
 export default function TerminalBootLoader({ onComplete }: { onComplete?: () => void }) {
-  const [hasInitiated, setHasInitiated] = useState(false);
   const [isBooting, setIsBooting] = useState(true);
   const [showAccessGranted, setShowAccessGranted] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const audioStateRef = useRef<any>(null);
 
   useEffect(() => {
-    if (!hasInitiated) return;
-
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -119,7 +115,7 @@ export default function TerminalBootLoader({ onComplete }: { onComplete?: () => 
     const fps = 30; // Throttle to 30fps for a classic, smooth Matrix look
     const intervalTime = 1000 / fps;
 
-    const audioState = audioStateRef.current;
+    const audioState = playHackingSound();
 
     const draw = (time: number) => {
       if (!isActive) return;
@@ -188,24 +184,6 @@ export default function TerminalBootLoader({ onComplete }: { onComplete?: () => 
       }
     };
   }, []);
-
-  if (!hasInitiated) {
-    return (
-      <div className="fixed inset-0 z-[99999] bg-black flex items-center justify-center">
-        <button 
-          onClick={() => {
-            audioStateRef.current = playHackingSound();
-            setHasInitiated(true);
-          }}
-          className="group relative px-8 py-4 font-mono font-bold tracking-widest text-red-500 border border-red-500 hover:bg-red-500/10 transition-all shadow-[0_0_15px_rgba(239,68,68,0.2)] hover:shadow-[0_0_30px_rgba(239,68,68,0.5)]"
-        >
-          <span className="animate-pulse">INITIATE_BOOT_SEQUENCE</span>
-          <div className="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-white opacity-50" />
-          <div className="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-white opacity-50" />
-        </button>
-      </div>
-    );
-  }
 
   return (
     <AnimatePresence>
