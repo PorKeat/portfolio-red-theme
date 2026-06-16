@@ -107,26 +107,31 @@ export default function ThemeToggle() {
         <div className="w-full h-px bg-slate-700 my-1" />
 
         {/* Custom Color Picker */}
-        <div className="px-3 py-2">
-          <span className="text-[10px] font-mono text-slate-500 uppercase tracking-widest mb-2 block">Custom Color</span>
+        <div className="px-3 py-3">
+          <span className="text-[10px] font-mono text-slate-500 uppercase tracking-widest mb-3 block">Custom Color</span>
           
-          <div className="flex items-center gap-2">
-            {/* Native color picker (drag to choose) */}
-            <div 
-              className="relative w-8 h-8 rounded-lg overflow-hidden border border-slate-600 cursor-pointer shrink-0"
-              onClick={() => colorInputRef.current?.click()}
-            >
-              <div className="w-full h-full" style={{ backgroundColor: customHex }} />
-              <input
-                ref={colorInputRef}
-                type="color"
-                value={customHex}
-                onChange={(e) => applyCustom(e.target.value)}
-                className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
-              />
-            </div>
+          {/* Color preview strip */}
+          <div 
+            className="w-full h-10 rounded-xl mb-3 relative overflow-hidden cursor-pointer group"
+            style={{ 
+              backgroundColor: customHex,
+              boxShadow: `0 0 25px ${customHex}40, inset 0 0 20px ${customHex}30`
+            }}
+            onClick={() => colorInputRef.current?.click()}
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-white/10 via-transparent to-black/20 group-hover:from-white/20 transition-all" />
+            <input
+              ref={colorInputRef}
+              type="color"
+              value={customHex}
+              onChange={(e) => applyCustom(e.target.value)}
+              className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
+            />
+          </div>
 
-            {/* Hex code input */}
+          {/* Hex code input */}
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 rounded-full shrink-0" style={{ backgroundColor: customHex, boxShadow: `0 0 8px ${customHex}` }} />
             <input
               type="text"
               value={customHex}
@@ -139,7 +144,7 @@ export default function ThemeToggle() {
               }}
               placeholder="#ff00ff"
               maxLength={7}
-              className="w-[85px] bg-slate-800 border border-slate-600 rounded-lg px-2 py-1.5 text-xs font-mono text-white outline-none focus:border-slate-400 transition-colors"
+              className="flex-1 bg-slate-800/80 border border-slate-600 rounded-lg px-3 py-1.5 text-xs font-mono text-white outline-none focus:border-slate-400 transition-colors text-center"
             />
           </div>
         </div>

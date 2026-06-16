@@ -44,7 +44,13 @@ export default function HeroSection() {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.4, ease: "easeOut", delay: 2.9 }}
           >
-            <span className="text-[4.5rem] md:text-[11rem] leading-[0.8] font-black text-transparent bg-clip-text bg-gradient-to-b from-red-400 via-red-primary to-red-900 drop-shadow-[0_10px_20px_rgba(239,68,68,0.4)] tracking-tighter hover:tracking-[0.05em] transition-[letter-spacing] duration-300 ease-out inline-block">
+            <span 
+              className="text-[4.5rem] md:text-[11rem] leading-[0.8] font-black text-transparent bg-clip-text tracking-tighter hover:tracking-[0.05em] transition-[letter-spacing] duration-300 ease-out inline-block"
+              style={{ 
+                backgroundImage: `linear-gradient(to bottom, color-mix(in srgb, var(--theme-primary) 80%, white), var(--theme-primary), color-mix(in srgb, var(--theme-primary) 40%, black))`,
+                filter: `drop-shadow(0 10px 20px color-mix(in srgb, var(--theme-primary) 40%, transparent))`
+              }}
+            >
               KGM
             </span>
           </motion.div>
