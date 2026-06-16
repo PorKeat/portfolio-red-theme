@@ -34,7 +34,6 @@ const getYoutubeId = (url: string) => {
 export function ExperienceCard({ item, index }: { item: any, index: number }) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [isImageLoaded, setIsImageLoaded] = useState(false);
   const isLeft = index % 2 === 0;
   
   // Detect Media Types
@@ -132,19 +131,16 @@ export function ExperienceCard({ item, index }: { item: any, index: number }) {
               </div>
             ) : (
               <>
-                {!isImageLoaded && (
-                  <div className="absolute inset-0 bg-slate-800 animate-pulse flex items-center justify-center">
-                    <span className="text-slate-500 font-mono text-xs">LOADING...</span>
-                  </div>
-                )}
+                <div className="absolute inset-0 bg-slate-800 animate-pulse flex items-center justify-center z-0">
+                  <span className="text-slate-500 font-mono text-xs">LOADING...</span>
+                </div>
                 <MotionImage 
                   src={item.image || "/placeholder-mountain.png"} 
                   alt={item.title || "Experience Preview"} 
                   fill
                   sizes="(max-width: 768px) 100vw, 40vw"
                   priority={index < 4}
-                  onLoad={() => setIsImageLoaded(true)}
-                  className={`object-cover transition-all duration-700 ${isImageLoaded ? 'opacity-100 scale-100 group-hover:scale-110' : 'opacity-0 scale-105'}`}
+                  className="object-cover transition-transform duration-700 scale-100 group-hover:scale-110 z-10"
                 />
               </>
             )}
@@ -254,11 +250,10 @@ export function ExperienceCard({ item, index }: { item: any, index: number }) {
                     className={`w-full transition-all duration-500 ${isFullscreen ? "h-full min-h-screen" : "h-full min-h-[500px] max-h-[calc(90vh-32px)]"}`}
                   />
                 ) : (
-                  <MotionImage 
+                  <img 
                     src={item.image || "/placeholder-mountain.png"} 
                     alt={item.title || "Enlarged Experience Preview"} 
-                    fill
-                    className="object-contain"
+                    className={`w-full object-contain transition-all duration-500 ${isFullscreen ? "h-full min-h-screen" : "h-auto min-h-[300px] max-h-[calc(90vh-32px)]"}`}
                   />
                 )}
               </div>
