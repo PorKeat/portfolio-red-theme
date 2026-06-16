@@ -100,7 +100,8 @@ export function ExperienceCard({ item, index }: { item: any, index: number }) {
             // Ensure background video plays when opening modal
             if (thumbnailVideoRef.current) thumbnailVideoRef.current.play();
           }}
-          className={`w-full md:w-[900px] md:h-[380px] flex flex-col md:flex-row ${isLeft ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 bg-slate-900/80 backdrop-blur-xl border border-red-primary/30 rounded-2xl p-6 md:p-8 shadow-[0_0_50px_rgba(239,68,68,0.15)] hover:border-red-primary hover:bg-slate-900/90 transition-all duration-300 relative group cursor-pointer`}
+          className={`w-full md:w-[900px] md:h-[380px] flex flex-col md:flex-row ${isLeft ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 bg-slate-900/80 backdrop-blur-xl border border-red-primary/30 rounded-2xl p-6 md:p-8 hover:border-red-primary hover:bg-slate-900/90 transition-all duration-300 relative group cursor-pointer`}
+          style={{ boxShadow: `0 0 50px color-mix(in srgb, var(--theme-primary) 15%, transparent)` }}
         >
           
           {/* Decorative neon accent */}
@@ -148,7 +149,10 @@ export function ExperienceCard({ item, index }: { item: any, index: number }) {
             )}
             {/* Click to view overlay */}
             <div className="absolute inset-0 bg-slate-950/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-20 pointer-events-none">
-              <span className="text-white font-mono text-sm tracking-widest border border-red-primary/50 bg-black/60 px-6 py-3 rounded-full backdrop-blur-md flex items-center gap-2 shadow-[0_0_20px_rgba(239,68,68,0.3)] group-hover:scale-110 transition-transform duration-300">
+              <span 
+                className="text-white font-mono text-sm tracking-widest border border-red-primary/50 bg-black/60 px-6 py-3 rounded-full backdrop-blur-md flex items-center gap-2 group-hover:scale-110 transition-transform duration-300"
+                style={{ boxShadow: `0 0 20px color-mix(in srgb, var(--theme-primary) 30%, transparent)` }}
+              >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
@@ -193,7 +197,8 @@ export function ExperienceCard({ item, index }: { item: any, index: number }) {
             <motion.div
               layoutId={`image-container-${index}`}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className={`relative ${isFullscreen ? "w-full h-full rounded-none border-none" : "max-w-6xl w-full h-auto max-h-[90vh] rounded-xl border-slate-700/80"} overflow-hidden shadow-[0_0_80px_rgba(239,68,68,0.2)] bg-slate-950 flex flex-col border cursor-default`}
+              className={`relative ${isFullscreen ? "w-full h-full rounded-none border-none" : "max-w-6xl w-full h-auto max-h-[90vh] rounded-xl border-slate-700/80"} overflow-hidden bg-slate-950 flex flex-col border cursor-default`}
+              style={{ boxShadow: `0 0 80px color-mix(in srgb, var(--theme-primary) 20%, transparent)` }}
               onClick={(e) => e.stopPropagation()} // Prevent click from closing when clicking image
             >
               

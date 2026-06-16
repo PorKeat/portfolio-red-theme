@@ -106,7 +106,8 @@ export default function TerminalSection() {
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="w-full bg-slate-950/80 backdrop-blur-xl border border-red-primary/30 rounded-lg overflow-hidden shadow-[0_0_40px_rgba(239,68,68,0.15)] group"
+        className="w-full bg-slate-950/80 backdrop-blur-xl border border-red-primary/30 rounded-lg overflow-hidden group"
+        style={{ boxShadow: `0 0 40px color-mix(in srgb, var(--theme-primary) 15%, transparent)` }}
       >
         {/* macOS style header */}
         <div className="w-full h-8 bg-slate-900 border-b border-red-primary/30 flex items-center px-4 gap-2">
@@ -119,7 +120,9 @@ export default function TerminalSection() {
         {/* Terminal Body */}
         <div 
           ref={containerRef}
+          data-lenis-prevent
           className="p-6 h-[400px] overflow-y-auto cursor-text text-sm md:text-base flex flex-col custom-scrollbar"
+          style={{ overscrollBehavior: "contain" }}
           onClick={() => inputRef.current?.focus()}
         >
           {logs.map((log, i) => (
