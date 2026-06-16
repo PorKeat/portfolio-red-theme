@@ -4,12 +4,16 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Palette } from "lucide-react";
 
-type Theme = "red" | "blue" | "green";
+type Theme = "red" | "blue" | "green" | "purple" | "orange" | "pink" | "cyan";
 
 const THEMES: { id: Theme; name: string; color: string }[] = [
   { id: "red", name: "Cyber Red", color: "bg-red-500" },
   { id: "blue", name: "Neon Blue", color: "bg-sky-500" },
   { id: "green", name: "Matrix Green", color: "bg-green-500" },
+  { id: "purple", name: "Phantom Purple", color: "bg-purple-500" },
+  { id: "orange", name: "Solar Orange", color: "bg-orange-500" },
+  { id: "pink", name: "Neon Pink", color: "bg-pink-500" },
+  { id: "cyan", name: "Arctic Cyan", color: "bg-cyan-500" },
 ];
 
 export default function ThemeToggle() {
@@ -19,7 +23,7 @@ export default function ThemeToggle() {
   useEffect(() => {
     // Load theme from localStorage if available
     const savedTheme = localStorage.getItem("app-theme") as Theme;
-    if (savedTheme && ["red", "blue", "green"].includes(savedTheme)) {
+    if (savedTheme && ["red", "blue", "green", "purple", "orange", "pink", "cyan"].includes(savedTheme)) {
       setCurrentTheme(savedTheme);
       document.documentElement.setAttribute("data-theme", savedTheme);
     } else {

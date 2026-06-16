@@ -79,6 +79,38 @@
   --theme-glow: #15803d;       /* Green 700 */
 }
 
+[data-theme="purple"] {
+  --background: #020617;
+  --foreground: #f3e8ff; /* Purple 100 */
+  --theme-primary: #a855f7;    /* Purple 500 */
+  --theme-accent: #9333ea;     /* Purple 600 */
+  --theme-glow: #7e22ce;       /* Purple 700 */
+}
+
+[data-theme="orange"] {
+  --background: #020617;
+  --foreground: #fff7ed; /* Orange 50 */
+  --theme-primary: #f97316;    /* Orange 500 */
+  --theme-accent: #ea580c;     /* Orange 600 */
+  --theme-glow: #c2410c;       /* Orange 700 */
+}
+
+[data-theme="pink"] {
+  --background: #020617;
+  --foreground: #fce7f3; /* Pink 100 */
+  --theme-primary: #ec4899;    /* Pink 500 */
+  --theme-accent: #db2777;     /* Pink 600 */
+  --theme-glow: #be185d;       /* Pink 700 */
+}
+
+[data-theme="cyan"] {
+  --background: #020617;
+  --foreground: #cffafe; /* Cyan 100 */
+  --theme-primary: #06b6d4;    /* Cyan 500 */
+  --theme-accent: #0891b2;     /* Cyan 600 */
+  --theme-glow: #0e7490;       /* Cyan 700 */
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
