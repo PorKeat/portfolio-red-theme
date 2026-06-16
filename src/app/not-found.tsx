@@ -6,25 +6,25 @@ import { useEffect, useState } from "react";
 import MouseSpotlight from "@/components/ui/MouseSpotlight";
 import GlitchText from "@/components/react-bits/GlitchText";
 
+const FULL_LOGS = [
+  "[system@devops] ~$ connect node --secure",
+  "Establishing secure tunnel...",
+  "[WARN] Anomalous traffic detected in routing tables.",
+  "Bypassing internal firewall...",
+  "Querying target sector...",
+  "HTTP 404: Resource unreachable.",
+  "[ERROR] Neural pathway severed. Container unlinked.",
+  "FATAL: Connection forcefully terminated by peer."
+];
+
 export default function NotFound() {
   const [logs, setLogs] = useState<string[]>([]);
-  
-  const fullLogs = [
-    "[system@devops] ~$ connect node --secure",
-    "Establishing secure tunnel...",
-    "[WARN] Anomalous traffic detected in routing tables.",
-    "Bypassing internal firewall...",
-    "Querying target sector...",
-    "HTTP 404: Resource unreachable.",
-    "[ERROR] Neural pathway severed. Container unlinked.",
-    "FATAL: Connection forcefully terminated by peer."
-  ];
 
   useEffect(() => {
     let currentIndex = 0;
     const interval = setInterval(() => {
-      if (currentIndex < fullLogs.length) {
-        setLogs(prev => [...prev, fullLogs[currentIndex]]);
+      if (currentIndex < FULL_LOGS.length) {
+        setLogs(prev => [...prev, FULL_LOGS[currentIndex]]);
         currentIndex++;
       } else {
         clearInterval(interval);
@@ -60,12 +60,15 @@ export default function NotFound() {
             <span className="ml-2 text-slate-500 text-xs">root@cluster-01:~</span>
           </div>
           <div className="p-4 h-[250px] overflow-y-auto flex flex-col gap-2 text-slate-400">
-            {logs.map((log, i) => (
-              <div key={i} className={`${log.includes('ERROR') || log.includes('FATAL') || log.includes('404') ? 'text-red-primary font-bold' : log.includes('WARN') ? 'text-yellow-500' : ''}`}>
-                <span className="text-green-500/80 mr-2">{'>'}</span> {log}
-              </div>
-            ))}
-            {logs.length === fullLogs.length && (
+            {logs.map((log, i) => {
+              if (!log) return null;
+              return (
+                <div key={i} className={`${log.includes('ERROR') || log.includes('FATAL') || log.includes('404') ? 'text-red-primary font-bold' : log.includes('WARN') ? 'text-yellow-500' : ''}`}>
+                  <span className="text-green-500/80 mr-2">{'>'}</span> {log}
+                </div>
+              );
+            })}
+            {logs.length >= FULL_LOGS.length && (
               <motion.div 
                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ repeat: Infinity, duration: 1 }}
                 className="w-2 h-4 bg-red-primary mt-1"
