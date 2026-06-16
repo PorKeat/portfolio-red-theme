@@ -3,6 +3,9 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import RevealText from "@/components/react-bits/RevealText";
+import Image from "next/image";
+
+const MotionImage = motion(Image);
 
 export function SectionTitle({ sysNum, title }: { sysNum: string, title: string }) {
   return (
@@ -127,11 +130,14 @@ export function ExperienceCard({ item, index }: { item: any, index: number }) {
                 />
               </div>
             ) : (
-              <motion.img 
+              <MotionImage 
                 layoutId={`image-${index}`}
                 src={item.image || "/placeholder-mountain.png"} 
                 alt={item.title || "Experience Preview"} 
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 scale-100 group-hover:scale-110"
+                fill
+                sizes="(max-width: 768px) 100vw, 40vw"
+                priority={index < 4} // Eagerly load the first few images
+                className="object-cover transition-transform duration-700 scale-100 group-hover:scale-110"
               />
             )}
             {/* Click to view overlay */}
