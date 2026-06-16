@@ -1,6 +1,7 @@
 "use client";
 
 import RevealText from "@/components/react-bits/RevealText";
+import { motion } from "framer-motion";
 
 export default function OutroSection() {
   return (
