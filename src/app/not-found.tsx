@@ -3,16 +3,26 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import GlitchText from "@/components/react-bits/GlitchText";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+
+let globalAudioCtx: AudioContext | null = null;
 
 const playSmashSound = () => {
   try {
-    const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
-    if (!AudioContext) return;
-    const ctx = new AudioContext();
-    if (ctx.state === 'suspended') {
-      ctx.resume();
+    if (!globalAudioCtx) {
+      const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+      if (AudioContextClass) {
+        globalAudioCtx = new AudioContextClass();
+      }
     }
+    
+    const ctx = globalAudioCtx;
+    if (!ctx) return;
+
+    if (ctx.state === 'suspended') {
+      ctx.resume().catch(() => {}); // catch autoplay rejection
+    }
+
     const duration = 0.6;
     
     // 1. High-frequency shatter (glass noise)
@@ -120,27 +130,27 @@ const ShatteredPiece = ({ clipPath, targetX, targetY, targetRotate }: { clipPath
 };
 
 export default function NotFound() {
-  const [playCount, setPlayCount] = useState(0);
-
-  // Loop the crash animation and sound every 6 seconds
+  // Ensure AudioContext is ready if user interacts before drop happens
   useEffect(() => {
-    const interval = setInterval(() => {
-      setPlayCount(c => c + 1);
-    }, 6000);
-    return () => clearInterval(interval);
+    const handleInteraction = () => {
+      if (!globalAudioCtx) {
+        const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+        if (AudioContextClass) globalAudioCtx = new AudioContextClass();
+      }
+      if (globalAudioCtx?.state === 'suspended') {
+        globalAudioCtx.resume();
+      }
+      document.removeEventListener('click', handleInteraction);
+    };
+    document.addEventListener('click', handleInteraction);
+    return () => document.removeEventListener('click', handleInteraction);
   }, []);
 
   return (
     <main className="w-full min-h-screen bg-slate-950 relative overflow-hidden flex flex-col items-center justify-center text-slate-200">
       
-      {/* Immersive 3D Geometric Background */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <div className="absolute w-[200%] h-[200%] bg-slate-900/40 rotate-12 -top-[50%] -left-[50%] border-r border-red-primary/10" style={{ clipPath: 'polygon(0 0, 50% 0, 100% 100%, 0% 100%)' }} />
-        <div className="absolute w-[150%] h-[150%] bg-slate-950/90 -rotate-6 top-[10%] left-[10%] shadow-2xl drop-shadow-2xl border-l border-white/5" style={{ clipPath: 'polygon(100% 0, 40% 0, 70% 100%, 100% 100%)' }} />
-        <div className="absolute w-[600px] h-[600px] bg-red-primary/10 rounded-full blur-[120px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
-      </div>
-
       <div className="relative z-20 text-center px-4 flex flex-col items-center w-full max-w-5xl">
+
         
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
