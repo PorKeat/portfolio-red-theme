@@ -31,23 +31,26 @@ export default function NotFound() {
           </p>
         </motion.div>
         
-        {/* 3D Sliced & Glitched 404 Text */}
+        {/* Sliced & Glitched 404 Text - Hollow Terminal Style */}
         <div className="relative w-full h-[250px] md:h-[400px] flex items-center justify-center group mb-2">
           
-          <h1 className="absolute text-[150px] md:text-[350px] font-black leading-none tracking-tighter text-slate-100 select-none text-3d">
-            404
-          </h1>
-          
           <h1 
-            className="absolute text-[150px] md:text-[350px] font-black leading-none tracking-tighter text-red-500 mix-blend-screen animate-glitch-1 select-none opacity-80"
-            style={{ transform: 'translate(-4px, 2px)' }}
+            className="absolute text-[150px] md:text-[350px] font-mono font-bold leading-none tracking-tighter text-transparent select-none drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]"
+            style={{ WebkitTextStroke: '4px #ef4444' }}
           >
             404
           </h1>
           
           <h1 
-            className="absolute text-[150px] md:text-[350px] font-black leading-none tracking-tighter text-cyan-500 mix-blend-screen animate-glitch-2 select-none opacity-80"
-            style={{ transform: 'translate(4px, -2px)' }}
+            className="absolute text-[150px] md:text-[350px] font-mono font-bold leading-none tracking-tighter text-transparent select-none animate-glitch-1 opacity-80"
+            style={{ WebkitTextStroke: '4px #ef4444', transform: 'translate(-4px, 2px)' }}
+          >
+            404
+          </h1>
+          
+          <h1 
+            className="absolute text-[150px] md:text-[350px] font-mono font-bold leading-none tracking-tighter text-transparent select-none animate-glitch-2 opacity-80"
+            style={{ WebkitTextStroke: '4px #06b6d4', transform: 'translate(4px, -2px)' }}
           >
             404
           </h1>
@@ -91,16 +94,6 @@ export default function NotFound() {
       </div>
 
       <style dangerouslySetInnerHTML={{__html: `
-        .text-3d {
-          text-shadow: 
-            0px 2px 0px #cbd5e1,
-            0px 4px 0px #94a3b8,
-            0px 6px 0px #64748b,
-            0px 8px 0px #475569,
-            0px 10px 0px #334155,
-            0px 12px 20px rgba(0,0,0,0.8),
-            0px 20px 40px rgba(0,0,0,0.6);
-        }
         @keyframes glitch-1 {
           0% { clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%); transform: translate(-2px, 2px); }
           20% { clip-path: polygon(0 15%, 100% 15%, 100% 15%, 0 15%); transform: translate(2px, -2px); }
