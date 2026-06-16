@@ -5,10 +5,15 @@ import { motion } from "framer-motion";
 import MouseSpotlight from "@/components/ui/MouseSpotlight";
 import GlitchText from "@/components/react-bits/GlitchText";
 
-const ShatteredPiece = ({ clipPath, translate, rotate }: { clipPath: string, translate: string, rotate: string }) => {
+const ShatteredPiece = ({ clipPath, targetX, targetY, targetRotate }: { clipPath: string, targetX: number, targetY: number, targetRotate: number }) => {
   const depth = 25; // Massive 3D thickness
   return (
-    <div className="absolute inset-0 w-full h-full" style={{ transform: `${translate} ${rotate}` }}>
+    <motion.div 
+      className="absolute inset-0 w-full h-full" 
+      initial={{ x: 0, y: 0, rotate: 0 }}
+      animate={{ x: targetX, y: targetY, rotate: targetRotate }}
+      transition={{ delay: 0.5, type: "spring", stiffness: 200, damping: 15 }}
+    >
       {/* Deep Shadow */}
       <h1 
         className="absolute inset-0 flex items-center justify-center text-[150px] md:text-[350px] font-sans font-black leading-none tracking-tighter select-none"
@@ -59,7 +64,7 @@ const ShatteredPiece = ({ clipPath, translate, rotate }: { clipPath: string, tra
       >
         404
       </h1>
-    </div>
+    </motion.div>
   );
 };
 
@@ -89,51 +94,66 @@ export default function NotFound() {
           </p>
         </motion.div>
         
-        {/* True 3D Jagged Shattered 404 */}
-        <div className="relative w-full h-[250px] md:h-[400px] flex items-center justify-center group mb-2">
+        {/* Animated Drop & Shatter */}
+        <motion.div 
+          className="relative w-full h-[250px] md:h-[400px] flex items-center justify-center group mb-2"
+          initial={{ y: -800 }}
+          animate={{ y: [-800, 0, 15, -10, 5, -5, 0] }} // Hard drop and violent camera shake
+          transition={{ duration: 0.9, times: [0, 0.5, 0.55, 0.6, 0.65, 0.7, 1], ease: "linear" }}
+        >
           
-          {/* Ambient Glitch Glows */}
-          <h1 
-            className="absolute inset-0 flex items-center justify-center text-[150px] md:text-[350px] font-sans font-black leading-none tracking-tighter text-red-500 mix-blend-screen animate-glitch-1 select-none opacity-40 blur-[4px]"
+          {/* Ambient Glitch Glows (Delayed so they don't glow during the drop) */}
+          <motion.h1 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.4 }}
+            transition={{ delay: 0.5, duration: 0.2 }}
+            className="absolute inset-0 flex items-center justify-center text-[150px] md:text-[350px] font-sans font-black leading-none tracking-tighter text-red-500 mix-blend-screen animate-glitch-1 select-none blur-[4px]"
             style={{ transform: 'translate(-10px, 5px)' }}
           >
             404
-          </h1>
-          <h1 
-            className="absolute inset-0 flex items-center justify-center text-[150px] md:text-[350px] font-sans font-black leading-none tracking-tighter text-cyan-500 mix-blend-screen animate-glitch-2 select-none opacity-40 blur-[4px]"
+          </motion.h1>
+          <motion.h1 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.4 }}
+            transition={{ delay: 0.5, duration: 0.2 }}
+            className="absolute inset-0 flex items-center justify-center text-[150px] md:text-[350px] font-sans font-black leading-none tracking-tighter text-cyan-500 mix-blend-screen animate-glitch-2 select-none blur-[4px]"
             style={{ transform: 'translate(10px, -5px)' }}
           >
             404
-          </h1>
+          </motion.h1>
 
           {/* Top Left Jagged Shard */}
           <ShatteredPiece 
             clipPath="polygon(0% 0%, 40% 0%, 30% 10%, 45% 25%, 35% 40%, 20% 55%, 0% 45%)"
-            translate="translate(-15px, -20px)"
-            rotate="rotate(-4deg)"
+            targetX={-15}
+            targetY={-20}
+            targetRotate={-4}
           />
 
           {/* Top Right Jagged Shard */}
           <ShatteredPiece 
             clipPath="polygon(40% 0%, 100% 0%, 100% 45%, 85% 55%, 70% 45%, 50% 60%, 35% 40%, 45% 25%, 30% 10%)"
-            translate="translate(10px, -15px)"
-            rotate="rotate(3deg)"
+            targetX={10}
+            targetY={-15}
+            targetRotate={3}
           />
 
           {/* Bottom Left Jagged Shard */}
           <ShatteredPiece 
             clipPath="polygon(0% 45%, 20% 55%, 35% 40%, 50% 60%, 45% 75%, 60% 85%, 50% 100%, 0% 100%)"
-            translate="translate(-20px, 15px)"
-            rotate="rotate(-2deg)"
+            targetX={-20}
+            targetY={15}
+            targetRotate={-2}
           />
 
           {/* Bottom Right Jagged Shard */}
           <ShatteredPiece 
             clipPath="polygon(50% 60%, 70% 45%, 85% 55%, 100% 45%, 100% 100%, 50% 100%, 60% 85%, 45% 75%)"
-            translate="translate(15px, 25px)"
-            rotate="rotate(5deg)"
+            targetX={15}
+            targetY={25}
+            targetRotate={5}
           />
-        </div>
+        </motion.div>
 
         <div className="relative z-30 mb-8 mt-8 md:mt-12">
           <GlitchText speed={1.2} className="font-mono text-2xl md:text-3xl font-bold tracking-widest text-red-500 uppercase drop-shadow-[0_0_15px_rgba(239,68,68,1)] border-2 border-red-500 px-6 py-2 bg-[#020617]/90 backdrop-blur-md transform -rotate-2">
