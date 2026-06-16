@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import GlitchText from "@/components/react-bits/GlitchText";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
 let globalAudioCtx: AudioContext | null = null;
 
@@ -130,6 +130,8 @@ const ShatteredPiece = ({ clipPath, targetX, targetY, targetRotate }: { clipPath
 };
 
 export default function NotFound() {
+  const [playCount, setPlayCount] = useState(0);
+
   // Ensure AudioContext is ready if user interacts before drop happens
   useEffect(() => {
     const handleInteraction = () => {
@@ -166,6 +168,7 @@ export default function NotFound() {
         
         {/* Animated Drop & Shatter Container */}
         <motion.div 
+          key={playCount}
           className="relative w-full h-[250px] md:h-[400px] flex items-center justify-center group mb-2"
           initial={{ y: "-100vh" }}
           animate={{ y: 0 }} 
@@ -270,6 +273,24 @@ export default function NotFound() {
             <span className="text-red-primary group-hover:text-white transition-colors duration-300 opacity-50 block w-2 h-4 bg-red-primary group-hover:bg-white animate-pulse"></span>
           </Link>
         </motion.div>
+
+        {/* Replay Sequence Button */}
+        <button
+          onClick={() => {
+            if (!globalAudioCtx) {
+              const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+              if (AudioContextClass) globalAudioCtx = new AudioContextClass();
+            }
+            if (globalAudioCtx?.state === 'suspended') {
+              globalAudioCtx.resume();
+            }
+            setPlayCount(c => c + 1);
+          }}
+          className="mt-8 text-xs font-mono text-slate-500 hover:text-red-500 transition-colors uppercase tracking-widest flex items-center gap-2"
+        >
+          <span className="w-1.5 h-1.5 bg-slate-500 rounded-full animate-pulse" />
+          [ Replay sequence ]
+        </button>
       </div>
 
       <style dangerouslySetInnerHTML={{__html: `
