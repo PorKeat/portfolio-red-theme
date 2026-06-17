@@ -28,11 +28,11 @@ export default function AboutSection() {
           {/* Floating Status Tags */}
           <div className="absolute top-1/2 -translate-y-1/2 -left-8 md:-left-12 -translate-x-full z-50 pointer-events-none opacity-30 group-hover:opacity-100 transition-all duration-500 flex items-center gap-2">
              <div className="w-4 h-[1px] bg-red-primary/50" />
-             <span className="font-mono text-[10px] md:text-xs text-red-primary bg-black/60 px-2 py-1 rounded border border-red-primary/30 backdrop-blur-md shadow-[0_0_10px_var(--theme-primary)] transition-colors duration-1000">[HUMAN_MODE]</span>
+             <span className="font-mono text-[10px] md:text-xs text-red-primary bg-black/60 px-2 py-1 rounded border border-red-primary/30 backdrop-blur-md shadow-[0_0_10px_var(--theme-primary)] transition-colors duration-1000">[CYBER_LINK]</span>
           </div>
           
           <div className="absolute top-1/2 -translate-y-1/2 -right-8 md:-right-12 translate-x-full z-50 pointer-events-none opacity-30 group-hover:opacity-100 transition-all duration-500 flex items-center gap-2">
-             <span className="font-mono text-[10px] md:text-xs text-red-primary bg-black/60 px-2 py-1 rounded border border-red-primary/30 backdrop-blur-md shadow-[0_0_10px_var(--theme-primary)] transition-colors duration-1000">[CYBER_LINK]</span>
+             <span className="font-mono text-[10px] md:text-xs text-red-primary bg-black/60 px-2 py-1 rounded border border-red-primary/30 backdrop-blur-md shadow-[0_0_10px_var(--theme-primary)] transition-colors duration-1000">[HUMAN_MODE]</span>
              <div className="w-4 h-[1px] bg-red-primary/50" />
           </div>
 
