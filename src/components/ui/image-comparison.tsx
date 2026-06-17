@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useRef } from "react";
+import Image from "next/image";
 
 interface ImageSliderProps {
   children: React.ReactNode;
@@ -61,8 +62,7 @@ export const ImageLayer = ({ src, alt, layer, className = "", position = 50 }: {
 
   return (
     <div className={`absolute inset-0 w-full h-full ${className}`} style={{ clipPath }}>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={src} alt={alt} className="w-full h-full object-cover pointer-events-none" />
+      <Image src={src} alt={alt} fill className="object-cover pointer-events-none" />
     </div>
   );
 };

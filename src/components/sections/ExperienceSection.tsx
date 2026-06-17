@@ -195,8 +195,7 @@ export function ExperienceCard({ item, index }: { item: { title?: string, year?:
             </div>
             <h3 className="text-3xl font-bold text-white mb-2 group-hover:text-red-primary transition-colors duration-300 flex items-center gap-3">
               {item.logo && (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img src={item.logo} alt={`${item.title} logo`} className="w-8 h-8 object-contain" />
+                <Image src={item.logo} alt={`${item.title} logo`} width={32} height={32} className="w-8 h-8 object-contain" />
               )}
               {item.title}
             </h3>
@@ -292,11 +291,12 @@ export function ExperienceCard({ item, index }: { item: { title?: string, year?:
                     className={`w-full transition-all duration-500 ${isFullscreen ? "h-full min-h-screen" : "h-full min-h-[500px] max-h-[calc(90vh-32px)]"}`}
                   />
                 ) : (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img 
+                  <Image 
                     src={item.image || "/placeholder-mountain.png"} 
                     alt={item.title || "Enlarged Experience Preview"} 
-                    className={`w-full object-contain transition-all duration-500 ${isFullscreen ? "h-full min-h-screen" : "h-auto min-h-[300px] max-h-[calc(90vh-32px)]"}`}
+                    fill
+                    sizes="100vw"
+                    className={`object-contain transition-all duration-500`}
                   />
                 )}
               </div>
