@@ -160,8 +160,8 @@ export default function NotFound() {
           transition={{ duration: 0.8 }}
           className="flex items-center gap-3 mb-2"
         >
-          <div className="w-3 h-3 bg-red-primary animate-pulse rounded-full shadow-[0_0_10px_red]"></div>
-          <p className="text-red-primary font-mono text-sm md:text-lg tracking-[0.2em] uppercase font-bold">
+          <div className="w-3 h-3 rounded-full animate-pulse transition-colors duration-1000" style={{ backgroundColor: 'var(--theme-primary)', boxShadow: '0 0 15px var(--theme-primary)' }}></div>
+          <p className="font-mono text-sm md:text-lg tracking-[0.2em] uppercase font-bold transition-colors duration-1000" style={{ color: 'var(--theme-primary)' }}>
             SECURITY ALERT: BREACH ATTEMPT FAILED
           </p>
         </motion.div>
@@ -223,9 +223,11 @@ export default function NotFound() {
           />
         </motion.div>
 
-        <div className="relative z-30 mb-8 mt-8 md:mt-12 bg-slate-950/90 border-2 border-red-500 px-6 py-2 backdrop-blur-md transform -rotate-2 drop-shadow-[0_0_15px_rgba(239,68,68,1)]">
-          <h2 className="font-mono text-2xl md:text-3xl font-bold tracking-widest text-red-500 uppercase animate-pulse">
+        <div className="relative z-30 mb-8 mt-8 md:mt-12 bg-slate-950/90 border-2 px-6 py-2 backdrop-blur-md transform -rotate-2 transition-all duration-1000" style={{ borderColor: 'var(--theme-primary)', filter: 'drop-shadow(0 0 15px var(--theme-primary))' }}>
+          <h2 className="relative font-mono text-2xl md:text-3xl font-bold tracking-widest uppercase transition-colors duration-1000" style={{ color: 'var(--theme-primary)' }}>
             SYSTEM_FAULT
+            <span className="absolute top-0 left-0 -ml-[2px] opacity-70 animate-glitch-1 pointer-events-none" style={{ color: 'var(--theme-accent)' }}>SYSTEM_FAULT</span>
+            <span className="absolute top-0 left-0 ml-[2px] opacity-70 animate-glitch-2 pointer-events-none" style={{ color: 'var(--theme-glow)' }}>SYSTEM_FAULT</span>
           </h2>
         </div>
         
@@ -233,7 +235,8 @@ export default function NotFound() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-red-primary/80 text-sm md:text-base mb-12 font-mono tracking-[0.2em] uppercase text-center"
+          className="text-sm md:text-base mb-12 font-mono tracking-[0.2em] uppercase text-center transition-colors duration-1000"
+          style={{ color: 'color-mix(in srgb, var(--theme-primary) 80%, transparent)' }}
         >
           {"// ROUTE_SEVERED"}
         </motion.p>
@@ -245,19 +248,24 @@ export default function NotFound() {
         >
           <Link 
             href="/"
-            className="inline-flex items-center justify-center gap-3 bg-red-950/20 backdrop-blur-xl border border-red-primary/50 text-white px-8 py-4 font-mono font-bold tracking-widest hover:bg-red-primary hover:text-white transition-all duration-300 group shadow-[0_0_30px_rgba(239,68,68,0.2)] hover:shadow-[0_0_50px_rgba(239,68,68,0.5)]"
-            style={{ clipPath: "polygon(5% 0, 100% 0, 100% 80%, 95% 100%, 0 100%, 0 20%)" }}
+            className="inline-flex items-center justify-center gap-3 backdrop-blur-xl border-2 text-white px-8 py-4 font-mono font-bold tracking-widest transition-all duration-1000 group hover:scale-105"
+            style={{ 
+              clipPath: "polygon(5% 0, 100% 0, 100% 80%, 95% 100%, 0 100%, 0 20%)",
+              backgroundColor: 'color-mix(in srgb, var(--theme-primary) 20%, transparent)',
+              borderColor: 'color-mix(in srgb, var(--theme-primary) 50%, transparent)',
+              boxShadow: '0 0 30px color-mix(in srgb, var(--theme-primary) 30%, transparent)'
+            }}
           >
-            <span className="text-red-primary group-hover:text-white transition-colors duration-300">{"$"}</span>
+            <span className="transition-colors duration-1000" style={{ color: 'var(--theme-primary)' }}>{"$"}</span>
             RESTART_SYSTEM
-            <span className="text-red-primary group-hover:text-white transition-colors duration-300 opacity-50 block w-2 h-4 bg-red-primary group-hover:bg-white animate-pulse"></span>
+            <span className="transition-colors duration-1000 opacity-50 block w-2 h-4 animate-pulse" style={{ backgroundColor: 'var(--theme-primary)' }}></span>
           </Link>
         </motion.div>
 
         {/* Replay Sequence Button */}
         <button
           onClick={() => setPlayCount(c => c + 1)}
-          className="mt-8 text-xs font-mono text-slate-500 hover:text-red-500 transition-colors uppercase tracking-widest flex items-center gap-2"
+          className="mt-8 text-xs font-mono text-slate-500 hover:text-white transition-colors uppercase tracking-widest flex items-center gap-2"
         >
           <span className="w-1.5 h-1.5 bg-slate-500 rounded-full animate-pulse" />
           [ Replay sequence ]
@@ -267,13 +275,14 @@ export default function NotFound() {
       <style dangerouslySetInnerHTML={{__html: `
         .text-3d {
           text-shadow: 
-            0px 2px 0px #7f1d1d,
-            0px 4px 0px #7f1d1d,
-            0px 6px 0px #450a0a,
-            0px 8px 0px #450a0a,
-            0px 10px 0px #450a0a,
-            0px 15px 30px rgba(239, 68, 68, 0.5),
-            0px 30px 60px rgba(239, 68, 68, 0.4);
+            0px 2px 0px color-mix(in srgb, var(--theme-primary) 40%, black),
+            0px 4px 0px color-mix(in srgb, var(--theme-primary) 40%, black),
+            0px 6px 0px color-mix(in srgb, var(--theme-primary) 20%, black),
+            0px 8px 0px color-mix(in srgb, var(--theme-primary) 20%, black),
+            0px 10px 0px color-mix(in srgb, var(--theme-primary) 20%, black),
+            0px 15px 30px color-mix(in srgb, var(--theme-primary) 50%, transparent),
+            0px 30px 60px color-mix(in srgb, var(--theme-primary) 40%, transparent);
+          transition: text-shadow 1s ease-in-out;
         }
         @keyframes glitch-1 {
           0% { clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%); transform: translate(-2px, 2px); }
