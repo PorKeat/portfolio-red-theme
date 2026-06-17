@@ -28,12 +28,13 @@ export default function AboutSection() {
             <div className="absolute inset-0 rounded-full overflow-hidden z-40">
               <ImageSlider className="w-full h-full" hoverControl={true}>
                 <ImageLayer
-                  src="/alexkgm.jpg"
+                  src="/alexkgm-transparent.png"
+                  bgSrc="/bg-devops.jpg"
                   alt="Alex KGM Realistic"
                   layer="first"
                 />
                 <ImageLayer 
-                  src="/alexkgm2d.png" 
+                  src="/alexkgm2d-transparent.png" 
                   bgSrc="/bg-devops.jpg"
                   alt="Alex KGM 2D Transparent" 
                   layer="second" 
