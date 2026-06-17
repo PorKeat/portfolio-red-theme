@@ -58,12 +58,12 @@ export default function AboutSection() {
             </div>
             {/* Inner Glowing Ring */}
             <div 
-              className="absolute inset-0 rounded-full border-4 border-red-primary z-50 pointer-events-none transition-all duration-1000 ease-in-out group-hover:border-8" 
+              className="absolute inset-0 rounded-full border-4 border-red-primary z-50 pointer-events-none transition-all duration-500 ease-in-out group-hover:border-[8px] group-hover:shadow-[inset_0_0_80px_var(--theme-primary),0_0_50px_var(--theme-primary)_!important]" 
               style={{ boxShadow: 'inset 0 0 25px var(--theme-primary), 0 0 25px color-mix(in srgb, var(--theme-primary) 50%, transparent)' }} 
             />
             {/* HUD Ring - High Intensity on Hover */}
-            <div className="absolute -inset-6 border border-red-primary/30 rounded-full animate-[spin_10s_linear_infinite] group-hover:border-red-primary group-hover:border-2 group-hover:shadow-[0_0_30px_var(--theme-primary)] transition-all duration-500" />
-            <div className="absolute -inset-10 border border-dashed border-red-accent/40 rounded-full animate-[spin_15s_linear_infinite_reverse] group-hover:border-red-accent group-hover:border-2 group-hover:opacity-100 transition-all duration-500" />
+            <div className="absolute -inset-6 border border-red-primary/30 rounded-full animate-[spin_10s_linear_infinite] group-hover:border-red-primary group-hover:border-[3px] group-hover:shadow-[0_0_40px_var(--theme-primary)_!important] transition-all duration-300" />
+            <div className="absolute -inset-10 border border-dashed border-red-accent/40 rounded-full animate-[spin_15s_linear_infinite_reverse] group-hover:border-red-accent group-hover:border-[3px] group-hover:opacity-100 transition-all duration-300" />
           </TiltCard>
         </div>
 
