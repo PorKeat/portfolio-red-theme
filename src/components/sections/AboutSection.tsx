@@ -32,6 +32,7 @@ export default function AboutSection() {
                   bgSrc="/bg-devops.jpg"
                   alt="Alex KGM Realistic"
                   layer="first"
+                  dynamicBackground={true}
                 />
                 <ImageLayer 
                   src="/alexkgm2d-transparent.png" 

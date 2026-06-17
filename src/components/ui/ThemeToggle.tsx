@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Palette } from "lucide-react";
+import { HexColorPicker } from "react-colorful";
 
 type Theme = "red" | "blue" | "green" | "purple" | "orange" | "pink" | "cyan" | "custom";
 
@@ -42,7 +43,8 @@ export default function ThemeToggle() {
   const [isOpen, setIsOpen] = useState(false);
   const [currentTheme, setCurrentTheme] = useState<Theme>("red");
   const [customHex, setCustomHex] = useState("#ef4444");
-  const colorInputRef = useRef<HTMLInputElement>(null);
+  const [showPicker, setShowPicker] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("app-theme") as Theme;
@@ -118,17 +120,30 @@ export default function ThemeToggle() {
               backgroundColor: customHex,
               boxShadow: `0 0 25px ${customHex}40, inset 0 0 20px ${customHex}30`
             }}
-            onClick={() => colorInputRef.current?.click()}
+            onClick={() => setShowPicker(!showPicker)}
           >
             <div className="absolute inset-0 bg-gradient-to-r from-white/10 via-transparent to-black/20 group-hover:from-white/20 transition-all" />
-            <input
-              ref={colorInputRef}
-              type="color"
-              value={customHex}
-              onChange={(e) => applyCustom(e.target.value)}
-              className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
-            />
+            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+               <span className="text-white text-xs font-semibold drop-shadow-md">
+                 {showPicker ? 'Close Picker' : 'Choose Custom Color'}
+               </span>
+            </div>
           </div>
+          
+          <AnimatePresence>
+            {showPicker && (
+               <motion.div 
+                 initial={{ height: 0, opacity: 0 }}
+                 animate={{ height: "auto", opacity: 1 }}
+                 exit={{ height: 0, opacity: 0 }}
+                 className="overflow-hidden mb-3"
+               >
+                 <div className="pt-2 pb-1 flex justify-center custom-react-colorful">
+                   <HexColorPicker color={customHex} onChange={applyCustom} style={{ width: '100%', height: '150px' }} />
+                 </div>
+               </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Hex code input */}
           <div className="flex items-center gap-2">
