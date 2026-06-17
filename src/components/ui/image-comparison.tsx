@@ -63,16 +63,6 @@ export const ImageLayer = ({ src, alt, layer, className = "", position = 50, dyn
   return (
     <div className={`absolute inset-0 w-full h-full ${className}`} style={{ clipPath }}>
       <Image src={src} alt={alt} fill className="object-cover pointer-events-none" />
-      {dynamicTint && (
-        <div 
-          className="absolute inset-0 pointer-events-none bg-red-primary" 
-          style={{ 
-            mixBlendMode: 'color',
-            WebkitMaskImage: 'radial-gradient(circle at 50% 40%, transparent 25%, black 60%)',
-            maskImage: 'radial-gradient(circle at 50% 40%, transparent 25%, black 60%)'
-          }} 
-        />
-      )}
     </div>
   );
 };
