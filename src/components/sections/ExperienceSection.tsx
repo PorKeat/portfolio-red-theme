@@ -208,7 +208,10 @@ export function ExperienceCard({ item, index }: { item: any, index: number }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={handleYellowClick} // Clicking outside acts like minimize (yellow)
+            onClick={(e) => {
+              e.stopPropagation();
+              handleYellowClick();
+            }} // Clicking outside acts like minimize (yellow)
             className={`fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/90 backdrop-blur-md transition-all duration-500 cursor-zoom-out ${isFullscreen ? "p-0" : "p-4 lg:p-10"}`}
           >
             <motion.div
