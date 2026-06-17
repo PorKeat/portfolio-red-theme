@@ -64,7 +64,7 @@ export const ImageLayer = ({ src, bgSrc, alt, layer, className = "", imageClassN
     <div className={`absolute inset-0 w-full h-full ${className}`} style={{ clipPath }}>
       {bgSrc && (
         <div className="absolute inset-0 pointer-events-none">
-          <Image src={bgSrc} alt={`${alt} background`} fill className="object-cover" />
+          <Image src={bgSrc} alt={`${alt} background`} fill className="object-cover scale-[1.10]" />
           {dynamicBackground && (
             <div 
               className="absolute inset-0 transition-colors duration-500" 
