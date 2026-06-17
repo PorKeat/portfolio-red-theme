@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Github, Star, GitFork, BookOpen } from "lucide-react";
+import { Star, GitFork, BookOpen } from "lucide-react";
+import { FaGithub } from "react-icons/fa";
 import RevealText from "@/components/react-bits/RevealText";
 
 export default function GitHubStatsSection() {
@@ -94,7 +95,7 @@ export default function GitHubStatsSection() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 px-8 py-4 bg-slate-900/80 backdrop-blur-md border border-slate-700 hover:border-red-primary text-white rounded-full transition-all hover:shadow-[0_0_20px_var(--theme-primary)] group"
           >
-            <Github className="w-5 h-5 group-hover:scale-110 transition-transform" />
+            <FaGithub className="w-5 h-5 group-hover:scale-110 transition-transform" />
             <span className="font-mono tracking-widest text-sm">VIEW GITHUB PROFILE</span>
           </a>
         </motion.div>
