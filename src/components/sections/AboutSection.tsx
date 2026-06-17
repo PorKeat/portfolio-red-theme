@@ -36,6 +36,7 @@ export default function AboutSection() {
                   src="/alexkgm2d.jpg" 
                   alt="Alex KGM 2D Cyberpunk" 
                   layer="second" 
+                  dynamicTint={true}
                 />
                 <Divider />
               </ImageSlider>

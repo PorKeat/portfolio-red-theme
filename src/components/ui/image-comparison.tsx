@@ -55,7 +55,7 @@ export const ImageSlider = ({ children, className = "", hoverControl = false, de
   );
 };
 
-export const ImageLayer = ({ src, alt, layer, className = "", position = 50 }: { src: string, alt: string, layer: string, className?: string, position?: number }) => {
+export const ImageLayer = ({ src, alt, layer, className = "", position = 50, dynamicTint = false }: { src: string, alt: string, layer: string, className?: string, position?: number, dynamicTint?: boolean }) => {
   const clipPath = layer === "first" 
     ? `polygon(0 0, ${position}% 0, ${position}% 100%, 0 100%)`
     : `polygon(${position}% 0, 100% 0, 100% 100%, ${position}% 100%)`;
@@ -63,6 +63,12 @@ export const ImageLayer = ({ src, alt, layer, className = "", position = 50 }: {
   return (
     <div className={`absolute inset-0 w-full h-full ${className}`} style={{ clipPath }}>
       <Image src={src} alt={alt} fill className="object-cover pointer-events-none" />
+      {dynamicTint && (
+        <div 
+          className="absolute inset-0 pointer-events-none bg-red-primary" 
+          style={{ mixBlendMode: 'color' }} 
+        />
+      )}
     </div>
   );
 };
