@@ -66,12 +66,18 @@ export const ImageLayer = ({ src, bgSrc, alt, layer, className = "", position = 
         <div className="absolute inset-0 pointer-events-none">
           <Image src={bgSrc} alt={`${alt} background`} fill className="object-cover" />
           {dynamicBackground && (
-            <div className="absolute inset-0 bg-red-primary transition-colors duration-500" style={{ mixBlendMode: 'color' }} />
+            <div 
+              className="absolute inset-0 transition-colors duration-500" 
+              style={{ mixBlendMode: 'hue', backgroundColor: 'var(--theme-primary)' }} 
+            />
           )}
         </div>
       )}
       {!bgSrc && dynamicBackground && (
-        <div className="absolute inset-0 pointer-events-none bg-red-primary transition-colors duration-500" />
+        <div 
+          className="absolute inset-0 pointer-events-none transition-colors duration-500" 
+          style={{ backgroundColor: 'var(--theme-primary)' }}
+        />
       )}
       <Image src={src} alt={alt} fill className="object-cover pointer-events-none relative z-10" />
     </div>
