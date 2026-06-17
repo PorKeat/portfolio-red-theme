@@ -24,7 +24,7 @@ export default function AboutSection() {
       <div className="relative w-full flex flex-col md:flex-row items-center justify-center gap-10 md:gap-0 mt-10 md:mt-0">
         {/* Center Target: The Image */}
         <div className="relative z-30 w-48 h-48 md:w-64 md:h-64 mx-auto md:absolute md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2">
-          <TiltCard className="w-full h-full rounded-full border-4 border-red-primary/50 relative group" style={{ boxShadow: '0 0 50px color-mix(in srgb, var(--theme-primary) 40%, transparent)' }}>
+          <TiltCard className="w-full h-full rounded-full relative group" style={{ boxShadow: '0 0 50px color-mix(in srgb, var(--theme-primary) 40%, transparent)' }}>
             <div className="absolute inset-0 rounded-full overflow-hidden z-40">
               <ImageSlider className="w-full h-full" hoverControl={true}>
                 <ImageLayer
@@ -38,11 +38,15 @@ export default function AboutSection() {
                   alt="Alex KGM 2D Transparent" 
                   layer="second" 
                   dynamicBackground={true}
-                  imageClassName="scale-[0.85] origin-bottom translate-y-[2%]"
                 />
                 <Divider />
               </ImageSlider>
             </div>
+            {/* Inner Glowing Ring to replace the painted background ring */}
+            <div 
+              className="absolute inset-0 rounded-full border-4 border-red-primary z-50 pointer-events-none transition-colors duration-500" 
+              style={{ boxShadow: 'inset 0 0 25px var(--theme-primary), 0 0 25px color-mix(in srgb, var(--theme-primary) 50%, transparent)' }} 
+            />
             {/* HUD Ring */}
             <div className="absolute -inset-6 border border-red-primary/30 rounded-full animate-[spin_10s_linear_infinite]" />
             <div className="absolute -inset-10 border border-dashed border-red-accent/40 rounded-full animate-[spin_15s_linear_infinite_reverse]" />
