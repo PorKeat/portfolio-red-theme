@@ -129,8 +129,9 @@ export default function TerminalBootLoader({ onComplete }: { onComplete?: () => 
       ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Red Hacker Rain color
-      ctx.fillStyle = "#ef4444"; 
+      // Dynamic Hacker Rain color based on theme
+      const themeColor = getComputedStyle(document.documentElement).getPropertyValue('--theme-primary').trim() || '#ef4444';
+      ctx.fillStyle = themeColor; 
       ctx.font = `bold ${fontSize}px monospace`;
 
       for (let i = 0; i < drops.length; i++) {
@@ -214,15 +215,15 @@ export default function TerminalBootLoader({ onComplete }: { onComplete?: () => 
                 className="relative z-30 flex flex-col items-center text-center bg-black/80 p-8 border border-red-primary/50 backdrop-blur-md rounded-lg"
                 style={{ boxShadow: '0 0 50px color-mix(in srgb, var(--theme-primary) 40%, transparent)' }}
               >
-                <div className="text-red-primary font-mono text-sm md:text-base mb-2">SYSTEM OVERRIDE COMPLETE.</div>
-                <div className="text-green-500 font-black font-mono text-3xl md:text-5xl tracking-widest mb-2">ACCESS GRANTED</div>
-                <div className="text-red-500 font-mono text-xs md:text-sm tracking-[0.3em]">WELCOME TO THE MAINFRAME</div>
+                <div className="text-red-primary font-mono text-sm md:text-base mb-2 transition-colors duration-1000">SYSTEM OVERRIDE COMPLETE.</div>
+                <div className="font-black font-mono text-3xl md:text-5xl tracking-widest mb-2 transition-colors duration-1000 drop-shadow-md" style={{ color: 'var(--theme-primary)', textShadow: '0 0 20px var(--theme-primary)' }}>ACCESS GRANTED</div>
+                <div className="font-mono text-xs md:text-sm tracking-[0.3em] transition-colors duration-1000" style={{ color: 'var(--theme-accent)' }}>WELCOME TO THE MAINFRAME</div>
                 
                 {/* Blinking cursor */}
                 <motion.div
                   animate={{ opacity: [1, 0] }}
                   transition={{ repeat: Infinity, duration: 0.8 }}
-                  className="w-16 h-1 bg-red-primary mt-4"
+                  className="w-16 h-1 bg-red-primary mt-4 transition-colors duration-1000"
                 />
               </motion.div>
             )}

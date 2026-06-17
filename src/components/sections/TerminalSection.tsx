@@ -128,7 +128,8 @@ export default function TerminalSection() {
           {logs.map((log, i) => (
             <div 
               key={i} 
-              className={`mb-1 ${log.isCommand ? 'text-slate-300 mt-2' : log.isError ? 'text-red-500' : 'text-slate-400'}`}
+              className={`mb-1 transition-colors duration-1000 ${log.isCommand ? 'text-slate-300 mt-2' : log.isError ? '' : 'text-slate-400'}`}
+              style={log.isError ? { color: 'var(--theme-primary)' } : {}}
             >
               {log.text}
             </div>

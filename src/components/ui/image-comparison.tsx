@@ -90,8 +90,8 @@ export const Divider = ({ width = 2, position = 50 }: { width?: number, position
       className="absolute top-0 bottom-0 bg-red-primary pointer-events-none flex items-center justify-center z-10" 
       style={{ left: `${position}%`, width: `${width}px`, transform: `translateX(-${width / 2}px)`, boxShadow: '0 0 15px color-mix(in srgb, var(--theme-primary) 80%, transparent)' }}
     >
-      <div className="w-8 h-8 rounded-full bg-slate-900 border-2 border-red-primary flex items-center justify-center" style={{ boxShadow: '0 0 15px color-mix(in srgb, var(--theme-primary) 80%, transparent)' }}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+      <div className="w-8 h-8 rounded-full bg-slate-900 border-2 border-red-primary flex items-center justify-center transition-colors duration-1000 ease-in-out" style={{ boxShadow: '0 0 15px color-mix(in srgb, var(--theme-primary) 80%, transparent)' }}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ stroke: 'var(--theme-primary)', transition: 'stroke 1s ease-in-out' }}><path d="m9 18 6-6-6-6"/></svg>
       </div>
     </div>
   );
