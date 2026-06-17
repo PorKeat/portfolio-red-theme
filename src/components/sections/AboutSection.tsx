@@ -2,6 +2,7 @@
 
 import { BookOpen, Shield, Terminal } from "lucide-react";
 import TiltCard from "@/components/ui/TiltCard";
+import ScrollRevealText from "@/components/ui/ScrollRevealText";
 import RevealText from "@/components/react-bits/RevealText";
 import { motion } from "framer-motion";
 import { ImageSlider, ImageLayer, Divider } from "@/components/ui/image-comparison";
@@ -59,7 +60,10 @@ export default function AboutSection() {
               <Terminal className="text-red-primary w-5 h-5" />
               <h3 className="text-white font-mono text-sm tracking-wider">ROLE</h3>
             </div>
-            <p className="text-slate-300 text-sm">DevOps Engineer & Software Engineering student blending code with secure cloud-native infrastructure.</p>
+            <ScrollRevealText 
+              text="DevOps Engineer & Software Engineering student blending code with secure cloud-native infrastructure." 
+              className="text-slate-300 text-sm" 
+            />
           </motion.div>
 
           <motion.div 
@@ -74,7 +78,10 @@ export default function AboutSection() {
               <h3 className="text-white font-mono text-sm tracking-wider md:order-1 order-2">ACADEMICS</h3>
               <BookOpen className="text-red-accent w-5 h-5 md:order-2 order-1" />
             </div>
-            <p className="text-slate-300 text-sm md:text-right">MIS at SETEC Institute & Software Expert Training at ISTAD.</p>
+            <ScrollRevealText 
+              text="MIS at SETEC Institute & Software Expert Training at ISTAD." 
+              className="text-slate-300 text-sm md:justify-end md:text-right" 
+            />
           </motion.div>
 
           <motion.div 
@@ -88,7 +95,10 @@ export default function AboutSection() {
               <Shield className="text-white w-5 h-5" />
               <h3 className="text-white font-mono text-sm tracking-wider">FOCUS</h3>
             </div>
-            <p className="text-slate-300 text-sm">DevOps, CI/CD, Docker, Kubernetes, and ethical hacking fundamentals.</p>
+            <ScrollRevealText 
+              text="DevOps, CI/CD, Docker, Kubernetes, and ethical hacking fundamentals." 
+              className="text-slate-300 text-sm" 
+            />
           </motion.div>
         </div>
 
