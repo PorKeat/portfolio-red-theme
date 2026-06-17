@@ -112,10 +112,10 @@ export default function AboutSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.9 }}
-            className="md:absolute bottom-0 md:-bottom-10 left-0 md:left-1/3 w-full md:w-64 bg-slate-900/60 backdrop-blur-xl border-b-4 border-white/50 p-4"
+            className="md:absolute bottom-0 md:-bottom-10 left-0 md:left-1/3 w-full md:w-64 bg-slate-900/60 backdrop-blur-xl border-b-4 border-red-primary p-4"
           >
             <div className="flex items-center gap-3 mb-2">
-              <Shield className="text-white w-5 h-5" />
+              <Shield className="text-red-primary w-5 h-5" />
               <h3 className="text-white font-mono text-sm tracking-wider">FOCUS</h3>
             </div>
             <ScrollRevealText 
