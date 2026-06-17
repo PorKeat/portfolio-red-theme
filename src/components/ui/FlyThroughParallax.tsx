@@ -4,7 +4,12 @@ import { useEffect, useRef, ReactNode, Children, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-export default function FlyThroughParallax({ children }: { children: ReactNode }) {
+interface FlyThroughParallaxProps {
+  children: ReactNode;
+  sectionNames?: string[];
+}
+
+export default function FlyThroughParallax({ children, sectionNames }: FlyThroughParallaxProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const sectionsRef = useRef<(HTMLDivElement | null)[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -145,8 +150,8 @@ export default function FlyThroughParallax({ children }: { children: ReactNode }
             />
             
             {/* Tooltip on hover */}
-            <span className="absolute right-8 px-2 py-1 bg-slate-900 border border-slate-700 text-slate-300 text-[10px] font-mono rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-              Section {index + 1}
+            <span className="absolute right-8 px-3 py-1.5 bg-slate-900 border border-slate-700 text-slate-200 text-xs font-mono rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-[0_0_10px_rgba(0,0,0,0.5)]">
+              {sectionNames?.[index] || `Section ${index + 1}`}
             </span>
           </button>
         ))}

@@ -17,7 +17,19 @@ import GitHubStatsSection from "@/components/sections/GitHubStatsSection";
 export default function Home() {
   const [isBooting, setIsBooting] = useState(true);
 
-  
+  const sectionNames = [
+    "Hero",
+    "About",
+    "Tech Stack",
+    "Education Intro",
+    ...portfolioData.education.map((item) => `Edu: ${item.title}`),
+    "Projects Intro",
+    ...portfolioData.projects.map((item) => `Proj: ${item.title}`),
+    "Hacker Terminal",
+    "Open Source Stats",
+    "Contact",
+    "End / Resume"
+  ];
 
   return (
     <main className={`w-full bg-slate-950 relative overflow-x-hidden ${isBooting ? "h-screen overflow-hidden" : ""}`}>
@@ -28,7 +40,7 @@ export default function Home() {
 
       <div className={`relative z-10 w-full transition-opacity duration-[1500ms] ease-in-out ${isBooting ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
         {/* The Universal 3D Fly-Through Parallax Container */}
-        <FlyThroughParallax>
+        <FlyThroughParallax sectionNames={sectionNames}>
           
           {/* Section 1: Hero */}
           <HeroSection />
