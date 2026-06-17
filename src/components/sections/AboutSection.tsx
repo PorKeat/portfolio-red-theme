@@ -63,6 +63,7 @@ export default function AboutSection() {
             <ScrollRevealText 
               text="DevOps Engineer & Software Engineering student blending code with secure cloud-native infrastructure." 
               className="text-slate-300 text-sm" 
+              delay={0.7}
             />
           </motion.div>
 
@@ -81,6 +82,7 @@ export default function AboutSection() {
             <ScrollRevealText 
               text="MIS at SETEC Institute & Software Expert Training at ISTAD." 
               className="text-slate-300 text-sm md:justify-end md:text-right" 
+              delay={0.9}
             />
           </motion.div>
 
@@ -98,6 +100,7 @@ export default function AboutSection() {
             <ScrollRevealText 
               text="DevOps, CI/CD, Docker, Kubernetes, and ethical hacking fundamentals." 
               className="text-slate-300 text-sm" 
+              delay={1.1}
             />
           </motion.div>
         </div>
