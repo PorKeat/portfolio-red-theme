@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import RevealText from "@/components/react-bits/RevealText";
 import Image from "next/image";
+import { createPortal } from "react-dom";
 
 const MotionImage = motion(Image);
 
@@ -34,7 +35,12 @@ const getYoutubeId = (url: string) => {
 export function ExperienceCard({ item, index }: { item: any, index: number }) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const isLeft = index % 2 === 0;
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // Close modal on Escape key
   useEffect(() => {
@@ -202,8 +208,9 @@ export function ExperienceCard({ item, index }: { item: any, index: number }) {
       </div>
 
       {/* Seamless Floating Image Modal */}
-      <AnimatePresence>
-        {selectedIndex === index && (
+      {isMounted && createPortal(
+        <AnimatePresence>
+          {selectedIndex === index && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -294,7 +301,9 @@ export function ExperienceCard({ item, index }: { item: any, index: number }) {
             </motion.div>
           </motion.div>
         )}
-      </AnimatePresence>
+        </AnimatePresence>,
+        document.body
+      )}
     </section>
   );
 }
