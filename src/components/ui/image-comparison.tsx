@@ -67,7 +67,7 @@ export const ImageLayer = ({ src, bgSrc, alt, layer, className = "", imageClassN
           <Image src={bgSrc} alt={`${alt} background`} fill className="object-cover scale-[1.10]" />
           {dynamicBackground && (
             <div 
-              className="absolute inset-0 transition-colors duration-500" 
+              className="absolute inset-0 transition-all duration-1000 ease-in-out" 
               style={{ mixBlendMode: 'hue', backgroundColor: 'var(--theme-primary)' }} 
             />
           )}
@@ -75,7 +75,7 @@ export const ImageLayer = ({ src, bgSrc, alt, layer, className = "", imageClassN
       )}
       {!bgSrc && dynamicBackground && (
         <div 
-          className="absolute inset-0 pointer-events-none transition-colors duration-500" 
+          className="absolute inset-0 pointer-events-none transition-all duration-1000 ease-in-out" 
           style={{ backgroundColor: 'var(--theme-primary)' }}
         />
       )}

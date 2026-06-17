@@ -44,7 +44,7 @@ export default function AboutSection() {
             </div>
             {/* Inner Glowing Ring to replace the painted background ring */}
             <div 
-              className="absolute inset-0 rounded-full border-4 border-red-primary z-50 pointer-events-none transition-colors duration-500" 
+              className="absolute inset-0 rounded-full border-4 border-red-primary z-50 pointer-events-none transition-all duration-1000 ease-in-out" 
               style={{ boxShadow: 'inset 0 0 25px var(--theme-primary), 0 0 25px color-mix(in srgb, var(--theme-primary) 50%, transparent)' }} 
             />
             {/* HUD Ring */}
