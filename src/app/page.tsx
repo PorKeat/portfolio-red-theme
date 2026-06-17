@@ -12,6 +12,7 @@ import MouseSpotlight from "@/components/ui/MouseSpotlight";
 import FlyThroughParallax from "@/components/ui/FlyThroughParallax";
 import TerminalBootLoader from "@/components/ui/TerminalBootLoader";
 import TerminalSection from "@/components/sections/TerminalSection";
+import GitHubStatsSection from "@/components/sections/GitHubStatsSection";
 
 export default function Home() {
   const [isBooting, setIsBooting] = useState(true);
@@ -56,6 +57,9 @@ export default function Home() {
 
           {/* Section 9.5: Hacker Terminal */}
           <TerminalSection />
+
+          {/* Section 9.6: GitHub Stats */}
+          <GitHubStatsSection />
 
           {/* Section 10: Contact */}
           <ContactSection />

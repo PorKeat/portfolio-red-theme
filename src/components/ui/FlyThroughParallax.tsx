@@ -102,6 +102,40 @@ export default function FlyThroughParallax({ children }: { children: ReactNode }
           </div>
         </div>
       ))}
+
+      {/* Navigation Dots */}
+      <div className="fixed right-6 top-1/2 -translate-y-1/2 z-[100] flex flex-col gap-4 pointer-events-auto">
+        {Children.toArray(children).map((_, index) => (
+          <button
+            key={`nav-dot-${index}`}
+            onClick={() => {
+              window.scrollTo({
+                top: index * 2.5 * window.innerHeight,
+                behavior: 'smooth'
+              });
+            }}
+            className="group relative flex items-center justify-center w-6 h-6 outline-none"
+            aria-label={`Go to section ${index + 1}`}
+          >
+            <div 
+              className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                activeIndex === index 
+                  ? "bg-red-primary scale-150" 
+                  : "bg-slate-600 hover:bg-slate-400"
+              }`}
+              style={activeIndex === index ? { 
+                backgroundColor: 'var(--theme-primary)',
+                boxShadow: '0 0 10px var(--theme-primary)'
+              } : {}}
+            />
+            
+            {/* Tooltip on hover */}
+            <span className="absolute right-8 px-2 py-1 bg-slate-900 border border-slate-700 text-slate-300 text-[10px] font-mono rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+              Section {index + 1}
+            </span>
+          </button>
+        ))}
+      </div>
     </div>
   );
 }

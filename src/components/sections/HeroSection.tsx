@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import TypewriterEffect from "@/components/ui/TypewriterEffect";
 import RevealText from "@/components/react-bits/RevealText";
 
 export default function HeroSection() {
@@ -61,8 +62,15 @@ export default function HeroSection() {
         <div className="mt-12 md:mt-24 relative z-20">
           <div className="absolute -left-4 md:-left-6 top-1/2 -translate-y-1/2 w-1 h-8 bg-red-primary" />
           <RevealText delay={3.1}>
-            <p className="text-slate-300 text-lg md:text-3xl max-w-2xl font-light tracking-wide pl-4">
-              Creative Developer <span className="text-red-primary font-bold">x</span> System Architect
+            <p className="text-slate-300 text-lg md:text-3xl max-w-2xl font-light tracking-wide pl-4 flex items-center gap-2 flex-wrap">
+              <TypewriterEffect 
+                phrases={[
+                  "DevOps Engineer",
+                  "Full Stack Developer",
+                  "Cloud Architect",
+                  "Problem Solver"
+                ]} 
+              />
             </p>
           </RevealText>
         </div>

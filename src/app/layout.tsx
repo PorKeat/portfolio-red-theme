@@ -5,6 +5,7 @@ import LenisProvider from "@/components/providers/LenisProvider";
 import CustomCursor from "@/components/ui/CustomCursor";
 import MusicPlayer from "@/components/ui/MusicPlayer";
 import ThemeToggle from "@/components/ui/ThemeToggle";
+import ScrollProgress from "@/components/ui/ScrollProgress";
 
 const mainFont = Outfit({
   variable: "--font-sans",
@@ -69,6 +70,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col selection:bg-red-primary selection:text-white overflow-x-hidden cursor-none">
         <CustomCursor />
+        <ScrollProgress />
         <ThemeToggle />
         <MusicPlayer />
         <LenisProvider>
