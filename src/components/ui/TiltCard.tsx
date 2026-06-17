@@ -7,9 +7,10 @@ interface TiltCardProps {
   children: ReactNode;
   className?: string;
   style?: React.CSSProperties;
+  onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
-export default function TiltCard({ children, className = "", style }: TiltCardProps) {
+export default function TiltCard({ children, className = "", style, onClick }: TiltCardProps) {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -38,6 +39,7 @@ export default function TiltCard({ children, className = "", style }: TiltCardPr
 
   return (
     <motion.div
+      onClick={onClick}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{

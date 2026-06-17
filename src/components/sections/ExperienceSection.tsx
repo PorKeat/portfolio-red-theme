@@ -3,6 +3,8 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import RevealText from "@/components/react-bits/RevealText";
+import { MoveRight, X } from "lucide-react";
+import TiltCard from "@/components/ui/TiltCard";
 import Image from "next/image";
 import { createPortal } from "react-dom";
 
@@ -111,7 +113,7 @@ export function ExperienceCard({ item, index }: { item: { title?: string, year?:
       <div className="w-full max-w-7xl mx-auto flex justify-center">
         
         {/* The Card */}
-        <div 
+        <TiltCard 
           onClick={() => {
             setSelectedIndex(index);
             setIsFullscreen(false); // Reset fullscreen state when opening
@@ -123,7 +125,7 @@ export function ExperienceCard({ item, index }: { item: { title?: string, year?:
         >
           
           {/* Decorative neon accent */}
-          <div className={`absolute top-1/2 -translate-y-1/2 w-2 h-1/2 bg-red-primary rounded-full opacity-50 group-hover:opacity-100 transition-opacity blur-[2px] ${isLeft ? '-right-1' : '-left-1'}`} />
+          <div className={`absolute top-1/2 -translate-y-1/2 w-2 h-1/2 bg-red-primary rounded-full opacity-50 group-hover:opacity-100 transition-opacity blur-[2px] ${isLeft ? '-right-1' : '-left-1'}`} style={{ backgroundColor: 'var(--theme-primary)' }} />
 
           {/* Image Side */}
           {/* Image Side */}
@@ -205,7 +207,7 @@ export function ExperienceCard({ item, index }: { item: { title?: string, year?:
             </p>
           </div>
 
-        </div>
+        </TiltCard>
       </div>
 
       {/* Seamless Floating Image Modal */}

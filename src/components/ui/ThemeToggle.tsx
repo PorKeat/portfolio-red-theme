@@ -39,12 +39,16 @@ function clearCustomColor() {
   root.style.removeProperty("--theme-glow");
 }
 
+import { useSoundEffects } from "@/hooks/use-sound-effects";
+
 export default function ThemeToggle() {
   const [isOpen, setIsOpen] = useState(false);
   const [currentTheme, setCurrentTheme] = useState<Theme>("red");
   const [customHex, setCustomHex] = useState("#ef4444");
   const [showPicker, setShowPicker] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  
+  const { playThemeClick } = useSoundEffects();
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("app-theme") as Theme;
@@ -65,6 +69,7 @@ export default function ThemeToggle() {
   }, []);
 
   const changeTheme = (theme: Theme) => {
+    playThemeClick();
     clearCustomColor();
     setCurrentTheme(theme);
     localStorage.setItem("app-theme", theme);
@@ -73,6 +78,7 @@ export default function ThemeToggle() {
   };
 
   const applyCustom = (hex: string) => {
+    playThemeClick();
     setCustomHex(hex);
     setCurrentTheme("custom");
     localStorage.setItem("app-theme", "custom");
@@ -168,7 +174,7 @@ export default function ThemeToggle() {
 
       {/* Main Toggle Button */}
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => { playThemeClick(); setIsOpen(!isOpen); }}
         className="w-12 h-12 rounded-full bg-slate-900/90 backdrop-blur-md border border-red-primary/30 flex items-center justify-center text-red-primary hover:scale-110 transition-all duration-300 group"
         style={{ 
           borderColor: `color-mix(in srgb, var(--theme-primary) 30%, transparent)`,

@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { MapPin, Send } from "lucide-react";
 import RevealText from "@/components/react-bits/RevealText";
+import MagneticButton from "@/components/ui/magnetic-button";
 
 const GithubIcon = ({ className }: { className?: string }) => (
   <svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -97,20 +98,25 @@ export default function ContactSection() {
                 <p className="text-red-500 text-sm mt-2">Transmission failed. Please try again or email me directly.</p>
               )}
 
-              <button 
-                type="submit" 
-                disabled={status === "submitting"}
-                className="mt-4 inline-flex items-center justify-center gap-4 bg-red-primary text-white px-8 py-4 font-bold tracking-widest hover:bg-red-accent transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {status === "submitting" ? (
-                  <span className="flex items-center gap-2">
-                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-                    TRANSMITTING...
-                  </span>
-                ) : (
-                  <>INITIATE CONTACT <Send size={18} /></>
-                )}
-              </button>
+              <MagneticButton className="w-full">
+                <button
+                  type="submit"
+                  disabled={status === 'submitting'}
+                  className="group relative w-full inline-flex items-center justify-center gap-3 px-8 py-4 bg-red-primary/10 border border-red-primary/50 text-red-primary font-mono tracking-widest hover:bg-red-primary hover:text-white transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  style={{ 
+                    backgroundColor: `color-mix(in srgb, var(--theme-primary) 10%, transparent)`,
+                    borderColor: `color-mix(in srgb, var(--theme-primary) 50%, transparent)`,
+                    color: `var(--theme-primary)`
+                  }}
+                >
+                  <span className="absolute inset-0 bg-red-primary/40 blur-md opacity-0 group-hover:opacity-100 transition-opacity" style={{ backgroundColor: `color-mix(in srgb, var(--theme-primary) 40%, transparent)` }} />
+                  {status === 'submitting' ? (
+                    <>TRANSMITTING <div className="w-4 h-4 border-2 border-current border-r-transparent rounded-full animate-spin" /></>
+                  ) : (
+                    <>INITIATE CONTACT <Send size={18} /></>
+                  )}
+                </button>
+              </MagneticButton>
             </form>
           )}
         </motion.div>

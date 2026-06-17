@@ -3,6 +3,8 @@
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Terminal as TerminalIcon } from "lucide-react";
+import MatrixRain from "@/components/ui/matrix-rain";
+import { useSoundEffects } from "@/hooks/use-sound-effects";
 
 type Log = {
   text: string;
@@ -54,8 +56,11 @@ export default function TerminalSection() {
     { text: "Hint: Try typing 'download' to get my resume!" }
   ]);
   const [input, setInput] = useState("");
+  const [isMatrixMode, setIsMatrixMode] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  
+  const { playKeystroke, playEnterKey } = useSoundEffects();
 
   useEffect(() => {
     if (containerRef.current) {
@@ -83,6 +88,16 @@ export default function TerminalSection() {
       link.href = "/Seng_PorKeat_Resume.pdf";
       link.download = "Seng_PorKeat_Resume.pdf";
       link.click();
+    } else if (cmd === "matrix") {
+      setIsMatrixMode(true);
+      newLogs.push({ text: "Initializing visual payload..." });
+      newLogs.push({ text: "Wake up, Neo." });
+    } else if (cmd === "sudo rm -rf /" || cmd === "rm -rf /") {
+      newLogs.push({ text: "CRITICAL ALERT: Attempting filesystem wipe...", isError: true });
+      newLogs.push({ text: "Bypassing security protocols...", isError: true });
+      setTimeout(() => {
+        window.location.href = "/fatal-system-error-initiated";
+      }, 1500);
     } else if (cmd.startsWith("sudo ")) {
       newLogs.push({ text: `alexkgm is not in the sudoers file. This incident will be reported.`, isError: true });
     } else if (COMMANDS[cmd]) {
@@ -121,13 +136,16 @@ export default function TerminalSection() {
         <div 
           ref={containerRef}
           data-lenis-prevent
-          className="p-6 h-[400px] overflow-y-auto cursor-text text-sm md:text-base flex flex-col custom-scrollbar"
+          className="p-6 h-[400px] overflow-y-auto cursor-text text-sm md:text-base flex flex-col custom-scrollbar relative"
           style={{ overscrollBehavior: "contain" }}
           onClick={() => inputRef.current?.focus()}
         >
-          {logs.map((log, i) => (
-            <div 
-              key={i} 
+          {isMatrixMode && <MatrixRain />}
+          
+          <div className="relative z-10 flex flex-col w-full">
+            {logs.map((log, i) => (
+              <div 
+                key={i} 
               className={`mb-1 transition-colors duration-1000 ${log.isCommand ? 'text-slate-300 mt-2' : log.isError ? '' : 'text-slate-400'}`}
               style={log.isError ? { color: 'var(--theme-primary)' } : {}}
             >
@@ -135,24 +153,29 @@ export default function TerminalSection() {
             </div>
           ))}
           
-          <form onSubmit={handleCommand} className="mt-2 flex items-center text-slate-300">
-            <span className="text-red-primary font-bold mr-2" style={{ color: `var(--theme-primary)` }}>user@alexkgm:~$</span>
-            <input
-              ref={inputRef}
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  e.preventDefault();
-                  handleCommand();
-                }
-              }}
-              className="flex-1 bg-transparent outline-none text-white caret-red-primary"
-              autoComplete="off"
-              spellCheck="false"
-            />
-          </form>
+            <form onSubmit={handleCommand} className="mt-2 flex items-center text-slate-300">
+              <span className="text-red-primary font-bold mr-2" style={{ color: `var(--theme-primary)` }}>user@alexkgm:~$</span>
+              <input
+                ref={inputRef}
+                type="text"
+                value={input}
+                onChange={(e) => {
+                  setInput(e.target.value);
+                  playKeystroke();
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    playEnterKey();
+                    handleCommand();
+                  }
+                }}
+                className="flex-1 bg-transparent outline-none text-white caret-red-primary"
+                autoComplete="off"
+                spellCheck="false"
+              />
+            </form>
+          </div>
         </div>
       </motion.div>
     </section>
