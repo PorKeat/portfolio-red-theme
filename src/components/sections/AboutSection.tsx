@@ -38,6 +38,7 @@ export default function AboutSection() {
                   alt="Alex KGM 2D Transparent" 
                   layer="second" 
                   dynamicBackground={true}
+                  imageClassName="scale-[0.85] translate-y-2"
                 />
                 <Divider />
               </ImageSlider>
