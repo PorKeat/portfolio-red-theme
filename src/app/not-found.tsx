@@ -223,11 +223,16 @@ export default function NotFound() {
           />
         </motion.div>
 
-        <div className="relative z-30 mb-8 mt-8 md:mt-12 bg-slate-950/90 border-2 px-6 py-2 backdrop-blur-md transform -rotate-2 transition-all duration-1000" style={{ borderColor: 'var(--theme-primary)', filter: 'drop-shadow(0 0 15px var(--theme-primary))' }}>
-          <h2 className="relative font-mono text-2xl md:text-3xl font-bold tracking-widest uppercase transition-colors duration-1000" style={{ color: 'var(--theme-primary)' }}>
+        <div 
+          className="relative z-30 mb-8 mt-8 md:mt-12 bg-slate-950/90 border-2 px-6 py-2 backdrop-blur-md transform -rotate-2" 
+          style={{ 
+            borderColor: 'var(--theme-primary)', 
+            filter: 'drop-shadow(0 0 15px var(--theme-primary))',
+            animation: 'box-glitch 3s infinite'
+          }}
+        >
+          <h2 className="font-mono text-2xl md:text-3xl font-bold tracking-widest uppercase transition-colors duration-1000" style={{ color: 'var(--theme-primary)' }}>
             SYSTEM_FAULT
-            <span className="absolute top-0 left-0 -ml-[2px] opacity-70 animate-glitch-1 pointer-events-none" style={{ color: 'var(--theme-accent)' }}>SYSTEM_FAULT</span>
-            <span className="absolute top-0 left-0 ml-[2px] opacity-70 animate-glitch-2 pointer-events-none" style={{ color: 'var(--theme-glow)' }}>SYSTEM_FAULT</span>
           </h2>
         </div>
         
@@ -283,6 +288,17 @@ export default function NotFound() {
             0px 15px 30px color-mix(in srgb, var(--theme-primary) 50%, transparent),
             0px 30px 60px color-mix(in srgb, var(--theme-primary) 40%, transparent);
           transition: text-shadow 1s ease-in-out;
+        }
+        @keyframes box-glitch {
+          0% { transform: translate(0) skew(0deg) rotate(-2deg); }
+          2% { transform: translate(-5px, 2px) skew(5deg) rotate(-2deg); opacity: 0.8; filter: hue-rotate(90deg) drop-shadow(0 0 15px var(--theme-primary)); }
+          4% { transform: translate(5px, -2px) skew(-5deg) rotate(-2deg); opacity: 0.9; }
+          6% { transform: translate(0) skew(0deg) rotate(-2deg); opacity: 1; filter: hue-rotate(0deg) drop-shadow(0 0 15px var(--theme-primary)); }
+          40% { transform: translate(0) skew(0deg) rotate(-2deg); }
+          42% { transform: translate(3px, 1px) skew(2deg) rotate(-2deg); opacity: 0.8; }
+          44% { transform: translate(-3px, -1px) skew(-2deg) rotate(-2deg); opacity: 1; }
+          46% { transform: translate(0) skew(0deg) rotate(-2deg); }
+          100% { transform: translate(0) skew(0deg) rotate(-2deg); }
         }
         @keyframes glitch-1 {
           0% { clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%); transform: translate(-2px, 2px); }
