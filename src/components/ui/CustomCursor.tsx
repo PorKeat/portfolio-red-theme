@@ -132,7 +132,7 @@ export default function CustomCursor() {
           height: hoverTarget ? hoverTarget.height : 30,
           borderRadius: hoverTarget ? hoverTarget.borderRadius : 9999,
           opacity: isVisible ? 1 : 0,
-          backgroundColor: hoverTarget ? "color-mix(in srgb, var(--theme-primary) 10%, transparent)" : "transparent",
+          backgroundColor: hoverTarget ? "color-mix(in srgb, var(--theme-primary) 10%, transparent)" : "rgba(0,0,0,0)",
         }}
         transition={{ type: "spring", stiffness: 200, damping: 25, mass: 0.8 }}
       />
