@@ -23,7 +23,7 @@ export default function MusicPlayer() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-[9999] flex items-center gap-4 bg-slate-900/80 backdrop-blur-md border border-red-primary/30 p-3 rounded-full shadow-[0_0_20px_rgba(239,68,68,0.15)] hover:border-red-primary/80 transition-colors pointer-events-auto group">
+    <div className="fixed bottom-6 right-6 z-[9999] flex items-center gap-4 bg-slate-900/80 backdrop-blur-md border border-red-primary/30 p-3 rounded-full hover:border-red-primary/80 transition-colors pointer-events-auto group" style={{ boxShadow: '0 0 20px color-mix(in srgb, var(--theme-primary) 15%, transparent)' }}>
       
       {/* Hidden YouTube Iframe Player */}
       <iframe
@@ -60,7 +60,8 @@ export default function MusicPlayer() {
       {/* Play/Pause Button */}
       <button 
         onClick={togglePlay}
-        className="w-10 h-10 flex items-center justify-center bg-red-primary text-slate-950 rounded-full hover:bg-red-400 hover:scale-105 transition-all cursor-pointer"
+        className="w-10 h-10 flex items-center justify-center bg-red-primary text-slate-950 rounded-full hover:bg-red-accent hover:scale-105 transition-all cursor-pointer"
+        aria-label={isPlaying ? "Pause music" : "Play music"}
       >
         {isPlaying ? (
           // Pause Icon

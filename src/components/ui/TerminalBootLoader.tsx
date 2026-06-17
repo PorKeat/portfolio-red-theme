@@ -210,7 +210,8 @@ export default function TerminalBootLoader({ onComplete }: { onComplete?: () => 
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="relative z-30 flex flex-col items-center text-center bg-black/80 p-8 border border-red-primary/50 shadow-[0_0_50px_rgba(239,68,68,0.4)] backdrop-blur-md rounded-lg"
+                className="relative z-30 flex flex-col items-center text-center bg-black/80 p-8 border border-red-primary/50 backdrop-blur-md rounded-lg"
+                style={{ boxShadow: '0 0 50px color-mix(in srgb, var(--theme-primary) 40%, transparent)' }}
               >
                 <div className="text-red-primary font-mono text-sm md:text-base mb-2">SYSTEM OVERRIDE COMPLETE.</div>
                 <div className="text-green-500 font-black font-mono text-3xl md:text-5xl tracking-widest mb-2">ACCESS GRANTED</div>

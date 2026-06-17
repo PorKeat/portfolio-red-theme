@@ -35,6 +35,17 @@ export function ExperienceCard({ item, index }: { item: any, index: number }) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const isLeft = index % 2 === 0;
+
+  // Close modal on Escape key
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSelectedIndex(null);
+    };
+    if (selectedIndex !== null) {
+      window.addEventListener("keydown", handleEsc);
+      return () => window.removeEventListener("keydown", handleEsc);
+    }
+  }, [selectedIndex]);
   
   // Detect Media Types
   const isVideo = item.image && /\.(mp4|webm|ogg|mov)$/i.test(item.image);

@@ -17,7 +17,7 @@ export default function ContactSection() {
       <div className="mb-16">
         <h2 className="text-4xl md:text-6xl font-bold flex flex-col">
           <RevealText delay={0.1}>
-            <span className="text-red-primary font-mono text-xl tracking-widest block mb-2">SYS.04</span>
+            <span className="text-red-primary font-mono text-xl tracking-widest block mb-2">SYS.05</span>
           </RevealText>
           <RevealText delay={0.3}>
             <span className="text-white uppercase tracking-tighter">Connection</span>
@@ -40,7 +40,7 @@ export default function ContactSection() {
           <h3 className="text-3xl md:text-5xl font-bold text-white mb-4">Let's build something<br/><span className="text-red-primary">exceptional.</span></h3>
           <p className="text-slate-400 text-lg mb-10 max-w-md">Currently looking for new opportunities. My inbox is always open.</p>
           
-          <a href="mailto:alexkgm2412@gmail.com" className="inline-flex items-center gap-4 bg-red-primary text-white px-8 py-4 font-bold tracking-widest hover:bg-red-600 transition-colors">
+          <a href="mailto:alexkgm2412@gmail.com" className="inline-flex items-center gap-4 bg-red-primary text-white px-8 py-4 font-bold tracking-widest hover:bg-red-accent transition-colors" aria-label="Send email to Alex KGM">
             INITIATE CONTACT <ExternalLink size={18} />
           </a>
         </motion.div>

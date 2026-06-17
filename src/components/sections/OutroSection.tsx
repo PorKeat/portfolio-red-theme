@@ -9,7 +9,7 @@ export default function OutroSection() {
       <div className="text-center w-full max-w-4xl px-4 flex flex-col items-center">
         
         {/* Glowing Ending Symbol */}
-        <div className="w-24 h-24 mb-8 clip-hex bg-slate-900 border border-red-primary/50 flex items-center justify-center shadow-[0_0_50px_rgba(239,68,68,0.3)] p-[2px]">
+        <div className="w-24 h-24 mb-8 clip-hex bg-slate-900 border border-red-primary/50 flex items-center justify-center p-[2px]" style={{ boxShadow: '0 0 50px color-mix(in srgb, var(--theme-primary) 30%, transparent)' }}>
           <div className="w-full h-full clip-hex bg-red-primary/20 flex items-center justify-center animate-pulse">
             <span className="text-red-primary font-mono font-bold text-lg tracking-widest">END</span>
           </div>
@@ -40,6 +40,7 @@ export default function OutroSection() {
           <a 
             href="/Seng_PorKeat_Resume.pdf" 
             download="Seng_PorKeat_Resume.pdf"
+            aria-label="Download Seng PorKeat's Resume PDF"
             className="group relative inline-flex items-center gap-3 px-8 py-4 bg-red-primary/10 border border-red-primary/50 text-red-primary font-mono tracking-widest hover:bg-red-primary hover:text-white transition-all duration-300"
             style={{ 
               backgroundColor: `color-mix(in srgb, var(--theme-primary) 10%, transparent)`,

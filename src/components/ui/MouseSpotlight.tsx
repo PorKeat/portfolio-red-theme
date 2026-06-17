@@ -67,14 +67,7 @@ export default function MouseSpotlight() {
         }}
       />
       
-      {/* A deep ambient glow that follows the mouse to illuminate the dark void */}
-      <motion.div
-        className="absolute inset-0 opacity-80 transition-colors duration-500"
-        style={{
-          background: `radial-gradient(500px circle at var(--glow-x, 50%) var(--glow-y, 50%), rgba(${rgb}, 0.4), transparent 100%)`
-        }}
-      />
-      {/* Use a second motion div for the glow position since we can't mix motionTemplate with dynamic rgb */}
+      {/* Ambient glow that follows the mouse */}
       <motion.div
         className="absolute inset-0 opacity-80"
         style={{

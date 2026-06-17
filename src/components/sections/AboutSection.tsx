@@ -23,7 +23,7 @@ export default function AboutSection() {
       <div className="relative w-full flex flex-col md:flex-row items-center justify-center gap-10 md:gap-0 mt-10 md:mt-0">
         {/* Center Target: The Image */}
         <div className="relative z-30 w-48 h-48 md:w-64 md:h-64 mx-auto md:absolute md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2">
-          <TiltCard className="w-full h-full rounded-full shadow-[0_0_50px_rgba(239,68,68,0.4)] border-4 border-red-primary/50 relative group">
+          <TiltCard className="w-full h-full rounded-full border-4 border-red-primary/50 relative group" style={{ boxShadow: '0 0 50px color-mix(in srgb, var(--theme-primary) 40%, transparent)' }}>
             <div className="absolute inset-0 rounded-full overflow-hidden z-40">
               <ImageSlider className="w-full h-full" hoverControl={true}>
                 <ImageLayer

@@ -74,25 +74,26 @@ export default function CustomCursor() {
     <>
       {/* Outer Glowing Ring */}
       <motion.div
-        className="fixed top-0 left-0 z-[9999] pointer-events-none rounded-full border border-red-primary/50 shadow-[0_0_15px_rgba(239,68,68,0.5)]"
+        className="fixed top-0 left-0 z-[9999] pointer-events-none rounded-full border border-red-primary/50"
         style={{
           x: ringX,
           y: ringY,
           translateX: "-50%",
           translateY: "-50%",
+          boxShadow: '0 0 15px color-mix(in srgb, var(--theme-primary) 50%, transparent)',
         }}
         animate={{
           width: isHovering ? 50 : 30,
           height: isHovering ? 50 : 30,
           opacity: isVisible ? 1 : 0,
-          backgroundColor: isHovering ? "rgba(239, 68, 68, 0.1)" : "rgba(239, 68, 68, 0)",
+          backgroundColor: isHovering ? "color-mix(in srgb, var(--theme-primary) 10%, transparent)" : "transparent",
         }}
         transition={{ duration: 0.15, ease: "easeOut" }}
       />
       
       {/* Inner Solid Dot */}
       <motion.div
-        className="fixed top-0 left-0 z-[10000] pointer-events-none rounded-full bg-red-primary shadow-[0_0_10px_rgba(239,68,68,1)]"
+        className="fixed top-0 left-0 z-[10000] pointer-events-none rounded-full bg-red-primary"
         style={{
           x: dotX,
           y: dotY,
@@ -101,6 +102,7 @@ export default function CustomCursor() {
           width: 8,
           height: 8,
           opacity: isVisible ? 1 : 0,
+          boxShadow: '0 0 10px var(--theme-primary)',
         }}
       />
     </>

@@ -83,7 +83,8 @@ export default function HeroSection() {
           <motion.div 
             animate={{ y: [0, 16, 0], opacity: [1, 0, 1] }}
             transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-            className="w-1.5 h-3 bg-red-primary rounded-full shadow-[0_0_10px_rgba(239,68,68,0.8)]"
+            className="w-1.5 h-3 bg-red-primary rounded-full"
+            style={{ boxShadow: '0 0 10px color-mix(in srgb, var(--theme-primary) 80%, transparent)' }}
           />
         </div>
       </motion.div>
