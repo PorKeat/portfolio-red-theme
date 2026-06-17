@@ -108,53 +108,60 @@ export default function FlyThroughParallax({ children, sectionNames }: FlyThroug
         </div>
       ))}
 
-      {/* Navigation Dots */}
-      <div className="fixed right-6 top-1/2 -translate-y-1/2 z-[100] flex flex-col gap-4 pointer-events-auto">
-        {Children.toArray(children).map((_, index) => (
-          <button
-            key={`nav-dot-${index}`}
-            onClick={() => {
-              if (!containerRef.current) return;
-              
-              const sectionsCount = sectionsRef.current.filter(Boolean).length;
-              if (sectionsCount === 0) return;
+      {/* Navigation Bars */}
+      <div className="fixed right-0 top-1/2 -translate-y-1/2 z-[100] flex flex-col items-end gap-3 pointer-events-auto pr-6">
+        {Children.toArray(children).map((_, index) => {
+          const isActive = activeIndex === index;
+          const name = sectionNames?.[index] || `Section ${index + 1}`;
+          
+          return (
+            <button
+              key={`nav-bar-${index}`}
+              onClick={() => {
+                if (!containerRef.current) return;
+                
+                const sectionsCount = sectionsRef.current.filter(Boolean).length;
+                if (sectionsCount === 0) return;
 
-              // The timeline duration is (sectionsCount * 2) - 1
-              // The resting phase for section `index` is precisely at time `index * 2`
-              // We target the exact middle of its 1-second resting phase (+ 0.5)
-              const timelineDuration = (sectionsCount * 2) - 1;
-              const targetTime = (index * 2) + 0.5;
-              const progress = targetTime / timelineDuration;
-              
-              const totalScrollDistance = sectionsCount * 2.5 * window.innerHeight;
-              const targetY = containerRef.current.offsetTop + (progress * totalScrollDistance);
-              
-              window.scrollTo({
-                top: targetY,
-                behavior: 'smooth'
-              });
-            }}
-            className="group relative flex items-center justify-center w-6 h-6 outline-none"
-            aria-label={`Go to section ${index + 1}`}
-          >
-            <div 
-              className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                activeIndex === index 
-                  ? "bg-red-primary scale-150" 
-                  : "bg-slate-600 hover:bg-slate-400"
-              }`}
-              style={activeIndex === index ? { 
-                backgroundColor: 'var(--theme-primary)',
-                boxShadow: '0 0 10px var(--theme-primary)'
-              } : {}}
-            />
-            
-            {/* Tooltip on hover */}
-            <span className="absolute right-8 px-3 py-1.5 bg-slate-900 border border-slate-700 text-slate-200 text-xs font-mono rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-[0_0_10px_rgba(0,0,0,0.5)]">
-              {sectionNames?.[index] || `Section ${index + 1}`}
-            </span>
-          </button>
-        ))}
+                const timelineDuration = (sectionsCount * 2) - 1;
+                const targetTime = (index * 2) + 0.5;
+                const progress = targetTime / timelineDuration;
+                
+                const totalScrollDistance = sectionsCount * 2.5 * window.innerHeight;
+                const targetY = containerRef.current.offsetTop + (progress * totalScrollDistance);
+                
+                window.scrollTo({
+                  top: targetY,
+                  behavior: 'smooth'
+                });
+              }}
+              className="group relative flex items-center justify-end h-6 outline-none"
+              aria-label={`Go to ${name}`}
+            >
+              <span 
+                className={`mr-4 font-mono text-[10px] uppercase tracking-widest whitespace-nowrap overflow-hidden transition-all duration-500 ease-out flex justify-end ${
+                  isActive 
+                    ? "max-w-[200px] opacity-100" 
+                    : "max-w-0 opacity-0 group-hover:max-w-[200px] group-hover:opacity-70"
+                }`}
+                style={isActive ? { color: 'var(--theme-primary)', textShadow: '0 0 10px var(--theme-primary)' } : { color: 'rgb(148 163 184)' }}
+              >
+                {name}
+              </span>
+              <div 
+                className={`h-[2px] transition-all duration-500 ease-out ${
+                  isActive 
+                    ? "w-8 bg-red-primary" 
+                    : "w-3 bg-slate-600 group-hover:bg-slate-400 group-hover:w-5"
+                }`}
+                style={isActive ? { 
+                  backgroundColor: 'var(--theme-primary)',
+                  boxShadow: '0 0 10px var(--theme-primary)'
+                } : {}}
+              />
+            </button>
+          );
+        })}
       </div>
     </div>
   );
