@@ -154,7 +154,8 @@ export function ExperienceCard({ item, index }: { item: any, index: number }) {
                   fill
                   sizes="(max-width: 768px) 100vw, 40vw"
                   priority={index < 4}
-                  className="object-cover object-top transition-transform duration-700 scale-100 group-hover:scale-110 z-10"
+                  className="object-cover transition-transform duration-700 scale-100 group-hover:scale-110 z-10"
+                  style={{ objectPosition: item.objectPosition || "center" }}
                 />
               </>
             )}

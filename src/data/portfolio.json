@@ -19,7 +19,8 @@
       "title": "IT Professional (DevOps)",
       "institution": "ISTAD",
       "description": "Specializing in DevOps practices, gaining practical experience through real projects, application deployment, CI/CD, and infrastructure management.",
-      "image": "/education/itp-photo.jpg"
+      "image": "/education/itp-photo.jpg",
+      "objectPosition": "center 15%"
     }
   ],
   "projects": [
