@@ -62,8 +62,8 @@ export default function AboutSection() {
               style={{ boxShadow: 'inset 0 0 25px var(--theme-primary), 0 0 25px color-mix(in srgb, var(--theme-primary) 50%, transparent)' }} 
             />
             {/* HUD Ring */}
-            <div className="absolute -inset-6 border border-red-primary/30 rounded-full animate-[spin_10s_linear_infinite] group-hover:animate-[spin_2s_linear_infinite] group-hover:border-red-primary/80 transition-all duration-500" />
-            <div className="absolute -inset-10 border border-dashed border-red-accent/40 rounded-full animate-[spin_15s_linear_infinite_reverse] group-hover:animate-[spin_3s_linear_infinite_reverse] group-hover:border-red-accent/80 transition-all duration-500" />
+            <div className="absolute -inset-6 border border-red-primary/30 rounded-full animate-[spin_10s_linear_infinite] group-hover:scale-105 group-hover:border-red-primary group-hover:shadow-[0_0_30px_var(--theme-primary)] transition-all duration-500" />
+            <div className="absolute -inset-10 border border-dashed border-red-accent/40 rounded-full animate-[spin_15s_linear_infinite_reverse] group-hover:scale-110 group-hover:border-red-accent group-hover:opacity-80 transition-all duration-500" />
           </TiltCard>
         </div>
 
