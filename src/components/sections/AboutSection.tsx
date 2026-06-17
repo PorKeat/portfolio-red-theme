@@ -33,7 +33,7 @@ export default function AboutSection() {
                   layer="first"
                 />
                 <ImageLayer 
-                  src="/alexkgm2d-transparent.png" 
+                  src="/alexkgm2d.png" 
                   bgSrc="/bg-devops.jpg"
                   alt="Alex KGM 2D Transparent" 
                   layer="second" 
