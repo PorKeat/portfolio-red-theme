@@ -32,13 +32,14 @@ const getYoutubeId = (url: string) => {
   return (match && match[2].length === 11) ? match[2] : null;
 };
 
-export function ExperienceCard({ item, index }: { item: any, index: number }) {
+export function ExperienceCard({ item, index }: { item: { title?: string, year?: string, institution?: string, description?: string, image?: string, logo?: string, objectPosition?: string, link?: string }, index: number }) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const isLeft = index % 2 === 0;
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsMounted(true);
   }, []);
 
@@ -194,6 +195,7 @@ export function ExperienceCard({ item, index }: { item: any, index: number }) {
             </div>
             <h3 className="text-3xl font-bold text-white mb-2 group-hover:text-red-primary transition-colors duration-300 flex items-center gap-3">
               {item.logo && (
+                // eslint-disable-next-line @next/next/no-img-element
                 <img src={item.logo} alt={`${item.title} logo`} className="w-8 h-8 object-contain" />
               )}
               {item.title}
@@ -290,6 +292,7 @@ export function ExperienceCard({ item, index }: { item: any, index: number }) {
                     className={`w-full transition-all duration-500 ${isFullscreen ? "h-full min-h-screen" : "h-full min-h-[500px] max-h-[calc(90vh-32px)]"}`}
                   />
                 ) : (
+                  // eslint-disable-next-line @next/next/no-img-element
                   <img 
                     src={item.image || "/placeholder-mountain.png"} 
                     alt={item.title || "Enlarged Experience Preview"} 

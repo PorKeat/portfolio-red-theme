@@ -13,7 +13,7 @@ export const ImageSlider = ({ children, className = "", hoverControl = false, de
   const [position, setPosition] = useState(defaultPosition);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const handleDrag = (e: any) => {
+  const handleDrag = (e: React.MouseEvent) => {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
     const x = Math.max(0, Math.min(e.clientX - rect.left, rect.width));
@@ -21,7 +21,7 @@ export const ImageSlider = ({ children, className = "", hoverControl = false, de
     setPosition(percent);
   };
 
-  const handleTouch = (e: any) => {
+  const handleTouch = (e: React.TouchEvent) => {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
     const x = Math.max(0, Math.min(e.touches[0].clientX - rect.left, rect.width));
@@ -33,7 +33,7 @@ export const ImageSlider = ({ children, className = "", hoverControl = false, de
     onMouseMove: handleDrag,
     onTouchMove: handleTouch,
   } : {
-    onMouseMove: (e: any) => e.buttons === 1 && handleDrag(e),
+    onMouseMove: (e: React.MouseEvent) => e.buttons === 1 && handleDrag(e),
     onMouseDown: handleDrag,
     onTouchMove: handleTouch,
   };
@@ -46,7 +46,7 @@ export const ImageSlider = ({ children, className = "", hoverControl = false, de
     >
       {React.Children.map(children, (child) => {
         if (React.isValidElement(child)) {
-          return React.cloneElement(child as any, { position });
+          return React.cloneElement(child as React.ReactElement<{ position?: number }>, { position });
         }
         return child;
       })}
@@ -54,19 +54,20 @@ export const ImageSlider = ({ children, className = "", hoverControl = false, de
   );
 };
 
-export const ImageLayer = ({ src, alt, layer, className = "", position = 50 }: any) => {
+export const ImageLayer = ({ src, alt, layer, className = "", position = 50 }: { src: string, alt: string, layer: string, className?: string, position?: number }) => {
   const clipPath = layer === "first" 
     ? `polygon(0 0, ${position}% 0, ${position}% 100%, 0 100%)`
     : `polygon(${position}% 0, 100% 0, 100% 100%, ${position}% 100%)`;
 
   return (
     <div className={`absolute inset-0 w-full h-full ${className}`} style={{ clipPath }}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={src} alt={alt} className="w-full h-full object-cover pointer-events-none" />
     </div>
   );
 };
 
-export const Divider = ({ width = 2, position = 50 }: any) => {
+export const Divider = ({ width = 2, position = 50 }: { width?: number, position?: number }) => {
   return (
     <div 
       className="absolute top-0 bottom-0 bg-red-primary pointer-events-none flex items-center justify-center z-10" 

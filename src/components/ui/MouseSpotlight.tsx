@@ -36,6 +36,7 @@ export default function MouseSpotlight() {
     window.addEventListener("mousemove", handleMouseMove);
 
     // Read initial theme color
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     readThemeColor();
 
     // Watch for data-theme attribute changes on <html>

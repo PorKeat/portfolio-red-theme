@@ -48,7 +48,7 @@ const SKILLS = [
   { name: "Security", icon: FaShieldAlt, color: "#EF4444", x: 312, y: 360 },
 ];
 
-function Hexagon({ skill, index }: { skill: any, index: number }) {
+function Hexagon({ skill, index }: { skill: { name: string, icon: React.ElementType, color: string, x: number, y: number }, index: number }) {
   const Icon = skill.icon;
   const [isHovered, setIsHovered] = useState(false);
 

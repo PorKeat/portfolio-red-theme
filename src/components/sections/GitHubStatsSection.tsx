@@ -21,7 +21,7 @@ export default function GitHubStatsSection() {
         const data = await response.json();
         
         // Fetch all repos to calculate total stars and forks
-        let allRepos: any[] = [];
+        let allRepos: { stargazers_count: number; forks_count: number }[] = [];
         let page = 1;
         let hasMore = true;
         
@@ -37,8 +37,8 @@ export default function GitHubStatsSection() {
           }
         }
         
-        const totalStars = allRepos.reduce((acc: number, repo: any) => acc + repo.stargazers_count, 0);
-        const totalForks = allRepos.reduce((acc: number, repo: any) => acc + repo.forks_count, 0);
+        const totalStars = allRepos.reduce((acc: number, repo: { stargazers_count: number }) => acc + repo.stargazers_count, 0);
+        const totalForks = allRepos.reduce((acc: number, repo: { forks_count: number }) => acc + repo.forks_count, 0);
 
         setStats({
           repos: data.public_repos || 0,
@@ -149,8 +149,8 @@ function Counter({ value }: { value: number }) {
     const end = value;
     if (start === end) return;
 
-    let totalDuration = 2000;
-    let incrementTime = (totalDuration / end);
+    const totalDuration = 2000;
+    const incrementTime = (totalDuration / end);
 
     const timer = setInterval(() => {
       start += 1;

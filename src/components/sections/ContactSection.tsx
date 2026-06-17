@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, MapPin, Phone, ExternalLink, Send } from "lucide-react";
+import { useState } from "react";
+import { MapPin, ExternalLink, Send } from "lucide-react";
 import RevealText from "@/components/react-bits/RevealText";
 
 const GithubIcon = ({ className }: { className?: string }) => (
@@ -12,6 +13,30 @@ const GithubIcon = ({ className }: { className?: string }) => (
 );
 
 export default function ContactSection() {
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus("submitting");
+    const formData = new FormData(e.currentTarget);
+    try {
+      const response = await fetch("https://formspree.io/f/xqeookpp", {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+      if (response.ok) {
+        setStatus("success");
+        (e.target as HTMLFormElement).reset();
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
+  };
   return (
     <section id="contact" className="px-4 md:px-8 w-full max-w-7xl mx-auto relative z-10 min-h-[80vh] flex flex-col justify-center py-20">
       <div className="mb-16">
@@ -37,12 +62,57 @@ export default function ContactSection() {
         >
           <div className="absolute top-0 right-0 w-32 h-32 bg-red-primary/20 blur-[50px] group-hover:bg-red-primary/40 transition-colors duration-500" />
           
-          <h3 className="text-3xl md:text-5xl font-bold text-white mb-4">Let's build something<br/><span className="text-red-primary">exceptional.</span></h3>
+          <h3 className="text-3xl md:text-5xl font-bold text-white mb-4">Let&apos;s build something<br/><span className="text-red-primary">exceptional.</span></h3>
           <p className="text-slate-400 text-lg mb-10 max-w-md">Currently looking for new opportunities. My inbox is always open.</p>
           
-          <a href="mailto:alexkgm2412@gmail.com" className="inline-flex items-center gap-4 bg-red-primary text-white px-8 py-4 font-bold tracking-widest hover:bg-red-accent transition-colors" aria-label="Send email to Alex KGM">
-            INITIATE CONTACT <ExternalLink size={18} />
-          </a>
+          {status === "success" ? (
+            <div className="bg-green-500/10 border border-green-500/50 p-6 flex flex-col items-center justify-center text-center gap-4">
+              <div className="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center text-green-500 mb-2">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+              </div>
+              <h4 className="text-xl font-bold text-white">Message Transmitted</h4>
+              <p className="text-green-400/80">I&apos;ve received your message and will respond shortly.</p>
+              <button onClick={() => setStatus("idle")} className="mt-4 px-6 py-2 bg-slate-800 hover:bg-slate-700 text-white transition-colors text-sm font-bold tracking-widest">
+                SEND ANOTHER
+              </button>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="flex flex-col gap-2">
+                  <label htmlFor="name" className="text-xs font-mono text-slate-400 uppercase tracking-widest">Name_</label>
+                  <input required type="text" id="name" name="name" className="bg-slate-900/50 border border-white/10 px-4 py-3 text-white focus:outline-none focus:border-red-primary/50 transition-colors" placeholder="John Doe" />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <label htmlFor="email" className="text-xs font-mono text-slate-400 uppercase tracking-widest">Email_</label>
+                  <input required type="email" id="email" name="email" className="bg-slate-900/50 border border-white/10 px-4 py-3 text-white focus:outline-none focus:border-red-primary/50 transition-colors" placeholder="john@example.com" />
+                </div>
+              </div>
+              <div className="flex flex-col gap-2">
+                <label htmlFor="message" className="text-xs font-mono text-slate-400 uppercase tracking-widest">Message_</label>
+                <textarea required id="message" name="message" rows={4} className="bg-slate-900/50 border border-white/10 px-4 py-3 text-white focus:outline-none focus:border-red-primary/50 transition-colors resize-none" placeholder="Initiating transmission..."></textarea>
+              </div>
+              
+              {status === "error" && (
+                <p className="text-red-500 text-sm mt-2">Transmission failed. Please try again or email me directly.</p>
+              )}
+
+              <button 
+                type="submit" 
+                disabled={status === "submitting"}
+                className="mt-4 inline-flex items-center justify-center gap-4 bg-red-primary text-white px-8 py-4 font-bold tracking-widest hover:bg-red-accent transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {status === "submitting" ? (
+                  <span className="flex items-center gap-2">
+                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                    TRANSMITTING...
+                  </span>
+                ) : (
+                  <>INITIATE CONTACT <Send size={18} /></>
+                )}
+              </button>
+            </form>
+          )}
         </motion.div>
 
         <div className="flex flex-col gap-6">

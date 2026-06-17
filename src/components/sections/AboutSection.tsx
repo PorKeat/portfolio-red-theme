@@ -1,6 +1,6 @@
 "use client";
 
-import { User, BookOpen, Shield, Code2, Database, Terminal } from "lucide-react";
+import { BookOpen, Shield, Terminal } from "lucide-react";
 import TiltCard from "@/components/ui/TiltCard";
 import RevealText from "@/components/react-bits/RevealText";
 import { motion } from "framer-motion";

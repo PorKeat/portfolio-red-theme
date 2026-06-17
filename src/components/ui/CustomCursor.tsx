@@ -24,6 +24,7 @@ export default function CustomCursor() {
   useEffect(() => {
     // Only enable on non-touch devices
     if (window.matchMedia("(pointer: fine)").matches) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsMobile(false);
     }
 

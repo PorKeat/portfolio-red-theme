@@ -25,7 +25,7 @@ export default function OutroSection() {
           <RevealText delay={0.4}>
             <p className="text-slate-400 text-lg md:text-xl max-w-2xl font-mono leading-relaxed">
               for taking the time to explore my portfolio. <br />
-              <span className="text-red-primary" style={{ color: `var(--theme-primary)` }}>Let's build something amazing together.</span>
+              <span className="text-red-primary" style={{ color: `var(--theme-primary)` }}>Let&apos;s build something amazing together.</span>
             </p>
           </RevealText>
         </div>

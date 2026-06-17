@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 interface TypewriterEffectProps {
   phrases: string[];
@@ -27,6 +27,7 @@ export default function TypewriterEffect({
 
     if (isDeleting) {
       if (currentText === "") {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setIsDeleting(false);
         setCurrentPhraseIndex((prev) => (prev + 1) % phrases.length);
       } else {

@@ -49,6 +49,7 @@ export default function ThemeToggle() {
     const savedCustom = localStorage.getItem("app-theme-custom");
 
     if (savedTheme === "custom" && savedCustom) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setCurrentTheme("custom");
       setCustomHex(savedCustom);
       document.documentElement.setAttribute("data-theme", "custom");

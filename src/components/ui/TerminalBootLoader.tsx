@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const playHackingSound = () => {
   try {
-    const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+    const AudioContextClass = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
     if (!AudioContextClass) return null;
     const ctx = new AudioContextClass();
 
@@ -41,19 +41,19 @@ const playHackingSound = () => {
     }, 50);
 
     return { ctx, hum, beepInterval };
-  } catch (e) {
+  } catch {
     return null;
   }
 };
 
-const playSuccessSound = (audioState: any) => {
+const playSuccessSound = (audioState: { ctx: AudioContext, hum: OscillatorNode, beepInterval: NodeJS.Timeout } | null) => {
   if (!audioState || !audioState.ctx) return;
   const { ctx, hum, beepInterval } = audioState;
   
   clearInterval(beepInterval);
   try {
     hum.stop(ctx.currentTime + 0.5);
-  } catch (e) {}
+  } catch {}
 
   // Success chime
   try {
@@ -70,7 +70,7 @@ const playSuccessSound = (audioState: any) => {
     gain.connect(ctx.destination);
     osc.start();
     osc.stop(ctx.currentTime + 0.5);
-  } catch (e) {}
+  } catch {}
 
   setTimeout(() => {
     if (ctx.state !== 'closed') {
@@ -180,9 +180,10 @@ export default function TerminalBootLoader({ onComplete }: { onComplete?: () => 
         clearInterval(audioState.beepInterval);
         try {
           if (audioState.ctx.state !== 'closed') audioState.ctx.close();
-        } catch(e) {}
+        } catch {}
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

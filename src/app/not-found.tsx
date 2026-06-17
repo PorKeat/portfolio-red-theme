@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import GlitchText from "@/components/react-bits/GlitchText";
 import { useState, useEffect } from "react";
+
+let globalAudioCtx: AudioContext | null = null;
 
 const playSmashSound = () => {
   try {
-    const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+    const AudioContextClass = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
     if (!AudioContextClass) return;
     const ctx = new AudioContextClass();
 
@@ -136,7 +137,7 @@ export default function NotFound() {
   useEffect(() => {
     const handleInteraction = () => {
       if (!globalAudioCtx) {
-        const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+        const AudioContextClass = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
         if (AudioContextClass) globalAudioCtx = new AudioContextClass();
       }
       if (globalAudioCtx?.state === 'suspended') {
@@ -223,9 +224,9 @@ export default function NotFound() {
         </motion.div>
 
         <div className="relative z-30 mb-8 mt-8 md:mt-12 bg-[#020617]/90 border-2 border-red-500 px-6 py-2 backdrop-blur-md transform -rotate-2 drop-shadow-[0_0_15px_rgba(239,68,68,1)]">
-          <GlitchText speed={1.2} className="font-mono text-2xl md:text-3xl font-bold tracking-widest text-red-500 uppercase">
+          <h2 className="font-mono text-2xl md:text-3xl font-bold tracking-widest text-red-500 uppercase animate-pulse">
             SYSTEM_FAULT
-          </GlitchText>
+          </h2>
         </div>
         
         <motion.p 
@@ -234,7 +235,7 @@ export default function NotFound() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-red-primary/80 text-sm md:text-base mb-12 font-mono tracking-[0.2em] uppercase text-center"
         >
-          // ROUTE_SEVERED
+          {"// ROUTE_SEVERED"}
         </motion.p>
 
         <motion.div

@@ -6,6 +6,7 @@ import CustomCursor from "@/components/ui/CustomCursor";
 import MusicPlayer from "@/components/ui/MusicPlayer";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import ScrollProgress from "@/components/ui/ScrollProgress";
+import { Analytics } from "@vercel/analytics/react";
 
 const mainFont = Outfit({
   variable: "--font-sans",
@@ -48,13 +49,11 @@ export const metadata: Metadata = {
     siteName: "Alex KGM Portfolio",
     locale: "en_US",
     type: "website",
-    images: [{ url: '/og-image.png', width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Alex KGM | DevOps Engineer & Fullstack Developer",
     description: "Building scalable, secure, and cloud-native systems. Explore my projects and infrastructure deployments.",
-    images: ['/og-image.png'],
   },
 };
 
@@ -76,6 +75,7 @@ export default function RootLayout({
         <LenisProvider>
           {children}
         </LenisProvider>
+        <Analytics />
       </body>
     </html>
   );

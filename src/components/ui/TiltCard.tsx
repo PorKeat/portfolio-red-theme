@@ -6,9 +6,10 @@ import React, { ReactNode } from "react";
 interface TiltCardProps {
   children: ReactNode;
   className?: string;
+  style?: React.CSSProperties;
 }
 
-export default function TiltCard({ children, className = "" }: TiltCardProps) {
+export default function TiltCard({ children, className = "", style }: TiltCardProps) {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -40,6 +41,7 @@ export default function TiltCard({ children, className = "" }: TiltCardProps) {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{
+        ...style,
         rotateY,
         rotateX,
         transformStyle: "preserve-3d",
