@@ -38,7 +38,7 @@ export default function Home() {
       {/* Interactive Spotlight Background fixed behind everything */}
       <MouseSpotlight />
 
-      <div className={`relative z-10 w-full transition-opacity duration-[1500ms] ease-in-out ${isBooting ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+      <div className={`relative z-10 w-full transition-opacity duration-1500 ease-in-out ${isBooting ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
         {/* The Universal 3D Fly-Through Parallax Container */}
         <FlyThroughParallax sectionNames={sectionNames}>
           

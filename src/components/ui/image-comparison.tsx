@@ -66,7 +66,11 @@ export const ImageLayer = ({ src, alt, layer, className = "", position = 50, dyn
       {dynamicTint && (
         <div 
           className="absolute inset-0 pointer-events-none bg-red-primary" 
-          style={{ mixBlendMode: 'color' }} 
+          style={{ 
+            mixBlendMode: 'color',
+            WebkitMaskImage: 'radial-gradient(circle at 50% 40%, transparent 25%, black 60%)',
+            maskImage: 'radial-gradient(circle at 50% 40%, transparent 25%, black 60%)'
+          }} 
         />
       )}
     </div>
