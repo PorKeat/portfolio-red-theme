@@ -33,9 +33,10 @@ export default function AboutSection() {
                   layer="first"
                 />
                 <ImageLayer 
-                  src="/alexkgm2d.jpg" 
-                  alt="Alex KGM 2D Cyberpunk" 
+                  src="/alexkgm2d-transparent.png" 
+                  alt="Alex KGM 2D Transparent" 
                   layer="second" 
+                  dynamicBackground={true}
                 />
                 <Divider />
               </ImageSlider>
