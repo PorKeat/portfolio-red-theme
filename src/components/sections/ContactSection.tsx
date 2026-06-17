@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { MapPin, ExternalLink, Send } from "lucide-react";
+import { MapPin, Send } from "lucide-react";
 import RevealText from "@/components/react-bits/RevealText";
 
 const GithubIcon = ({ className }: { className?: string }) => (

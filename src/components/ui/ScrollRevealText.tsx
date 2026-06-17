@@ -1,39 +1,39 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
-
-const Word = ({ children, progress, range }: { children: React.ReactNode, progress: MotionValue<number>, range: [number, number] }) => {
-  const opacity = useTransform(progress, range, [0.1, 1]);
-  const filter = useTransform(progress, range, ["blur(8px)", "blur(0px)"]);
-  
-  return (
-    <motion.span style={{ opacity, filter }} className="inline-block">
-      {children}
-    </motion.span>
-  );
-};
+import { motion, Variants } from "framer-motion";
 
 export default function ScrollRevealText({ text, className = "" }: { text: string; className?: string }) {
-  const containerRef = useRef<HTMLParagraphElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start 95%", "start 65%"]
-  });
-
   const words = text.split(" ");
   
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.04, // 40ms between each word
+        delayChildren: 0.2, // Wait for parent animation to start
+      }
+    }
+  };
+
+  const wordVariants: Variants = {
+    hidden: { opacity: 0.1, filter: "blur(8px)", y: 10 },
+    visible: { opacity: 1, filter: "blur(0px)", y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+  };
+
   return (
-    <div ref={containerRef} className={`flex flex-wrap gap-x-[0.25em] ${className}`}>
-      {words.map((word, i) => {
-        const start = i / words.length;
-        const end = start + (1 / words.length);
-        return (
-          <Word key={i} progress={scrollYProgress} range={[start, end]}>
-            {word}
-          </Word>
-        );
-      })}
-    </div>
+    <motion.div 
+      className={`flex flex-wrap gap-x-[0.25em] ${className}`}
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-10%" }}
+    >
+      {words.map((word, i) => (
+        <motion.span key={i} variants={wordVariants} className="inline-block">
+          {word}
+        </motion.span>
+      ))}
+    </motion.div>
   );
 }
