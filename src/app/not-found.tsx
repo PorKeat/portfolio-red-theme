@@ -169,7 +169,7 @@ export default function NotFound() {
         {/* Animated Drop & Shatter Container */}
         <motion.div 
           key={playCount}
-          className="relative w-full h-[250px] md:h-[400px] flex items-center justify-center group mb-2"
+          className="relative w-full h-62.5 md:h-100 flex items-center justify-center group mb-2"
           initial={{ y: "-100vh" }}
           animate={{ y: 0 }} 
           transition={{ duration: 0.4, ease: "easeIn" }}
@@ -223,7 +223,7 @@ export default function NotFound() {
           />
         </motion.div>
 
-        <div className="relative z-30 mb-8 mt-8 md:mt-12 bg-[#020617]/90 border-2 border-red-500 px-6 py-2 backdrop-blur-md transform -rotate-2 drop-shadow-[0_0_15px_rgba(239,68,68,1)]">
+        <div className="relative z-30 mb-8 mt-8 md:mt-12 bg-slate-950/90 border-2 border-red-500 px-6 py-2 backdrop-blur-md transform -rotate-2 drop-shadow-[0_0_15px_rgba(239,68,68,1)]">
           <h2 className="font-mono text-2xl md:text-3xl font-bold tracking-widest text-red-500 uppercase animate-pulse">
             SYSTEM_FAULT
           </h2>

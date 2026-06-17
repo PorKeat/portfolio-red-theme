@@ -23,8 +23,20 @@ export default function AboutSection() {
 
       <div className="relative w-full flex flex-col md:flex-row items-center justify-center gap-10 md:gap-0 mt-10 md:mt-0">
         {/* Center Target: The Image */}
-        <div className="relative z-30 w-48 h-48 md:w-64 md:h-64 mx-auto md:absolute md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2">
-          <TiltCard className="w-full h-full rounded-full relative group" style={{ boxShadow: '0 0 50px color-mix(in srgb, var(--theme-primary) 40%, transparent)' }}>
+        <div className="relative z-30 w-48 h-48 md:w-64 md:h-64 mx-auto md:absolute md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 group">
+          
+          {/* Floating Status Tags */}
+          <div className="absolute top-1/2 -translate-y-1/2 -left-8 md:-left-12 -translate-x-full z-50 pointer-events-none opacity-30 group-hover:opacity-100 transition-all duration-500 flex items-center gap-2">
+             <div className="w-4 h-[1px] bg-red-primary/50" />
+             <span className="font-mono text-[10px] md:text-xs text-red-primary bg-black/60 px-2 py-1 rounded border border-red-primary/30 backdrop-blur-md shadow-[0_0_10px_var(--theme-primary)] transition-colors duration-1000">[HUMAN_MODE]</span>
+          </div>
+          
+          <div className="absolute top-1/2 -translate-y-1/2 -right-8 md:-right-12 translate-x-full z-50 pointer-events-none opacity-30 group-hover:opacity-100 transition-all duration-500 flex items-center gap-2">
+             <span className="font-mono text-[10px] md:text-xs text-red-primary bg-black/60 px-2 py-1 rounded border border-red-primary/30 backdrop-blur-md shadow-[0_0_10px_var(--theme-primary)] transition-colors duration-1000">[CYBER_LINK]</span>
+             <div className="w-4 h-[1px] bg-red-primary/50" />
+          </div>
+
+          <TiltCard className="w-full h-full rounded-full relative" style={{ boxShadow: '0 0 50px color-mix(in srgb, var(--theme-primary) 40%, transparent)' }}>
             <div className="absolute inset-0 rounded-full overflow-hidden z-40">
               <ImageSlider className="w-full h-full" hoverControl={true}>
                 <ImageLayer
@@ -50,8 +62,8 @@ export default function AboutSection() {
               style={{ boxShadow: 'inset 0 0 25px var(--theme-primary), 0 0 25px color-mix(in srgb, var(--theme-primary) 50%, transparent)' }} 
             />
             {/* HUD Ring */}
-            <div className="absolute -inset-6 border border-red-primary/30 rounded-full animate-[spin_10s_linear_infinite]" />
-            <div className="absolute -inset-10 border border-dashed border-red-accent/40 rounded-full animate-[spin_15s_linear_infinite_reverse]" />
+            <div className="absolute -inset-6 border border-red-primary/30 rounded-full animate-[spin_10s_linear_infinite] group-hover:animate-[spin_2s_linear_infinite] group-hover:border-red-primary/80 transition-all duration-500" />
+            <div className="absolute -inset-10 border border-dashed border-red-accent/40 rounded-full animate-[spin_15s_linear_infinite_reverse] group-hover:animate-[spin_3s_linear_infinite_reverse] group-hover:border-red-accent/80 transition-all duration-500" />
           </TiltCard>
         </div>
 
