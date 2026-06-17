@@ -25,12 +25,20 @@ export default function GitHubStatsSection() {
         let page = 1;
         let hasMore = true;
         
-        // Just fetch first page for simplicity in demo
-        const reposRes = await fetch(`https://api.github.com/users/${username}/repos?per_page=100`);
-        const reposData = await reposRes.json();
+        while (hasMore) {
+          const reposRes = await fetch(`https://api.github.com/users/${username}/repos?per_page=100&page=${page}`);
+          const reposData = await reposRes.json();
+          
+          if (reposData.length > 0) {
+            allRepos = [...allRepos, ...reposData];
+            page++;
+          } else {
+            hasMore = false;
+          }
+        }
         
-        const totalStars = reposData.reduce((acc: number, repo: any) => acc + repo.stargazers_count, 0);
-        const totalForks = reposData.reduce((acc: number, repo: any) => acc + repo.forks_count, 0);
+        const totalStars = allRepos.reduce((acc: number, repo: any) => acc + repo.stargazers_count, 0);
+        const totalForks = allRepos.reduce((acc: number, repo: any) => acc + repo.forks_count, 0);
 
         setStats({
           repos: data.public_repos || 0,

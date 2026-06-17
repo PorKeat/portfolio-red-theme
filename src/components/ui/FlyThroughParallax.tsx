@@ -109,8 +109,23 @@ export default function FlyThroughParallax({ children }: { children: ReactNode }
           <button
             key={`nav-dot-${index}`}
             onClick={() => {
+              if (!containerRef.current) return;
+              
+              const sectionsCount = sectionsRef.current.filter(Boolean).length;
+              if (sectionsCount === 0) return;
+
+              // The timeline duration is (sectionsCount * 2) - 1
+              // The resting phase for section `index` is precisely at time `index * 2`
+              // We target the exact middle of its 1-second resting phase (+ 0.5)
+              const timelineDuration = (sectionsCount * 2) - 1;
+              const targetTime = (index * 2) + 0.5;
+              const progress = targetTime / timelineDuration;
+              
+              const totalScrollDistance = sectionsCount * 2.5 * window.innerHeight;
+              const targetY = containerRef.current.offsetTop + (progress * totalScrollDistance);
+              
               window.scrollTo({
-                top: index * 2.5 * window.innerHeight,
+                top: targetY,
                 behavior: 'smooth'
               });
             }}
