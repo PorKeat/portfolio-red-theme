@@ -141,7 +141,7 @@ export default function TerminalBootLoader({ onComplete }: { onComplete?: () => 
         if (Math.random() > 0.95) {
             ctx.fillStyle = "#FFF";
         } else {
-            ctx.fillStyle = "#ef4444";
+            ctx.fillStyle = themeColor;
         }
 
         // Draw the character
