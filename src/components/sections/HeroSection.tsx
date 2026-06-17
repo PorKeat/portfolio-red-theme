@@ -4,39 +4,10 @@ import { motion } from "framer-motion";
 import TypewriterEffect from "@/components/ui/TypewriterEffect";
 import RevealText from "@/components/react-bits/RevealText";
 
-const CyberpunkGrid = () => (
-  <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-40" style={{ perspective: "1000px" }}>
-    <motion.div
-      className="absolute bottom-[-20%] left-[-50%] right-[-50%] h-[150vh] origin-bottom"
-      style={{
-        backgroundImage: `
-          linear-gradient(to right, color-mix(in srgb, var(--theme-primary) 30%, transparent) 1px, transparent 1px),
-          linear-gradient(to top, color-mix(in srgb, var(--theme-primary) 30%, transparent) 1px, transparent 1px)
-        `,
-        backgroundSize: '60px 60px',
-        transform: 'rotateX(75deg) translateZ(0)',
-      }}
-      animate={{
-        backgroundPosition: ['0px 0px', '0px 60px']
-      }}
-      transition={{
-        repeat: Infinity,
-        ease: "linear",
-        duration: 1.5
-      }}
-    />
-    {/* Fade out the grid towards the top */}
-    <div className="absolute inset-0 bg-gradient-to-t from-transparent via-slate-950/80 to-slate-950" />
-  </div>
-);
-
 export default function HeroSection() {
   return (
     <section className="w-full h-screen flex flex-col items-center justify-center relative px-4 pointer-events-none overflow-hidden">
       
-      {/* Cyberpunk Grid Background */}
-      <CyberpunkGrid />
-
       {/* Decorative background glow behind the text */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-red-primary/5 blur-[120px] rounded-full pointer-events-none z-0" />
 
